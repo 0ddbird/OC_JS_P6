@@ -1,44 +1,29 @@
 # P6 Fisheye
 
-<style>
-    backtotop {
-        background-color: #2d2d2d;
-        padding: .5rem 0 .5rem .5rem;
-}
-</style>
-
 ## <a id="index">Index</a>
-###[1 - Liens utiles](#links)
 
-###[2 - Briefing](#2)
-
-####[2.1 - Prototype des fonctionnalités](#2.1)
-
-####[2.2 - Contraintes techniques additionnelles](#2.2)
-
-####[2.3 - Livrables](#2.3)
-
-###[3 - Etude de la maquette](#3)
-
-###[4 - Etude de la codebase originale](#4)
-
-####[4.1 - HTML](#4.1)
-
-####[4.2 - CSS](#4.2)
-
-####[4.3 - JS](#4.3)
-
-####[4.4 - JSON](#4.4)
-
-####[4.5 - Synthèse de la codebase](#4.5)
-
-###[5 - Concepts à apprendre](#5)
+[1 - Liens utiles](#links)  
+[2 - Briefing](#2)  
+___[2.1 - Prototype des fonctionnalités](#2.1)  
+___[2.2 - Contraintes techniques additionnelles](#2.2)  
+___[2.3 - Livrables](#2.3)  
+[3 - Etude de la maquette](#3)  
+[4 - Etude de la codebase originale](#4)  
+___[4.1 - HTML](#4.1)  
+___[4.2 - CSS](#4.2)  
+___[4.3 - JS](#4.3)  
+___[4.4 - JSON](#4.4)  
+___[4.5 - Décomposition de la codebase](#4.5)  
+[5 - Codebase existante VS résultat final](#5)  
+[6 - Planification du projet](#6)  
+[Annexe 1 - Concepts à apprendre](#Annexe1)  
+[Annexe 2 - Questions mentorat](#Annexe2)
 
 ___
 
 ## <a id="links">1 - Liens utiles</a>
 
-[Repo GitHub original](https://github.com/OpenClassrooms-Student-Center/Front-End-Fisheye)
+[Repo GitHub original](https://github.com/OpenClassrooms-Student-Center/Front-End-Fisheye)  
 [Maquette Figma](https://www.figma.com/file/Q3yNeD7WTK9QHDldg9vaRl/UI-Design-FishEye-FR)
 
 ___
@@ -90,7 +75,7 @@ Il est très important que notre site soit accessible aux utilisateurs malvoyant
 Toutes nos photos doivent comporter des descriptions textuelles, et vous devez les inclure dans la page.  
 De plus, l'utilisateur doit pouvoir utiliser les commandes du clavier pour naviguer sur le site, comme les touches fléchées de la lightbox"
 
-- Utilisez des éléments HTML "sémantiques" qui décrivent leur intention autant que possible, au lieu de mettre des éléments <div> et <span> partout.
+- Utilisez des éléments HTML "sémantiques" qui décrivent leur intention autant que possible, au lieu de mettre des éléments `<div>` et `<span>` partout.
 - Lorsque vous devez créer un élément personnalisé, ajoutez des attributs ARIA pour décrire ce qu'il fait.
 - Le code devrait passer les tests AChecker sans “known issue” (afin qu'il soit conforme aux WCAG).
 - Toute la gestion des événements (par exemple, les clics et les pressions au clavier) doit être configurée (utilisez KeyboardEvent.key ou KeyboardEvent.code.).
@@ -108,7 +93,7 @@ De plus, l'utilisateur doit pouvoir utiliser les commandes du clavier pour navig
 - Un dépôt de code sur GitHub avec des fichiers HTML, CSS et JavaScript.
 - Une version mise à jour du JSON (avec alt-text).
 
-<backtotop>[:top: Retour à l'index](#index)<backtotop>
+[:top: Retour à l'index](#index)
 
 ___
 
@@ -163,7 +148,7 @@ Un formulaire avec :
 - 2 boutons de navigation
 - 1 bouton *fermer*
 
-<backtotop>[:top: Retour à l'index](#index)<backtotop>
+[:top: Retour à l'index](#index)
 
 ___
 
@@ -209,7 +194,7 @@ Page photographe - photographer.html
 
 Toutes les pages HTML importent style.css
 
-**photographer.css**
+**photographer.css:**
 
 - #contact_modal
 - .photograph-header
@@ -223,7 +208,7 @@ Toutes les pages HTML importent style.css
 - form div
 - form input
 
-**style.css**
+**style.css:**
 
 `@import photographer.css`
 
@@ -269,6 +254,7 @@ Appelle `init()`
             photographers: [...photographers, ...photographers, ...photographers]})
     }
 ```
+
 Récupère les données du JSON et retourne une liste de quelque chose (??)
 
 ```js
@@ -285,12 +271,12 @@ Récupère les données du JSON et retourne une liste de quelque chose (??)
 }
 ```
 
-Ne retourne rien (modifie le DOM)
-Prend un argument `photographers` (liste générée par `getPhotographers()`)
-Récupère l'adresse de `.photographer_section` dans l'HTML.
-Crée une variable `photographerModal` dont la valeur est le résultat de `photographerFactory(photographer)`
-La valeur de cette variable a le format `{name, picture, getUserCardDOM()}`
-Ajoute un enfant dont la valeur est `userCardDOM` à `photographerSection`
+- Ne retourne rien (modifie le DOM)
+- Prend un argument `photographers` (liste générée par `getPhotographers()`)
+- Récupère l'adresse de `.photographer_section` dans l'HTML.
+- Crée une variable `photographerModal` dont la valeur est le résultat de `photographerFactory(photographer)`
+- La valeur de cette variable a le format `{name, picture, getUserCardDOM()}`
+- Ajoute un enfant dont la valeur est `userCardDOM` à `photographerSection`
 
 ```js
     async function init() {
@@ -306,7 +292,7 @@ Ajoute un enfant dont la valeur est `userCardDOM` à `photographerSection`
 
 #### photographer.js
 
-**/factories/photographer.js**
+**/factories/photographer.js:**
 
 ```js
 function photographerFactory(data) {
@@ -345,6 +331,8 @@ La fonction getUserCardDom :
 
 #### /utils/contactForm.js
 
+2 fonctions pour ouvrir et fermer la modale du formulaire.
+
 ### <a id="4.4">4.4 - JSON</a>
 
 ***photographers.json*** contient 2 objets :
@@ -352,32 +340,214 @@ La fonction getUserCardDom :
 - photographers, une liste de 6 objets
 - media : une liste de 59 objets
 
+```json
+{
+    "photographers": [
+        {
+            "name": "Mimi Keel",
+            "id": 243,
+            "city": "London",
+            "country": "UK",
+            "tagline": "Voir le beau dans le quotidien",
+            "price": 400,
+            "portrait": "MimiKeel.jpg"
+        }
+    ],
+    "media": [
+        {
+            "id": 342550,
+            "photographerId": 82,
+            "title": "Fashion Yellow Beach",
+            "image": "Fashion_Yellow_Beach.jpg",
+            "likes": 62,
+            "date": "2011-12-08",
+            "price": 55
+        }
+    ]
+}
+```
 
-2 fonctions pour ouvrir et fermer la modale du formulaire.
+### <a id="4.5">4.5 - Décomposition de la codebase</a>
 
-### <a id="4.5">4.5 - Synthèse de la codebase</a>
+1. init() appelle la fonction `getPhotographers()`
 
-To do
+`getPhotographers()` lui renvoie un objet avec 1 clé `photographers` / 1 valeur (une liste) qui contient des objets.
 
-<backtotop>[:top: Retour à l'index](#index)<backtotop>
+```js
+    {
+    photographers : [
+            {
+                "name": "Ma data test",
+                "id": 1,
+                "city": "Paris",
+                "country": "France",
+                "tagline": "Ceci est ma data test",
+                "price": 400,
+                "portrait": "account.png"
+            },
+            {
+                "name": "Autre data test",
+                "id": 2,
+                "city": "Londres",
+                "country": "UK",
+                "tagline": "Ceci est ma data test 2",
+                "price": 500,
+                "portrait": "account.png"
+            },
+        ]
+    }
+```
 
-## <a id="5">5 - Concepts à apprendre</a>
+2. `init()` appelle `displayData(photographers)`
+`displayData(photographers)` récupère l'élément du DOM dont la classe est `.photographer_section`
+3. pour chaque élément de `photographers`, soit pour chaque objet de la liste `photographers`, elle initialise une constante `photographerModel` dont la valeur est `photographerFactory(photographer)` soit un objet avec 3 clés :
 
-**Rest parameter, Spread operator**
-[MDN | Paramètres du reste / Rest parameter](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Functions/rest_parameters)
-[MDN | Syntaxe de décomposition / Spread operator](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
-[Mindsers | Rest parameter et spread operator](https://mindsers.blog/fr/post/rest-parameter-et-spread-operator-en-javascript/)
+- `name` : la valeur de `name` est égale à celle de l'objet passé en argument de `photographerFactory()`  
+- `picture`: la valeur de `picture` est égale à `assets/photographers/${portrait}`, `portrait` est récupéré dans l'objet passé en argument de `photographerFactory()`
+ - La fonction `getUserCardDom`
 
-**JS Promises, async, await**
-[MDN | Faciliter la programmation asynchrone avec async et await](https://developer.mozilla.org/fr/docs/Learn/JavaScript/)
-[MDN | Promise](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-[MDN | Asynchrone](https://developer.mozilla.org/fr/docs/Glossary/Asynchronous/Asynchronous/Async_await)
-[MDN | Async](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/async_function)
+4. `init()` initalise une constante `userCardDOM` qui est égale à ce que renvoie la méthode getUsersCardDOM appliquée sur photographerModel.
 
-**Design patterns**
-[MDN | Factory pattern in JavaScript](https://www.dofactory.com/javascript/design-patterns/factory-method)
+5. `getUserCardDOM()` :
 
-**CSS**
-[MDN | CSS Grid](https://developer.mozilla.org/fr/docs/Web/CSS/grid)
+- Initialise une constante pour préparer l'injection d'un `<article>` dans le DOM
+- Initialise une constante pour préparer l'injection d'une `<img src="${picture}"`
+- Initialise un h2 dont le contenu est celui de la valeur de `name`
+- Joint à l'article l'image et le h2
+- Retourne la valeur de `article`
 
-<backtotop>[:top: Retour à l'index](#index)<backtotop>
+5. `init()` joint à photographersSection la valeur retournée par userCardDOM soit
+
+```js
+{
+const getUserCardDom =  document.createElement( 'article' )
+                        document.createEment( 'img' )
+                        img.setAttribute(src, 'assets/photographers/account.png')
+                        document.createElement( 'h2' )
+                        h2.textContent = 'Ma data test'
+                        article.appendChild(img)
+                        article.appendChild(h2)
+                        return(article)
+}
+```
+
+soit en HTML :
+
+```html
+<div class="photographer_section">
+    <article>
+        <img src="assets/photographers/account.png">
+        <h2> Ma data test </h2>
+    </article>
+</div>
+```
+
+[:top: Retour à l'index](#index)
+
+___
+
+## <a id="5">5 - Codebase existante VS résultat final</a>
+
+### index.html
+En l'état, la codebase existante permet de récupérer des données dans une constante "placeholder", des les transformer et d'injecter dans l'index HTML un ou plusieurs `<article>` comprenant :
+
+- Une image
+- un h2
+
+Le résultat final attendu est de récupérer des données des photographes depuis un fichier JSON, de les transformer et d'injecter dans l'index HTML un ou plusieurs `<article>` comprenant :
+
+- Une image
+- un h2
+- Une localisation
+- Une citation
+- Un tarif journalier
+
+### photographer.html
+En l'état, la codebase existante permet de créer un article pour 1 photographe (avec image et h2), mais il faudra modifier la fonction ou en créer une nouvelle. La fonction actuelle effectue une boucle à travers toute la liste des photographes pour créer leur article respectif, or nous n'avons besoin que des données que pour un photographe ici.
+
+Le résultat final attendu est de :
+
+**1.** Prévoir une `<section class="photographer_details">` dans l'HTML, prévoir une `<section class="gallery">`
+**2.** récupérer les données d'un photographe spécifique depuis un fichier JSON et d'injecter dans la `<section class="photographer_details">` les éléments suivants :
+
+à la section photographer_details :
+
+- Une image
+- Un titre h2
+- Une localisation
+- Une citation
+
+au widget :
+
+- Un tarif journalier
+
+Note : il faudra leur attribuer des classes pour que le CSS puissent les placer et leur donner un style une fois dans la page.
+
+**3.** Récupérer les données des photos et vidéos depuis un fichier JSON et ajouter :
+
+à la `<section class="gallery">`
+
+- Une image
+- Un titre h3
+- Un nombre de likes
+- Une checkbox
+- Une date (attribut de donnée ?)
+
+au widget `<div class="widget">`
+
+- Un nombre total de likes calculé depuis la somme des likes de toutes les photos/vidéos du photographe
+
+[:top: Retour à l'index](#index)
+
+___
+
+## <a id="6">6 - Planification du projet</a>
+
+1. GLOBAL | Répartir le CSS en SCSS
+2. GLOBAL | Faire le design statique complet des 2 pages (+ 2 modales)
+3. INDEX.HTML | Compléter les fonctions existantes pour générer des articles complets
+4. GLOBAL | ajouter les champs Aria au JSON
+5. PHOTOGRAPHERS.HTML | Créer les fonctions pour peupler la section "photographer_details"
+6. PHOTOGRAPHERS.HTML | Créer une constante "placeholder" et les fonctions associées pour peupler la section "galerie"
+7. INDEX.HTML | Remplacer les données "placeholder" par une fonction qui exploite le JSON
+8. PHOTOGRAPHERS.HTML | Remplacer les données "placeholder" par une fonction qui exploite le JSON (details/galerie)
+9. PHOTOGRAPHERS.HTML | Créer une fonction pour faire la somme des likes et une pour les retourner dans l'HTML
+10. PHOTOGRAPHERS.HTML | MODALE | Implémenter les fonctions de validation du formulaire.
+11. GLOBAL | Accessibilité : ajouter les key listeners pour la navigation au clavier
+
+[:top: Retour à l'index](#index)
+
+___
+
+## <a id="Annexe1">Annexe 1 - Concepts à apprendre</a>
+
+**Rest parameter, Spread operator:**
+
+- [MDN | Paramètres du reste / Rest parameter](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Functions/rest_parameters)
+- [MDN | Syntaxe de décomposition / Spread operator](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+- [Mindsers | Rest parameter et spread operator](https://mindsers.blog/fr/post/rest-parameter-et-spread-operator-en-javascript/)
+
+**JS Promises, async, await:**
+
+- [MDN | Faciliter la programmation asynchrone avec async et await](https://developer.mozilla.org/fr/docs/Learn/JavaScript/Asynchronous/Async_await)
+- [MDN | Promise](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+- [MDN | Asynchrone](https://developer.mozilla.org/fr/docs/Glossary/Asynchronous)
+- [MDN | Async](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/async_function)
+
+**Destructuring objects**
+
+- [What is the difference between const and const {} in JavaScript](https://stackoverflow.com/questions/41058569/what-is-the-difference-between-const-and-const-in-javascript)
+
+**Design patterns:**
+
+- [MDN | Factory pattern in JavaScript](https://www.dofactory.com/javascript/design-patterns/factory-method)
+
+**CSS:**
+
+- [MDN | CSS Grid](https://developer.mozilla.org/fr/docs/Web/CSS/grid)
+
+[:top: Retour à l'index](#index)
+
+## <a id="Annexe2">Annexe 2 - Questions mentorat</a>
+
+- Est-ce qu'un attribut de données est pertinent pour stocker la date d'une photo et s'en servir pour les trier
