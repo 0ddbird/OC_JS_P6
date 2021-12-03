@@ -1,66 +1,28 @@
-// Get Photographer ID from URL.
-function getPhotographerId() {
-    return parseInt(new URLSearchParams(window.location.search).get('id'))
-}
+import { getData, getPhotographerId, getPhotographer, getGalery } from '../components/query.js';
+import { displayProfile, displayPrice, displayLikes } from '../components/display.js';
+import { handleGalery } from '../components/handlegalery.js';
+import { computeLikes } from "../components/widget.js";
 
-// Fetch photographer data in object : returns a single object matching the photographer ID
-async function getPhotographer(data) {
-    return data.photographers.find(photographer => photographer.id === getPhotographerId())
-}
 
-// Fetch galery content data in object : returns multiple objects matching the photographer ID
-async function getGalery(data) {
-    return data.media.filter(element => element.photographerId === getPhotographerId())
-}
-
-// Append HTML elements to profile.html
-async function displayProfile(photographerObject) {
-    const photographerSection = document.getElementById('photographer-section')
-    const photographerModel = photographerFactory(photographerObject)
-    const userSectionDOM = photographerModel.getUserSectionDOM()
-    photographerSection.appendChild(userSectionDOM)
-}
-
-async function displayGalery(galeryObject) {
-    const galerySection = document.getElementById('galery-section')
-    galeryObject.forEach((mediaObject) => {
-        const mediaThumbnail = galeryFactory(mediaObject)
-        const mediaThumbnailDOM = mediaThumbnail.getThumbnailDOM()
-        galerySection.appendChild(mediaThumbnailDOM)
-    })
-}
-
-async function displayPrice(photographerObject) {
-    const price = photographerObject.price
-    const widget = document.getElementById('widget')
-    const priceTag = document.createElement('span')
-    priceTag.textContent = `${price}€/jour`
-    widget.appendChild(priceTag)
-}
-
-async function computeLikes(galeryObject) {
-    return Object.values(galeryObject).reduce((acc, {likes}) => acc + likes, 0)
-}
-
-async function displayLikes(total) {
-    const widget = document.getElementById('widget')
-    const likeCount = document.createElement('span')
-    likeCount.textContent = total + '<3';
-    widget.appendChild(likeCount)
+function getSelectOption(e) {
+    let selectOption = this.options[this.selectedIndex].text; 
+    console.log(this.options[this.selectedIndex].text);
+    //sortGalery(selectOption)
+    //return this.options[this.selectedIndex];
 }
 
 // Main function of profile.html
 async function init() {
-    const response = await fetch('./data/photographers.json')
-    const data = await response.json()
+    const data = await getData();
+    const id = await getPhotographerId();
+    const photographer = await getPhotographer(data, id);
+    const galery = await getGalery(data, id);
+    let totalLikes = await computeLikes(galery);
 
-    const photographer = await getPhotographer(data)
-    const galery = await getGalery(data)
-
-    displayProfile(photographer)
-    displayPrice(photographer)
-    displayGalery(galery)
-    displayLikes(await computeLikes(galery))
+    displayProfile(photographer);
+    handleGalery(galery);
+    displayPrice(photographer);
+    displayLikes(totalLikes);
 }
 
-init()
+init();

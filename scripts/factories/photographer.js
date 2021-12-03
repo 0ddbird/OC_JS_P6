@@ -1,4 +1,4 @@
-function photographerFactory(data) {
+export function photographerFactory(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
 
     const picture = `./assets/photographers/${portrait}`;
@@ -54,12 +54,12 @@ function photographerFactory(data) {
         // Build profile picture element
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
-        
+
         // Build title element with Name
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         h2.classList.add("photographer-article_name")
-        
+
         // Build City, Country element
         const locationSpan = document.createElement( 'span' );
         locationSpan.textContent = city + ', ' + country;
@@ -79,7 +79,7 @@ function photographerFactory(data) {
         contactButton.textContent = "Contactez-moi";
         contactButton.classList.add('contact_button');
         contactButton.setAttribute('onclick', "displayModal()");
-        
+
         profile.appendChild(h2);
         profile.appendChild(locationSpan);
         profile.appendChild(taglineSpan);
