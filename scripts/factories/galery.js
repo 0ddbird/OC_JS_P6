@@ -42,13 +42,13 @@ function galeryFactory(data) {
         likesCount.textContent = likes;
         article.appendChild(likesCount);
 
-        const pictureDate = document.createElement( 'span' );
+/*         const pictureDate = document.createElement( 'span' );
         pictureDate.textContent = date;
         article.appendChild(pictureDate);
 
         const picturePrice = document.createElement( 'span' );
         picturePrice.textContent = price;
-        article.appendChild(picturePrice);
+        article.appendChild(picturePrice); */
 
         return article;
     }
