@@ -3,7 +3,7 @@ export const id = await getPhotographerId();
 
 /**
  * Fetch json file and returns JS object.
- * @returns {object} Returns an object containing 2 keys, photographers and media
+ * @returns {object} an object containing 2 keys, photographers and media
  */
 async function getData() {
     const response = await fetch('./data/photographers.json');

@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <link href="css/photographer.css" type="text/css" rel="stylesheet">
     <title>Fisheye - photographe </title>
+    <script src="./scripts/events.js"></script>
   </head>
   <body>
     <header>
@@ -19,7 +20,7 @@
       </section>
       <section id="galery-section">
         <label for="sort-by">Trier par</label>
-        <select onchange="getSelectOption.call(this, event)" name="sort-by" >
+        <select onchange="getSelectOption.call(this, event)" name="sort-by">
           <option name="popularity">Popularité</option>
           <option name="date">Date</option>
           <option name="title">Titre</option>
@@ -43,6 +44,7 @@
 			</div>
 		</div>
     <script src="./scripts/pages/profile.js" type="module"></script>
+    
     <script src="./scripts/utils/contactForm.js"></script>
   </body>
 </html>

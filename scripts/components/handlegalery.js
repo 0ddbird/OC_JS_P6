@@ -4,7 +4,7 @@ import { displayGalery } from './display.js';
  * Displays and updates the galery in profile.html.
  * @param {array} galery an array of objects (medias).
  */
-export async function handleGalery(galery) {
+export async function handleGalery(galery, sortOption) {
     const sortedGalery = await sortGalery(galery);
     await displayGalery(sortedGalery);
 }
@@ -14,22 +14,14 @@ export async function handleGalery(galery) {
  * @param {array} galery an array containing the medias to display.
  * @returns {array} a sorted array.
  */
-async function sortGalery(galery) {
-    // cas 'titre' : trier par ordre alphabétique des valeurs pour la clé "Title"
-    let sortedByTitle = galery;
-    sortedByTitle.sort((a, b) => a.title - b.title);
+async function sortGalery(galery, sortOption) {
 
-    // Cas 'date' : trier par valeur décroissante pour la clé "Date"
-    let sortedByDate = galery;
-    sortedByDate.sort((a, b) => a.date.localeCompare(b.date));
+    let sortedGalery = galery;
 
-    // Cas 'popularité" : trier par valeurs décroissantes pour la clé "Likes"
-    let sortedByPopularity = galery;
-    sortedByPopularity.sort((a, b) => a.likes - b.likes);
-
-    /* console.log('title', sortedByTitle);
-    console.log('date', sortedByDate);
-    console.log('popularity', sortedByPopularity);
- */
-    return galery;
+    switch (sortOption) {
+        case 'Date': return sortedGalery.sort((a, b) => a.date.localeCompare(b.date));
+        case 'Titre': return sortedGalery.sort((a, b) => a.title - b.title);
+        case 'Popularité':
+        default: return sortedGalery.sort((a, b) => a.likes - b.likes);
+    }
 }

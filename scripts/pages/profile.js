@@ -3,13 +3,6 @@ import { displayProfile, displayPrice, displayLikes } from '../components/displa
 import { handleGalery } from '../components/handlegalery.js';
 import { computeLikes } from "../components/widget.js";
 
-function getSelectOption(e) {
-    let selectOption = this.options[this.selectedIndex].text; 
-    console.log(this.options[this.selectedIndex].text);
-    //sortGalery(selectOption)
-    //return this.options[this.selectedIndex];
-}
-
 /**
  * Main function of profile.html
  */
