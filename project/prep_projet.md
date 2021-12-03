@@ -442,6 +442,26 @@ soit en HTML :
 </div>
 ```
 
+### Synthèse
+
+1. `init()` appelle `getPhotographers()`
+2. `getPhotographers()` récupère les données du JSON
+3. `get Photographers()` retourne un objet `{photographers: []}`
+4. `init()` stock le résultat dans un objet `{photographers}`
+5. `init()` appelle `displayData()` et passe `{photographers}` en argument.
+
+6. `displayData()` stock l'adresse de l'élément HTML `.photographer_section` dans `photographerSection`
+7. `displayData()` passe chaque objet dans `photographerFactory()`
+8. `photographerFactory()` retourne un objet `{name, picture, getUserCardDOM}`
+9. `displayData()` stock l'objet dans `photographerModel`
+10. `displayData()` appelle la méthode `.getUsercardDom` sur l'objet
+11. `displayData()`stock la valeur renvoyée dans une constante `userCardDOM`
+12. `displayData()` ajoute `userCardDOM` à `.photographer_section`
+
+[Factory pattern](https://refactoring.guru/fr/design-patterns/factory-method)
+
+[:rocket: Workflow - Whimsical](https://whimsical.com/p6-default-codebase-NmtiyYW4fcZdGe7scF4N9h)
+
 [:top: Retour à l'index](#index)
 
 ___
@@ -550,4 +570,7 @@ ___
 
 ## <a id="Annexe2">Annexe 2 - Questions mentorat</a>
 
-- Est-ce qu'un attribut de données est pertinent pour stocker la date d'une photo et s'en servir pour les trier
+- Promises / Sync/async
+- Factory method
+- variables dans l'URL
+- 

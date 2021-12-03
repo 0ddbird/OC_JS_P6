@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="assets/icons/fisheye_favicon.png"/>
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link href="css/photographer.css" type="text/css" rel="stylesheet">
+    <title>Fisheye - photographe </title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html">
+      <img src="assets/images/logo.png" class="logo" />
+      </a>
+    </header>
+    <main id="main">
+      <section id="photographer-section"></section>
+      <section id="galery-section"></section>
+    </main>
+    <div id="contact_modal">
+			<div class="modal">
+				<header>
+          <h2>Contactez-moi</h2>
+          <img src="assets/icons/close.svg" onclick="closeModal()" />
+        </header>
+				<form>
+					<div>
+						<label>Prénom</label>
+						<input />
+					</div>
+          <button class="contact_button">Envoyer</button>
+				</form>
+			</div>
+		</div>
+    <script src="./scripts/pages/profile.js"></script>
+    <script src="./scripts/factories/photographer.js"></script>
+    <script src="./scripts/factories/galery.js"></script>
+    <script src="./scripts/utils/contactForm.js"></script>
+  </body>
+</html>
