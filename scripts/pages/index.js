@@ -1,10 +1,12 @@
 import { getPhotographers } from "../components/query.js";
 import { displayData } from '../components/display.js';
 
-async function init() {
-    // Récupère les datas des photographes
+/**
+ * Main function of index.html
+ */
+async function indexInit() {
     const photographers = await getPhotographers();
     displayData(photographers); 
 };
 
-init();
+indexInit();

@@ -1,10 +1,19 @@
 import { displayGalery } from './display.js';
 
+/**
+ * Displays and updates the galery in profile.html.
+ * @param {array} galery an array of objects (medias).
+ */
 export async function handleGalery(galery) {
     const sortedGalery = await sortGalery(galery);
     await displayGalery(sortedGalery);
 }
 
+/**
+ * Sorts the galery
+ * @param {array} galery an array containing the medias to display.
+ * @returns {array} a sorted array.
+ */
 async function sortGalery(galery) {
     // cas 'titre' : trier par ordre alphabétique des valeurs pour la clé "Title"
     let sortedByTitle = galery;

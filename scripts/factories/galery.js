@@ -1,3 +1,9 @@
+/**
+ * Creates medias objects with methods to display them.
+ * @param {array} data and array of objects.
+ * @returns {object} an object with 4 keys and 2 methods.
+ */
+
 export function galeryFactory(data) {
 
     const { photographerId, id, title, image, video, likes, date, price } = data;
