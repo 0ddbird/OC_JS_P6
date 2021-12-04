@@ -4,10 +4,10 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/icons/fisheye_favicon.png"/>
+    <script src="https://kit.fontawesome.com/52b9d34509.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <link href="css/photographer.css" type="text/css" rel="stylesheet">
     <title>Fisheye - photographe </title>
-    <script src="./scripts/events.js"></script>
   </head>
   <body>
     <header>
@@ -18,13 +18,13 @@
     <main id="main">
       <section id="photographer-section">
       </section>
-      <section id="galery-section">
-        <label for="sort-by">Trier par</label>
-        <select onchange="getSelectOption.call(this, event)" name="sort-by">
-          <option name="popularity">Popularité</option>
-          <option name="date">Date</option>
-          <option name="title">Titre</option>
+      <label for="sort-by">Trier par</label>
+        <select name="sort-by" id="select">
+          <option name="popularity" value="popularity">Popularité</option>
+          <option name="date" value="date">Date</option>
+          <option name="title" value="title">Titre</option>
         </select>
+      <section id="galery-section">
       </section>
       <div id="widget"></div>
     </main>
@@ -43,8 +43,8 @@
 				</form>
 			</div>
 		</div>
-    <script src="./scripts/pages/profile.js" type="module"></script>
-    
+    <script defer src="./scripts/pages/profile.js" type="module"></script>
+    <script defer src="./scripts/components/events.js" type="module"></script>
     <script src="./scripts/utils/contactForm.js"></script>
   </body>
 </html>

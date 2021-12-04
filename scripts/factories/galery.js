@@ -6,14 +6,14 @@
 
 export function galeryFactory(data) {
 
-    const { photographerId, id, title, image, video, likes, date, price } = data;
+    const { photographerId, id, title, image, video, likes, date} = data;
     let link;
 
     if ( data.hasOwnProperty('image') ) {
         link = `./assets/photos/${photographerId}/${image}`;
     } else if ( data.hasOwnProperty('video') ) 
     {
-        link = `./assets/photos/${photographerId}/${video}`
+        link = `./assets/photos/${photographerId}/${video}`;
     };
 
     function getThumbnailDOM() {
@@ -43,17 +43,11 @@ export function galeryFactory(data) {
         h3.classList.add("picture__title");
         article.appendChild(h3);
 
-        const likesCount = document.createElement('span');
-        likesCount.textContent = likes;
-        article.appendChild(likesCount);
 
-/*      const pictureDate = document.createElement( 'span' )
-        pictureDate.textContent = date;
-        article.appendChild(pictureDate);
+        const mediaLikes = document.createElement('span');
+        mediaLikes.textContent = likes;
+        article.appendChild(mediaLikes);
 
-        const picturePrice = document.createElement( 'span' )
-        picturePrice.textContent = price;
-        article.appendChild(picturePrice); */
 
         return article;
     }

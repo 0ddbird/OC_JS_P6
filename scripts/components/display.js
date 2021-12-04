@@ -1,7 +1,6 @@
 import { galeryFactory } from '../factories/galery.js';
 import { photographerFactory } from '../factories/photographer.js';
 
-
 /**
  * Appends an article for each photographer to photographer_section in homepage
  * @param {array} photographers array of object (photographers)
@@ -15,7 +14,6 @@ export async function displayData(photographers) {
     });
 };
 
-// 
 /**
  * Appends HTML elements to the photographer_section in profile.html
  * @param {object} photographer an object with the photographer's data
@@ -33,6 +31,9 @@ export async function displayProfile(photographer) {
  */
 export async function displayGalery(galery) {
     const galerySection = document.getElementById('galery-section');
+    galerySection.innerHTML='';
+    //const articles = document.getElementsByClassName('picture-article');
+    //articles.forEach((article) => galerySection.removeChild(article));
 
     galery.forEach((mediaObject) => {
         const mediaThumbnail = galeryFactory(mediaObject);

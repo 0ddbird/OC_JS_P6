@@ -1,1 +1,0 @@
-// récupérer id images + likes
