@@ -310,34 +310,34 @@ header {
   gap: 30px;
 }
 #galery-section .media-article:nth-child(1n) {
-  animation-delay: 0.15s;
+  animation-delay: 0.35s;
 }
 #galery-section .media-article:nth-child(2n) {
-  animation-delay: 0.3s;
+  animation-delay: 0.7s;
 }
 #galery-section .media-article:nth-child(3n) {
-  animation-delay: 0.45s;
-}
-#galery-section .media-article:nth-child(4n) {
-  animation-delay: 0.6s;
-}
-#galery-section .media-article:nth-child(5n) {
-  animation-delay: 0.75s;
-}
-#galery-section .media-article:nth-child(6n) {
-  animation-delay: 0.9s;
-}
-#galery-section .media-article:nth-child(7n) {
   animation-delay: 1.05s;
 }
+#galery-section .media-article:nth-child(4n) {
+  animation-delay: 1.4s;
+}
+#galery-section .media-article:nth-child(5n) {
+  animation-delay: 1.75s;
+}
+#galery-section .media-article:nth-child(6n) {
+  animation-delay: 2.1s;
+}
+#galery-section .media-article:nth-child(7n) {
+  animation-delay: 2.45s;
+}
 #galery-section .media-article:nth-child(8n) {
-  animation-delay: 1.2s;
+  animation-delay: 2.8s;
 }
 #galery-section .media-article:nth-child(9n) {
-  animation-delay: 1.35s;
+  animation-delay: 3.15s;
 }
 #galery-section .media-article:nth-child(10n) {
-  animation-delay: 1.5s;
+  animation-delay: 3.5s;
 }
 
 .media-article {
