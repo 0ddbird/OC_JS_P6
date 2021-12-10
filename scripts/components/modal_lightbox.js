@@ -1,3 +1,5 @@
+let animationDirection;
+
 export async function addMediaEventListeners(photographerId, articlesDOM, photographerGalery) {
     articlesDOM.forEach((article) => {
         article.addEventListener('click', function() {
@@ -21,6 +23,8 @@ function openLightboxModal(photographerId, mediaId, photographerGalery) {
     displayLightboxMedia(photographerId, media, galery);
 };
 
+
+
 function displayLightboxMedia(photographerId, media, galery) {
 /* =============================== HTML element made by getThumbnailDOM() ===============================
 |-- MODAL               #lightbox_modal
@@ -43,6 +47,10 @@ function displayLightboxMedia(photographerId, media, galery) {
     const mediaMain = document.createElement('div');
     mediaMain.setAttribute('id', 'lightbox_modal_main');
 
+    if (animationDirection != undefined) {
+        mediaMain.classList.add(animationDirection);
+    }
+
     // LIGHTBOX MAIN: TITLE
     const mediaTitle = document.createElement('span');
     mediaTitle.setAttribute('id', 'lightbox_modal_title');
@@ -59,7 +67,6 @@ function displayLightboxMedia(photographerId, media, galery) {
     };
     lightboxMedia.setAttribute('src', mediaLink);
     lightboxMedia.setAttribute('id', 'lightbox_modal_media');
-    
 
     // LIGHTBOX LEFT ARROW
     const leftArrow = document.createElement('div');
@@ -87,7 +94,6 @@ function displayLightboxMedia(photographerId, media, galery) {
     lightbox.appendChild(mediaMain);
     lightbox.appendChild(rightArrow);
     lightbox.appendChild(lightboxCloseButton);
-
 
     // MAKE A PROXY TO ITERATE OVER THE ARRAY WITH INDEXES THAT ARE NEGATIVE OR > TO ARRAY LENGTH
     const galeryProxy = new Proxy(galery, {
@@ -119,6 +125,7 @@ function getPreviousMedia(photographerId, media, galery) {
     const mediaId = media.id;
     const thisMediaIndex = getMedia(mediaId, galery);
     const previousMedia = galery[thisMediaIndex - 1];
+    animationDirection = 'previous';
     displayLightboxMedia(photographerId, previousMedia, galery);
 };
 
@@ -126,10 +133,10 @@ function getNextMedia(photographerId, media, galery) {
     const mediaId = media.id;
     const thisMediaIndex = getMedia(mediaId, galery);
     const nextMedia = galery[thisMediaIndex + 1];
+    animationDirection = 'next';
     displayLightboxMedia(photographerId, nextMedia, galery);
 };
 
 function getMedia(mediaId, galery) {
     return galery.findIndex(media => media.id === mediaId);
 };
-

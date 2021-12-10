@@ -9,6 +9,7 @@ export async function updateGalery(sortOption) {
     let sortedGalery = await sortGalery(photographerGalery, sortOption);
 
     displayGalery(sortedGalery);
+    bufferMedias();
     updateCheckboxState(photographerId);
     const allArticles = document.querySelectorAll('.media-article');
     addMediaEventListeners(photographerId, allArticles, photographerGalery);
@@ -74,5 +75,17 @@ async function sortGalery(galery, sortOption) {
             let sorted = sortedGalery.sort((a, b) => a.likes - b.likes).reverse();
             return sorted;
         }
+    }
+}
+
+function bufferMedias() {
+    let allGaleryMediasDOM = document.querySelectorAll('.media-article_media');
+
+    allGaleryMediasDOM.forEach((media) => {
+        media.addEventListener("load", removeLoadingClass(media));
+    });
+
+    function removeLoadingClass(media) {
+        media.classList.remove('buffer');
     }
 }

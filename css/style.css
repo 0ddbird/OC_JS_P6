@@ -339,6 +339,21 @@ header {
 #galery-section .media-article:nth-child(10n) {
   animation-delay: 1.5s;
 }
+#galery-section .media-article:nth-child(11n) {
+  animation-delay: 1.65s;
+}
+#galery-section .media-article:nth-child(12n) {
+  animation-delay: 1.8s;
+}
+#galery-section .media-article:nth-child(13n) {
+  animation-delay: 1.95s;
+}
+#galery-section .media-article:nth-child(14n) {
+  animation-delay: 2.1s;
+}
+#galery-section .media-article:nth-child(15n) {
+  animation-delay: 2.25s;
+}
 
 .media-article {
   transform: scale(0);
@@ -347,7 +362,8 @@ header {
   align-items: center;
   cursor: pointer;
   animation-name: grow;
-  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
   transition: transform 0.15s ease-in-out;
@@ -358,6 +374,7 @@ header {
   width: 300px;
   object-fit: cover;
   border-radius: 5px;
+  object-position: center top;
 }
 
 .buffer {
@@ -397,9 +414,11 @@ header {
   left: 0;
   right: 0;
   z-index: 1;
+  overflow: hidden;
 }
 
 .lightbox_modal_arrow {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -410,13 +429,62 @@ header {
   cursor: pointer;
 }
 
+#left-arrow {
+  left: 0;
+}
+
+#right-arrow {
+  right: 0;
+}
+
 #lightbox_modal_main {
   display: flex;
   flex-direction: column;
   margin: 0 1%;
   overflow: hidden;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
 
+.previous {
+  animation-name: slideRight;
+  transform: translateX(2000px);
+}
+
+.next {
+  animation-name: slideLeft;
+  transform: translateX(-2000px);
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(2000px);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(-70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-2000px);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 #lightbox_modal_close_button {
   position: absolute;
   top: 50px;
@@ -425,10 +493,10 @@ header {
 }
 
 #lightbox_modal_media {
-  object-fit: cover;
+  object-fit: contain;
   margin-bottom: 1em;
   border-radius: 5px;
-  max-height: 500px;
+  max-height: 60vh;
   max-width: 80vw;
 }
 

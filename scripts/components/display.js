@@ -32,14 +32,10 @@ export async function displayGalery(galery) {
 // Photographer widget
 export async function createPhotographerWidget() {
     const body = document.getElementsByTagName('body')[0];
-    console.log(body);
-    
     const widget = document.createElement('div');
     widget.setAttribute('id', 'widget');
-
     const likeCount = document.createElement('span');
     likeCount.setAttribute('id', 'widget__like-count')
-    
     widget.appendChild(likeCount);
     body.appendChild(widget);
 }
