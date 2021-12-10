@@ -4,9 +4,16 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
+
+    @for $i from 1 through 10 {
+        & .media-article:nth-child(#{$i}n) {
+            animation-delay: #{$i * 0.15}s;
+        }
+    }
 }
 
 .media-article {
+    transform: scale(0);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,13 +21,25 @@
     animation-name: grow;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
-    transition: transform .25s ease-in-out;
+    animation-fill-mode: forwards;
+    transition: transform .15s ease-in-out;
 }
 
 .media-article_media {
     @include a.square(300px);
     object-fit: cover;
     border-radius: 5px;
+}
+
+.media-article_details {
+    text-overflow:ellipsis;
+}
+
+.media-article_details_title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    font-size: 18px;
 }
 
 @keyframes grow {

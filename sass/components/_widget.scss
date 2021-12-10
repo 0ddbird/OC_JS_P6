@@ -1,8 +1,8 @@
 @use '../abstract/' as a;
 #widget {
-    position: fixed;
-    right: 50px;
+    position: sticky;
     bottom: 0;
+    left: 85%;
     background-color: a.$clr-secondary;
     width: 225px;
     height: 50px;
@@ -11,6 +11,21 @@
     align-items: center;
     border-radius: 5px 5px 0 0;
     font-weight: 500;
+    transform: translateY(50px);
+    animation-name: slideIn;
+    animation-delay: 1s;
+    animation-duration: .75s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+} 
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(50px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 #widget__like-count::after {

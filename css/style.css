@@ -153,9 +153,9 @@ h2 {
 }
 
 #widget {
-  position: fixed;
-  right: 50px;
+  position: sticky;
   bottom: 0;
+  left: 85%;
   background-color: #D3573C;
   width: 225px;
   height: 50px;
@@ -164,8 +164,22 @@ h2 {
   align-items: center;
   border-radius: 5px 5px 0 0;
   font-weight: 500;
+  transform: translateY(50px);
+  animation-name: slideIn;
+  animation-delay: 1s;
+  animation-duration: 0.75s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
+@keyframes slideIn {
+  0% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
 #widget__like-count::after {
   content: "\f004";
   font-family: "Font Awesome 5 Free";
@@ -295,8 +309,39 @@ header {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
 }
+#galery-section .media-article:nth-child(1n) {
+  animation-delay: 0.15s;
+}
+#galery-section .media-article:nth-child(2n) {
+  animation-delay: 0.3s;
+}
+#galery-section .media-article:nth-child(3n) {
+  animation-delay: 0.45s;
+}
+#galery-section .media-article:nth-child(4n) {
+  animation-delay: 0.6s;
+}
+#galery-section .media-article:nth-child(5n) {
+  animation-delay: 0.75s;
+}
+#galery-section .media-article:nth-child(6n) {
+  animation-delay: 0.9s;
+}
+#galery-section .media-article:nth-child(7n) {
+  animation-delay: 1.05s;
+}
+#galery-section .media-article:nth-child(8n) {
+  animation-delay: 1.2s;
+}
+#galery-section .media-article:nth-child(9n) {
+  animation-delay: 1.35s;
+}
+#galery-section .media-article:nth-child(10n) {
+  animation-delay: 1.5s;
+}
 
 .media-article {
+  transform: scale(0);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -304,7 +349,8 @@ header {
   animation-name: grow;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
-  transition: transform 0.25s ease-in-out;
+  animation-fill-mode: forwards;
+  transition: transform 0.15s ease-in-out;
 }
 
 .media-article_media {
@@ -312,6 +358,17 @@ header {
   width: 300px;
   object-fit: cover;
   border-radius: 5px;
+}
+
+.media-article_details {
+  text-overflow: ellipsis;
+}
+
+.media-article_details_title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 18px;
 }
 
 @keyframes grow {
@@ -335,6 +392,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
 }
 
 .lightbox_modal_arrow {
@@ -382,6 +440,7 @@ header {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
 }
 
 .modal-body {

@@ -30,11 +30,18 @@ export async function displayGalery(galery) {
 }
 
 // Photographer widget
-export async function createPhotographerWidget(total) {
-    const widget = document.getElementById('widget');
+export async function createPhotographerWidget() {
+    const body = document.getElementsByTagName('body')[0];
+    console.log(body);
+    
+    const widget = document.createElement('div');
+    widget.setAttribute('id', 'widget');
+
     const likeCount = document.createElement('span');
     likeCount.setAttribute('id', 'widget__like-count')
+    
     widget.appendChild(likeCount);
+    body.appendChild(widget);
 }
 
 export async function displayPrice(photographer) {
@@ -50,8 +57,10 @@ export async function computeLikes(galery) {
 }
 
 export async function updatePhotographerWidget(galery) {
+    
     const widgetLikes = document.getElementById('widget__like-count');
     widgetLikes.textContent = await computeLikes(galery);
+    
 }
 
 export async function updateCheckboxState(photographerId) {
