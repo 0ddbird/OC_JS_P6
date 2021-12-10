@@ -41,7 +41,7 @@ export function galeryFactory(data) {
         if (data.hasOwnProperty('image')) {
             articleMedia = document.createElement('img');
             
-            articleMedia.setAttribute('srcset', `${srcSetLink} 1600w, ${link} 2000w`);
+            articleMedia.setAttribute('srcset', `${srcSetLink} 2000w, ${link} 2500w`);
         } else if (data.hasOwnProperty('video')) {
             articleMedia = document.createElement('video');
             articleMedia.setAttribute('preload','metadata');
