@@ -38,11 +38,11 @@ export function galeryFactory(data) {
         } else if (data.hasOwnProperty('video')) {
             articleMedia = document.createElement('video');
             articleMedia.setAttribute('preload','metadata');
+            articleMedia.setAttribute('poster',`./assets/posters/${title}.jpg`);
         }
         articleMedia.setAttribute("src", link);
-        articleMedia.classList.add('media-article_media');
+        articleMedia.classList.add('media-article_media', 'buffer');
         articleMedia.setAttribute('alt', `${title}, closeup view`);
-
         // DETAILS DIV
         const detailsDiv = document.createElement('div');
         detailsDiv.classList.add('media-article_details');
