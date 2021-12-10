@@ -9,6 +9,3 @@ async function indexInit() {
 };
 
 indexInit();
-
-let monImage = document.createElement('img')
-monImage.setAttribute('src', 'http://sourcedemonimage.jpg')

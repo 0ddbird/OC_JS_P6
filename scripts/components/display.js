@@ -9,6 +9,8 @@ export async function displayPhotographers(photographers) {
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     });
+    bufferPhotographers();
+    
 };
 
 export async function displayProfile(photographer) {
@@ -66,5 +68,16 @@ export async function updateCheckboxState(photographerId) {
         const selectedCheckbox = document.getElementById(`${checkbox}`)
         selectedCheckbox.setAttribute('checked', true)
     });
+    }
+}
+
+function bufferPhotographers() {
+    let allPhotographersDOM = document.querySelectorAll('.photographer-article__picture');
+    allPhotographersDOM.forEach((photographerPicture) => {
+        photographerPicture.addEventListener("load", removeLoadingClass(photographerPicture));
+    });
+
+    function removeLoadingClass(domElement) {
+        domElement.classList.remove('buffer');
     }
 }

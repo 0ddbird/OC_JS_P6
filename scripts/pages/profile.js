@@ -20,7 +20,6 @@ async function init() {
     createPhotographerWidget();
     displayPrice(photographerObject);
     updatePhotographerWidget(photographerGalery);
-    bufferMedias();
 
     // ADD EVENT LISTENER TO SELECT INPUT
     document.getElementById('select').addEventListener('change', function() {
@@ -37,7 +36,6 @@ async function init() {
         closeContactModal();
     });
 
-
     async function openContactModal() {
         const contactModal = document.getElementById('contact_modal');
         contactModal.style.setProperty('display', 'flex');
@@ -51,20 +49,8 @@ async function init() {
         const contactModal = document.getElementById('contact_modal');
         contactModal.style.setProperty('display', 'none');
     }
-
-    
 }
 
 await init();
 
-function bufferMedias() {
-    let allGaleryMediasDOM = document.querySelectorAll('.media-article_media');
 
-    allGaleryMediasDOM.forEach((media) => {
-        media.addEventListener("load", removeLoadingClass(media));
-    });
-
-    function removeLoadingClass(media) {
-        media.classList.remove('buffer');
-    }
-}

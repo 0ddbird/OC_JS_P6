@@ -41,7 +41,7 @@ export function galeryFactory(data) {
             articleMedia.setAttribute('poster',`./assets/posters/${title}.jpg`);
         }
         articleMedia.setAttribute("src", link);
-        articleMedia.classList.add('media-article_media', 'buffer');
+        articleMedia.classList.add('media-article_media','buffer');
         articleMedia.setAttribute('alt', `${title}, closeup view`);
         // DETAILS DIV
         const detailsDiv = document.createElement('div');

@@ -150,6 +150,7 @@ h2 {
 .media-article_details_like-module_label {
   color: #901C1C;
   margin-left: 1ch;
+  cursor: pointer;
 }
 
 #widget {
@@ -298,6 +299,7 @@ header {
 .photographer-section__profile-details-location {
   color: #901C1C;
   margin-bottom: 1em;
+  font-size: 24px;
 }
 
 .photographer-section__profile-details-tagline {
@@ -490,6 +492,7 @@ header {
   top: 50px;
   right: 50px;
   padding: 0;
+  cursor: pointer;
 }
 
 #lightbox_modal_media {

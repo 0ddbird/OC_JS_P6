@@ -10,11 +10,11 @@ export function photographerFactory(data) {
         link.setAttribute('href', url)
 
         const article = document.createElement( 'article' );
-        article.classList.add("photographer-article")
+        article.classList.add("photographer-article");
 
         // Build profile picture element
         const img = document.createElement( 'img' );
-        img.classList.add("photographer-article__picture");
+        img.classList.add("photographer-article__picture", "buffer");
         img.setAttribute("src", picture)
         
         // Build title element with Name
