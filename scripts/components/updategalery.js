@@ -1,26 +1,57 @@
-import { displayGalery } from './display.js';
+import { setPhotographerGalery, getPhotographerId, setCheckboxState, getCurrentPhotographerGalery } from './query.js';
+import { displayGalery, updateCheckboxState, updatePhotographerWidget } from './display.js';
+import { addMediaEventListeners } from '../components/modal_lightbox.js';
 
-/**
- * Displays and updates the galery in profile.html.
- * @param {array} galery an array of objects (medias).
- */
-export async function updateGalery(galery, sortOption) {
-    let galeryArray = galery;
+export async function updateGalery(sortOption) {
 
-    if (galeryArray === undefined) {
-        galeryArray = JSON.parse(sessionStorage.getItem('galery'));
-        //console.log('sessionStorage galeryArray', galeryArray);
-    }
+    const photographerId = getPhotographerId();
+    const photographerGalery = await getCurrentPhotographerGalery();
+    let sortedGalery = await sortGalery(photographerGalery, sortOption);
 
-    const sortedGalery = await sortGalery(galeryArray, sortOption);
     displayGalery(sortedGalery);
-}
+    updateCheckboxState(photographerId);
+    const allArticles = document.querySelectorAll('.media-article');
+    addMediaEventListeners(photographerId, allArticles, photographerGalery);
 
-/**
- * Sorts the galery
- * @param {array} galery an array containing the medias to display.
- * @returns {array} a sorted array.
- */
+    const likeCheckboxes = [...document.querySelectorAll('.media-article_details_like-module_input')];
+    const likeLabels = [...document.querySelectorAll('.media-article_details_like-module_label')];
+
+    likeLabels.forEach(label => {
+        label.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+    });
+
+    likeCheckboxes.forEach(checkbox => {
+
+        checkbox.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+        checkbox.addEventListener('change', async function() {
+            const checkboxId = parseInt(this.id);
+            const checked = this.checked;
+            const matchingMedia = photographerGalery.find(media => media.id === checkboxId);
+            const mediaLikesCount = document.getElementById(`${checkboxId}-likes`);
+            let mediaLikesCountInt = parseInt(mediaLikesCount.textContent);
+
+            if (checked) {
+                matchingMedia.likes += 1;
+                mediaLikesCountInt +=1;
+                setCheckboxState(photographerId, checkboxId, true);
+            } else {
+                matchingMedia.likes -=1;
+                mediaLikesCountInt -=1;
+                setCheckboxState(photographerId, checkboxId, false);
+            }
+            mediaLikesCount.textContent = mediaLikesCountInt;
+            setPhotographerGalery(photographerId, photographerGalery);
+            
+            updatePhotographerWidget(photographerGalery);
+        });
+    });
+};
+
 async function sortGalery(galery, sortOption) {
     let sortedGalery = galery;
     let sortType = sortOption;
@@ -32,18 +63,15 @@ async function sortGalery(galery, sortOption) {
     switch (sortOption) {
         case 'date': {
             let sorted = sortedGalery.sort((a, b) => a.date.localeCompare(b.date)).reverse();
-            //console.log('sorted by date', sorted);
             return sorted;
         }
         case 'title': {
             let sorted = sortedGalery.sort((a, b) => a.title.localeCompare(b.title));
-            //console.log('sorted by title', sorted);
             return sorted;
         }
         case 'popularity':
         default: {
             let sorted = sortedGalery.sort((a, b) => a.likes - b.likes).reverse();
-            //console.log('sorted by popularity', sorted);
             return sorted;
         }
     }

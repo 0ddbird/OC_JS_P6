@@ -1,12 +1,14 @@
-import { getPhotographersArray } from "../components/query.js";
-import { displayData } from '../components/display.js';
+import { photographersArray } from "../components/query.js";
+import { displayPhotographers } from '../components/display.js';
 
 /**
  * Main function of index.html
  */
 async function indexInit() {
-    const photographers = await getPhotographersArray();
-    displayData(photographers); 
+    displayPhotographers(photographersArray); 
 };
 
 indexInit();
+
+let monImage = document.createElement('img')
+monImage.setAttribute('src', 'http://sourcedemonimage.jpg')

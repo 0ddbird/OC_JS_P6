@@ -1,24 +1,31 @@
-import { getJsonData, getPhotographerObject, getGaleryArray, getPhotographerId } from '../components/query.js';
-import { displayProfile, displayPrice, displayLikes } from '../components/display.js';
+import { getPhotographerId, setPhotographerGalery, getCurrentPhotographerGalery, getPhotographerProfile, getInitialPhotographerGalery, getCheckboxState } from '../components/query.js';
+import { displayProfile, displayPrice, createPhotographerWidget, updatePhotographerWidget, updateCheckboxState} from '../components/display.js';
 import { updateGalery } from '../components/updategalery.js';
-import { computeLikes } from '../components/widget.js';
-import { storeCurrentData } from '../components/storage.js';
 
-/**
- * Main function of profile.html
- */
-async function profileInit() {
-    const jsonData = await getJsonData();
-    const photographerId = await getPhotographerId();
-    const photographer = await getPhotographerObject(jsonData, photographerId);
-    const galery = await getGaleryArray(jsonData, photographerId);
-    let totalLikes = await computeLikes(galery);
+async function init() {
 
-    displayProfile(photographer);
-    displayPrice(photographer);
-    updateGalery(galery);
-    displayLikes(totalLikes);
-    storeCurrentData(galery);
+    const photographerId = getPhotographerId();
+    const photographerObject = await getPhotographerProfile(photographerId);
+
+    if (getCurrentPhotographerGalery() === null) {
+        const initialPhotographerGalery = await getInitialPhotographerGalery(photographerId);
+        await setPhotographerGalery(photographerId, initialPhotographerGalery);
+    }
+    const photographerGalery = await getCurrentPhotographerGalery(photographerId);
+    getCheckboxState()
+    displayProfile(photographerObject);
+    
+    await updateGalery();
+    updateCheckboxState(photographerId);
+    createPhotographerWidget();
+    displayPrice(photographerObject);
+    updatePhotographerWidget(photographerGalery);
 }
 
-profileInit();
+init();
+
+// Add event listener to select in HTML.
+document.getElementById('select').addEventListener('change', function() {
+    updateGalery(this.value)
+});
+

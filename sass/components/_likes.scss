@@ -1,0 +1,26 @@
+@use '../abstract/' as a;
+
+.media-article_details {
+    display: flex;
+    justify-content: space-between;
+    color: a.$clr-primary;
+    font-size: 20px;
+    width: 300px;
+    margin: 1em 0;
+    font-weight: 400;
+}
+
+.media-article_details_title {
+    color: a.$clr-primary;
+    font-weight: 500;
+}
+
+.media-article_details_like-module_input {
+    display: none;
+}
+
+.media-article_details_like-module_label {
+    color: a.$clr-primary;
+}
+
+

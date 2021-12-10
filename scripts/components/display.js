@@ -1,11 +1,8 @@
 import { galeryFactory } from '../factories/galery.js';
 import { photographerFactory } from '../factories/photographer.js';
+import { getCheckboxState } from './query.js';
 
-/**
- * Appends an article for each photographer to photographer_section in homepage
- * @param {array} photographers array of object (photographers)
- */
-export async function displayData(photographers) {
+export async function displayPhotographers(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     photographers.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer);
@@ -14,10 +11,6 @@ export async function displayData(photographers) {
     });
 };
 
-/**
- * Appends HTML elements to the photographer_section in profile.html
- * @param {object} photographer an object with the photographer's data
- */
 export async function displayProfile(photographer) {
     const photographerSection = document.getElementById('photographer-section');
     const photographerModel = photographerFactory(photographer);
@@ -25,15 +18,9 @@ export async function displayProfile(photographer) {
     photographerSection.appendChild(userSectionDOM);
 }
 
-/**
- * Appends HTML elements to galery section in profile.html
- * @param {array} galery an array of objects
- */
 export async function displayGalery(galery) {
     const galerySection = document.getElementById('galery-section');
     galerySection.innerHTML='';
-    //const articles = document.getElementsByClassName('picture-article');
-    //articles.forEach((article) => galerySection.removeChild(article));
 
     galery.forEach((mediaObject) => {
         const mediaThumbnail = galeryFactory(mediaObject);
@@ -42,10 +29,14 @@ export async function displayGalery(galery) {
     })
 }
 
-/**
- * Appends and HTML element to a div (widget) with photographer price
- * @param {object} photographer an object with data if a single photographer
- */
+// Photographer widget
+export async function createPhotographerWidget(total) {
+    const widget = document.getElementById('widget');
+    const likeCount = document.createElement('span');
+    likeCount.setAttribute('id', 'widget__like-count')
+    widget.appendChild(likeCount);
+}
+
 export async function displayPrice(photographer) {
     const price = photographer.price;
     const widget = document.getElementById('widget');
@@ -54,13 +45,21 @@ export async function displayPrice(photographer) {
     widget.appendChild(priceTag);
 }
 
-/**
- * Appends and HTML element to a div (widget) with photographer total likes
- * @param {number} total an integer: the total amount of likes from the photographer's galery
- */
-export async function displayLikes(total) {
-    const widget = document.getElementById('widget');
-    const likeCount = document.createElement('span');
-    likeCount.textContent = total + '<3';
-    widget.appendChild(likeCount);
+export async function computeLikes(galery) {
+    return galery.reduce((acc, curr) => acc + curr.likes, 0);
+}
+
+export async function updatePhotographerWidget(galery) {
+    const widgetLikes = document.getElementById('widget__like-count');
+    widgetLikes.textContent = await computeLikes(galery);
+}
+
+export async function updateCheckboxState(photographerId) {
+    const photographerCheckboxes = getCheckboxState(photographerId);
+    if (photographerCheckboxes != undefined) {
+        photographerCheckboxes.forEach(checkbox => {
+        const selectedCheckbox = document.getElementById(`${checkbox}`)
+        selectedCheckbox.setAttribute('checked', true)
+    });
+    }
 }

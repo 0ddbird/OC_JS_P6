@@ -1,50 +1,37 @@
-/**
- * Fetch json file and returns JS object.
- * @returns {object} an object containing 2 keys, photographers and media
- */
+const jsonData = await getJsonData();
+let allCheckboxStates = [];
+export const photographersArray = await getPhotographersArray();
+
+export function getPhotographerId() {
+    return parseInt(new URLSearchParams(window.location.search).get('id'));
+} 
+
+// Index.html and profile.html
 export async function getJsonData() {
     const response = await fetch('./data/photographers.json');
     return await response.json();
 }
-/**
- * Get the photographer ID from the variable in URL.
- * @returns {number} returns an integer: the photographer ID.
- */
-export async function getPhotographerId() {
-    return parseInt(new URLSearchParams(window.location.search).get('id'));
-}
-/**
- * Get a list of photographers
- * @returns {array} Returns an array of objects (photographers).
- */
+
+//Index.html
 export async function getPhotographersArray() {
     const data = await getJsonData()
     return data.photographers
 }
-/**
- * Find a single photographer object in an array.
- * @param {array} data array containing multiple objects.
- * @param {number} id  id of the photographer.
- * @returns {number} returns a single object matching the photographer ID.
- */
-export async function getPhotographerObject(data, photographerId) {
-    return data.photographers.find(photographer => photographer.id === photographerId);
+
+//Profile.html
+export async function getPhotographerProfile(photographerId) {
+    return jsonData.photographers.find(photographer => photographer.id === photographerId);
 }
-/**
- * Fetch galery content data in object
- * @param {array} data an object containing 2 keys: photographers and media.
- * @param {number} id  id of the photographer.
- * @returns {array} returns and array containing multiple objects that match the photographer ID.
- */
-export async function getGaleryArray(data, photographerId) {
-    const result = data.media.filter(element => element.photographerId === photographerId);
+
+export async function getInitialPhotographerGalery(photographerId) {
+    const result = jsonData.media.filter(element => element.photographerId === photographerId);
     return await fixMediaTitles(result);
 }
-/**
- * Fix missing title for videos
- * @param {array} data an array of objects (medias)
- * @returns {array} an array of objects (medias) with fixed title value.
- */
+
+export function getCurrentPhotographerGalery() {
+    return JSON.parse(sessionStorage.getItem(getPhotographerId()));
+}
+
 async function fixMediaTitles(data) {
     data.forEach(element => {
         if (element.title === undefined) {
@@ -53,3 +40,25 @@ async function fixMediaTitles(data) {
     });
     return data;
 }
+
+export async function setPhotographerGalery(photographerId, galery) {
+    sessionStorage.setItem(photographerId, JSON.stringify(galery));
+}
+
+export function setCheckboxState(photographerId, checkboxId, checked) {
+    if(checked === true) {
+        allCheckboxStates.push(checkboxId);
+    } else {
+        let indexOfId = allCheckboxStates.indexOf(checkboxId);
+        allCheckboxStates.splice(indexOfId, 1);
+    }
+    sessionStorage.setItem(`${photographerId}-checkboxes`, allCheckboxStates);
+}
+
+export function getCheckboxState(photographerId) {
+    if (sessionStorage.getItem(`${photographerId}-checkboxes`)) {
+
+        return [...sessionStorage.getItem(`${photographerId}-checkboxes`).split(',')];
+    }
+}
+

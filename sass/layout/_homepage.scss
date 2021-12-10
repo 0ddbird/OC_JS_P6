@@ -1,0 +1,48 @@
+@use '../abstract' as a;
+
+.photographer_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    margin-top: 100px;
+}
+
+.photographer-article {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation-name: grow;
+    animation-duration: .75s;
+    animation-timing-function: ease-in-out;
+    transition: transform .25s ease-in-out;
+}
+
+.photographer-article__name {
+    font-size: 36px;
+}
+
+.photographer-article__picture {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.photographer-article__location {
+    color: a.$clr-primary;
+    font-weight: 500;
+}
+
+.photographer-article__tagline {
+    font-size: .75em;
+    font-weight: 500;
+}
+
+.photographer-article__price {
+    font-size: .75em;
+    font-weight: 500;
+    color: a.$clr-darkgrey;
+}
+

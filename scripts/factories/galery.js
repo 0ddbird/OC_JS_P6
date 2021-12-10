@@ -1,55 +1,103 @@
-/**
- * Creates medias objects with methods to display them.
- * @param {array} data and array of objects.
- * @returns {object} an object with 4 keys and 2 methods.
- */
+import { getCheckboxState } from "../components/query.js";
 
 export function galeryFactory(data) {
 
     const { photographerId, id, title, image, video, likes, date} = data;
     let link;
 
-    if ( data.hasOwnProperty('image') ) {
+    if (data.hasOwnProperty('image')) {
         link = `./assets/photos/${photographerId}/${image}`;
-    } else if ( data.hasOwnProperty('video') ) 
+    } else if (data.hasOwnProperty('video')) 
     {
         link = `./assets/photos/${photographerId}/${video}`;
     };
 
     function getThumbnailDOM() {
 
-        // Create new article
+    /* ============================= HTML element made by getThumbnailDOM() =============================
+    |-- ARTICLE                      .media-article
+            |-- IMG || VIDEO         .media-article_media
+            |-- DIV                  .media-article_details
+                |-- SPAN             .media-article_details_title
+                |-- DIV              .media-article_details_like-module
+                    |-- INPUT        .media-article_details_like-module_input
+                    |-- SPAN         .media-article_details_like-module_count
+                        |-- LABEL    .media-article_details_like-module_label
+                            |-- I    .media-article_details_like-module_label_like-icon + .fas + .fa-heart 
+    =====================================================================================================*/
+
+        // ARTICLE
         const article = document.createElement('article');
-        article.classList.add("picture-article");
+        article.setAttribute('id', `article-${id}`);
+        article.classList.add("media-article");
 
-        if ( data.hasOwnProperty('image') ) {
-            // Build picture
-            const thumbnail = document.createElement('img');
-            thumbnail.setAttribute("src", link);
-            article.appendChild(thumbnail);
+        // MEDIA IMG | VIDEO
+        let articleMedia;
+        if (data.hasOwnProperty('image')) {
+            articleMedia = document.createElement('img');
+        } else if (data.hasOwnProperty('video')) {
+            articleMedia = document.createElement('video');
+        }
+        articleMedia.setAttribute("src", link);
+        articleMedia.classList.add('media-article_media');
+        
+
+        // DETAILS DIV
+        const detailsDiv = document.createElement('div');
+        detailsDiv.classList.add('media-article_details');
+        
+        // DETAILS DIV: TITLE
+        const detailsTitle = document.createElement('span');
+        detailsTitle.textContent = title;
+        detailsTitle.classList.add(`media-article_details_title`);
+
+        // LIKE MODULE
+        const likeModule = document.createElement('div');
+        likeModule.classList.add(`media-article_details_like-module`);
+        
+        //LIKE MODULE: INPUT
+        const likeInput = document.createElement('input');
+        likeInput.classList.add('media-article_details_like-module_input');
+        likeInput.setAttribute('type', 'checkbox')
+        likeInput.setAttribute('id', id)
+        if (getCheckboxState() != null ){
+            const checkBoxState = getCheckboxState().split(',');
+            likeInput.checked = checkBoxState.includes(likeInput.id);
         }
 
-        if ( data.hasOwnProperty('video') ) {
-            const video = document.createElement('video');
-            const source = document.createElement('source');
-            source.setAttribute('src', link);
-            video.appendChild(source);
-            article.appendChild(video);
-        }
+        //LIKE MODULE: SPAN 'COUNT'
+        const likeCountSpan = document.createElement('span');
+        likeCountSpan.setAttribute('id', `${id}-likes`)
+        likeCountSpan.classList.add('media-article_details_like-module_count')
+        likeCountSpan.textContent = likes;
 
-        //Build title
-        const h3 = document.createElement('h3');
-        h3.textContent = title;
-        h3.classList.add("picture__title");
-        article.appendChild(h3);
+        // LIKE MODULE: LABEL
+        const likeLabel = document.createElement('label');
+        likeLabel.setAttribute('for', id);
+        likeLabel.classList.add('media-article_details_like-module_label')
 
+        // LIKE MODULE LABEL: ICON
+        const likeLabelIcon = document.createElement('i');
+        likeLabelIcon.classList.add('fas', 'fa-heart', '.media-article_details_like-module_label_like-icon')
 
-        const mediaLikes = document.createElement('span');
-        mediaLikes.textContent = likes;
-        article.appendChild(mediaLikes);
+        // APPEND ICON TO LABEL
+        likeLabel.appendChild(likeLabelIcon);
 
+        // APPEND INPUT, SPAN AND LABEL TO DIV 'LIKE MODULE'
+        likeModule.appendChild(likeInput);
+        likeModule.appendChild(likeCountSpan);
+        likeModule.appendChild(likeLabel);
+        
+        // APPEND TITLE AND LIKE MODULE TO DIV 'DETAILS'
+        detailsDiv.appendChild(detailsTitle);
+        detailsDiv.appendChild(likeModule);
+        
+        // APPEND MEDIA AND DIV 'DETAILS' TO ARTICLE
+        article.appendChild(articleMedia);
+        article.appendChild(detailsDiv);
 
         return article;
     }
     return {id, likes, date, title, getThumbnailDOM};
 }
+

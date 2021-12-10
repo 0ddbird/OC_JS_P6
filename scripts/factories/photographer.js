@@ -1,8 +1,3 @@
-/**
- * Creates photographers objects with methods to display them.
- * @param {array} data an array of objects (photographers).
- * @returns {object} an object with 2 keys and 2 methods.
- */
 export function photographerFactory(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
 
@@ -19,12 +14,13 @@ export function photographerFactory(data) {
 
         // Build profile picture element
         const img = document.createElement( 'img' );
+        img.classList.add("photographer-article__picture");
         img.setAttribute("src", picture)
         
         // Build title element with Name
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        h2.classList.add("photographer-article_name")
+        h2.classList.add("photographer-article__name")
         
         // Build City, Country element
         const locationSpan = document.createElement( 'span' );
@@ -58,37 +54,47 @@ export function photographerFactory(data) {
 
         // Build profile picture element
         const img = document.createElement( 'img' );
+        img.classList.add("photographer-section__picture")
         img.setAttribute("src", picture)
+
+        const profileDiv = document.createElement('div');
+        profileDiv.classList.add('photographer-section__profile');
 
         // Build title element with Name
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        h2.classList.add("photographer-article_name")
+        h2.classList.add("photographer-section__profile-name")
+
+        const detailsDiv = document.createElement('div');
+        detailsDiv.classList.add('photographer-section__profile-details');
 
         // Build City, Country element
         const locationSpan = document.createElement( 'span' );
         locationSpan.textContent = city + ', ' + country;
-        locationSpan.classList.add("photographer-article__location")
-
+        locationSpan.classList.add("photographer-section__profile-details-location")
+ 
         // Build tagline
         const taglineSpan = document.createElement( 'span' );
         taglineSpan.textContent = tagline;
-        taglineSpan.classList.add("photographer-article__tagline")
+        taglineSpan.classList.add("photographer-section__profile-details-tagline")
 
-        // Build price
+/*         // Build price
         const priceSpan = document.createElement( 'span' );
         priceSpan.textContent = price + "€/jour";
-        priceSpan.classList.add("photographer-article__price")
-
+        priceSpan.classList.add("photographer-section__price")
+ */
         const contactButton = document.createElement('button');
         contactButton.textContent = "Contactez-moi";
         contactButton.classList.add('contact_button');
         contactButton.setAttribute('onclick', "displayModal()");
 
-        profile.appendChild(h2);
-        profile.appendChild(locationSpan);
-        profile.appendChild(taglineSpan);
-        profile.appendChild(priceSpan);
+        
+        detailsDiv.appendChild(locationSpan);
+        detailsDiv.appendChild(taglineSpan);
+        profileDiv.appendChild(h2);
+        profileDiv.appendChild(detailsDiv);
+        profile.appendChild(profileDiv);
+        //profile.appendChild(priceSpan);
         profile.appendChild(contactButton);
         profile.appendChild(img);
 
