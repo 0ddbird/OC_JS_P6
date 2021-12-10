@@ -1,6 +1,10 @@
 export function photographerFactory(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
 
+    // Remove .jpg extension for sourceset
+    const portraitName = portrait.slice(0, -4);
+    const srcSetLink = `./assets/photographers/${portraitName}-light.jpg`
+
     const picture = `./assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
@@ -15,7 +19,8 @@ export function photographerFactory(data) {
         // Build profile picture element
         const img = document.createElement( 'img' );
         img.classList.add("photographer-article__picture", "buffer");
-        img.setAttribute("src", picture)
+        img.setAttribute("src", srcSetLink)
+        img.setAttribute("srcset", `${srcSetLink} w2000, ${picture} w2500`)
         
         // Build title element with Name
         const h2 = document.createElement( 'h2' );

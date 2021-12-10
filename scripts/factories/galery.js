@@ -3,10 +3,13 @@ import { getCheckboxState } from "../components/query.js";
 export function galeryFactory(data) {
 
     const { photographerId, id, title, image, video, likes, date} = data;
-    let link;
+    
+    let link, pictureName, srcSetLink;
 
     if (data.hasOwnProperty('image')) {
         link = `./assets/photos/${photographerId}/${image}`;
+        const pictureName = image.slice(0, -4);
+        srcSetLink = `./assets/photos/${photographerId}/${pictureName}-light.jpg`;
     } else if (data.hasOwnProperty('video')) 
     {
         link = `./assets/photos/${photographerId}/${video}`;
@@ -33,14 +36,19 @@ export function galeryFactory(data) {
 
         // MEDIA IMG | VIDEO
         let articleMedia;
+        
+
         if (data.hasOwnProperty('image')) {
             articleMedia = document.createElement('img');
+            
+            articleMedia.setAttribute('srcset', `${srcSetLink} 1600w, ${link} 2000w`);
         } else if (data.hasOwnProperty('video')) {
             articleMedia = document.createElement('video');
             articleMedia.setAttribute('preload','metadata');
             articleMedia.setAttribute('poster',`./assets/posters/${title}.jpg`);
         }
-        articleMedia.setAttribute("src", link);
+        articleMedia.setAttribute("src", srcSetLink);
+        
         articleMedia.classList.add('media-article_media','buffer');
         articleMedia.setAttribute('alt', `${title}, closeup view`);
         // DETAILS DIV
