@@ -22,10 +22,34 @@ async function init() {
     updatePhotographerWidget(photographerGalery);
 }
 
-init();
+await init();
 
-// Add event listener to select in HTML.
+// ADD EVENT LISTENER TO SELECT INPUT
 document.getElementById('select').addEventListener('change', function() {
     updateGalery(this.value)
 });
 
+// ADD EVENT LISTENER TO CONTACT BUTTON
+document.getElementById('contact-me_button').addEventListener('click', async function() {
+    openContactModal();
+});
+
+// ADD EVENT LISTENER TO CLOSE MODAL BUTTON
+document.getElementById('contact-modal_close-button').addEventListener('click', function () {
+    closeContactModal();
+});
+
+
+async function openContactModal() {
+    const contactModal = document.getElementById('contact_modal');
+    contactModal.style.setProperty('display', 'flex');
+    const contactModalTitle  = document.getElementById('contact_modal_title');
+    const photographerProfile = await getPhotographerProfile(getPhotographerId());
+    const photographerName = photographerProfile.name;
+    contactModalTitle.textContent = `Contactez-moi ${photographerName}`;
+};
+
+function closeContactModal() {
+    const contactModal = document.getElementById('contact_modal');
+    contactModal.style.setProperty('display', 'none');
+}

@@ -13,7 +13,7 @@
   <body>
     <header>
       <a href="index.html">
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
       </a>
     </header>
     <main id="main">
@@ -34,15 +34,21 @@
     <div id="lightbox_modal">
     </div>
     <div id="contact_modal">
-			<div class="modal">
+			<div class="modal-body">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <h2 id="contact_modal_title">Contactez-moi</h2>
+          <img src="assets/icons/close.svg" id="contact-modal_close-button" />
         </header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="contact-first-name">Prénom</label>
+						<input type="text" id="contact-first-name"/>
+            <label for="contact-last-name">Nom</label>
+						<input type="text" id="contact-last-name"/>
+            <label for="contact-email">Email</label>
+						<input type="text" id="contact-email"/>
+            <label for="contact-message">Votre message</label>
+						<input type="text" id="contact-message"/>
 					</div>
           <button class="contact_button">Envoyer</button>
 				</form>

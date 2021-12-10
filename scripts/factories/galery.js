@@ -40,7 +40,7 @@ export function galeryFactory(data) {
         }
         articleMedia.setAttribute("src", link);
         articleMedia.classList.add('media-article_media');
-        
+        articleMedia.setAttribute('alt', `${title}, closeup view`);
 
         // DETAILS DIV
         const detailsDiv = document.createElement('div');
@@ -79,6 +79,7 @@ export function galeryFactory(data) {
         // LIKE MODULE LABEL: ICON
         const likeLabelIcon = document.createElement('i');
         likeLabelIcon.classList.add('fas', 'fa-heart', '.media-article_details_like-module_label_like-icon')
+        likeLabelIcon.setAttribute('aria-label', 'likes');
 
         // APPEND ICON TO LABEL
         likeLabel.appendChild(likeLabelIcon);

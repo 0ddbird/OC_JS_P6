@@ -20,7 +20,8 @@ export function photographerFactory(data) {
         // Build title element with Name
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        h2.classList.add("photographer-article__name")
+        h2.classList.add("photographer-article__name");
+        h2.setAttribute('aria-label', name); 
         
         // Build City, Country element
         const locationSpan = document.createElement( 'span' );
@@ -56,6 +57,7 @@ export function photographerFactory(data) {
         const img = document.createElement( 'img' );
         img.classList.add("photographer-section__picture")
         img.setAttribute("src", picture)
+        img.setAttribute('alt', name);
 
         const profileDiv = document.createElement('div');
         profileDiv.classList.add('photographer-section__profile');
@@ -78,17 +80,13 @@ export function photographerFactory(data) {
         taglineSpan.textContent = tagline;
         taglineSpan.classList.add("photographer-section__profile-details-tagline")
 
-/*         // Build price
-        const priceSpan = document.createElement( 'span' );
-        priceSpan.textContent = price + "€/jour";
-        priceSpan.classList.add("photographer-section__price")
- */
         const contactButton = document.createElement('button');
         contactButton.textContent = "Contactez-moi";
         contactButton.classList.add('contact_button');
+        contactButton.setAttribute('id','contact-me_button');
+        contactButton.setAttribute('aria-labelledby', 'contact-me_button');
         contactButton.setAttribute('onclick', "displayModal()");
 
-        
         detailsDiv.appendChild(locationSpan);
         detailsDiv.appendChild(taglineSpan);
         profileDiv.appendChild(h2);
