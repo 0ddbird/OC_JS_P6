@@ -120,12 +120,36 @@ h2 {
   font-weight: 500;
 }
 
+.media-article_details_like-module {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .media-article_details_like-module_input {
   display: none;
 }
 
+.media-article_details_like-module_input:checked ~ .media-article_details_like-module_label i {
+  color: #D3573C;
+  animation-name: bounce;
+  animation-duration: 0.35s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .media-article_details_like-module_label {
   color: #901C1C;
+  margin-left: 1ch;
 }
 
 #widget {
@@ -299,53 +323,56 @@ header {
   }
 }
 #lightbox_modal {
-  position: sticky;
-  bottom: 0;
-  background-color: white;
   display: none;
   align-items: center;
   justify-content: center;
+  position: relative;
+  background-color: white;
+  padding: 0 15px 15px 15px;
   height: 100vh;
   width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.lightbox_modal_arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1em;
+  font-size: 80px;
+  font-weight: 700;
+  color: #901C1C;
+  cursor: pointer;
 }
 
 #lightbox_modal_main {
   display: flex;
   flex-direction: column;
   margin: 0 1%;
-  max-width: clamp(600px, 30%, 1200px);
+  overflow: hidden;
+}
+
+#lightbox_modal_close_button {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  padding: 0;
 }
 
 #lightbox_modal_media {
   object-fit: cover;
-  height: 600px;
-  width: 600px;
   margin-bottom: 1em;
   border-radius: 5px;
+  max-height: 500px;
+  max-width: 80vw;
 }
 
 #lightbox_modal_title {
   font-size: 30px;
   color: #901C1C;
-}
-
-.lightbox_modal_arrow {
-  font-size: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1em;
-  cursor: pointer;
-  color: #901C1C;
-  font-weight: 700;
-  font-size: 80px;
-}
-
-#lightbox_modal_close_button {
-  position: absolute;
-  top: 100px;
-  right: 100px;
-  padding: 30px;
 }
 
 #contact_modal {

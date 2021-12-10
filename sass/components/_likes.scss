@@ -15,12 +15,37 @@
     font-weight: 500;
 }
 
+.media-article_details_like-module {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
 .media-article_details_like-module_input {
     display: none;
 }
 
+.media-article_details_like-module_input:checked ~ .media-article_details_like-module_label i{
+    color: a.$clr-secondary;
+    animation-name: bounce;
+    animation-duration: .35s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .media-article_details_like-module_label {
     color: a.$clr-primary;
+    margin-left: 1ch;
 }
 
 
