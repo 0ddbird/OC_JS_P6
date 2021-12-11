@@ -27,8 +27,8 @@
 .media-article_details_like-module_input:checked ~ .media-article_details_like-module_label i{
     color: a.$clr-secondary;
     animation-name: bounce;
-    animation-duration: .35s;
-    animation-timing-function: ease-in-out;
+    animation-duration: .25s;
+    animation-timing-function: ease-out;
 }
 
 @keyframes bounce {
@@ -36,7 +36,7 @@
         transform: scale(1);
     }
     50% {
-        transform: scale(1.5);
+        transform: scale(1.75);
     }
     100% {
         transform: scale(1);

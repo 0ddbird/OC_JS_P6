@@ -18,12 +18,12 @@
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    animation-name: grow;
-    animation-delay: .5s;
+    transform: translateY(2000px);
+    animation-name: slideUp;
+    /* animation-delay: .5s; */
     animation-duration: .5s;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: ease-out;
     animation-fill-mode: forwards;
-    transition: transform .15s ease-in-out;
 }
 
 .media-article_media {

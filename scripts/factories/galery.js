@@ -8,7 +8,7 @@ export function galeryFactory(data) {
 
     if (data.hasOwnProperty('image')) {
         link = `./assets/photos/${photographerId}/${image}`;
-        const pictureName = image.slice(0, -4);
+        pictureName = image.slice(0, -4);
         srcSetLink = `./assets/photos/${photographerId}/${pictureName}-light.jpg`;
     } else if (data.hasOwnProperty('video')) 
     {

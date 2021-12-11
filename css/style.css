@@ -90,6 +90,56 @@ a {
     transform: scale(1);
   }
 }
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(500px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(2000px);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(-70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-2000px);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 h1 {
   color: #901C1C;
   margin-right: 100px;
@@ -132,8 +182,8 @@ h2 {
 .media-article_details_like-module_input:checked ~ .media-article_details_like-module_label i {
   color: #D3573C;
   animation-name: bounce;
-  animation-duration: 0.35s;
-  animation-timing-function: ease-in-out;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
 }
 
 @keyframes bounce {
@@ -141,7 +191,7 @@ h2 {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.75);
   }
   100% {
     transform: scale(1);
@@ -219,10 +269,10 @@ header {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  animation-name: grow;
+  animation-name: fadeIn;
   animation-duration: 0.75s;
   animation-timing-function: ease-in-out;
-  transition: transform 0.25s ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .photographer-article__name {
@@ -363,12 +413,12 @@ header {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  animation-name: grow;
-  animation-delay: 0.5s;
+  transform: translateY(2000px);
+  animation-name: slideUp;
+  /* animation-delay: .5s; */
   animation-duration: 0.5s;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  transition: transform 0.15s ease-in-out;
 }
 
 .media-article_media {
@@ -444,9 +494,9 @@ header {
   flex-direction: column;
   margin: 0 1%;
   overflow: hidden;
-  animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
+  animation-duration: 0.55s;
 }
 
 .previous {
@@ -459,34 +509,6 @@ header {
   transform: translateX(-2000px);
 }
 
-@keyframes slideLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(2000px);
-  }
-  85% {
-    opacity: 1;
-    transform: translateX(-70px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-@keyframes slideRight {
-  0% {
-    opacity: 0;
-    transform: translateX(-2000px);
-  }
-  85% {
-    opacity: 1;
-    transform: translateX(70px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 #lightbox_modal_close_button {
   position: absolute;
   top: 50px;

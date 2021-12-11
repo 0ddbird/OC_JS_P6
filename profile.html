@@ -19,6 +19,12 @@
     <main id="main">
       <section id="photographer-section">
       </section>
+      <div id="listbox-label" role="label">Trier par</div> 
+      <div role="listbox" tabindex="0" id="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-1"> 
+          <div role="option" id="listbox-1" aria-selected="true" value="popularity">Popularité</div> 
+          <div role="option" id="listbox-2" value="date">Date</div> 
+          <div role="option" id="listbox-3" value="title">Titre</div> 
+      </div>
       <label for="sort-by">Trier par</label>
         <select name="sort-by" id="select">
           <option name="popularity" value="popularity">Popularité</option>

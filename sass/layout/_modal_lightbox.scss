@@ -41,9 +41,9 @@
     flex-direction: column;
     margin: 0 1%;
     overflow: hidden;
-    animation-duration: 1s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
+    animation-duration: .55s;
 }
 
 .previous {
@@ -54,36 +54,7 @@
 .next {
     animation-name: slideLeft;
     transform: translateX(-2000px);
-}
-
-@keyframes slideLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(2000px);
-    }
-    85% {
-        opacity: 1;
-        transform : translateX(-70px);
-    }
-    100% {
-        opacity: 1;
-        transform : translateX(0);
-    }
-}
-
-@keyframes slideRight {
-    0% {
-        opacity: 0;
-        transform: translateX(-2000px);
-    }
-    85% {
-        opacity: 1;
-        transform : translateX(70px);
-    }
-    100% {
-        opacity: 1;
-        transform : translateX(0);
-    }
+    
 }
 
 #lightbox_modal_close_button{

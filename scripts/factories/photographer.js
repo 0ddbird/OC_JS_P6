@@ -3,7 +3,7 @@ export function photographerFactory(data) {
 
     // Remove .jpg extension for sourceset
     const portraitName = portrait.slice(0, -4);
-    const srcSetLink = `./assets/photographers/${portraitName}-light.jpg`
+    const srcSetLink = `./assets/photographers/${portraitName}-xxlight.jpg`
 
     const picture = `./assets/photographers/${portrait}`;
 
