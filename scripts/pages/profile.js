@@ -1,56 +1,16 @@
-import { getPhotographerId, setPhotographerGalery, getCurrentPhotographerGalery, getPhotographerProfile, getInitialPhotographerGalery, getCheckboxState } from '../components/query.js';
-import { displayProfile, displayPrice, createPhotographerWidget, updatePhotographerWidget, updateCheckboxState} from '../components/display.js';
+import { getPhotographerId, getGalery } from '../components/query.js';
+import { displayProfile } from '../components/display.js';
 import { updateGalery } from '../components/updategalery.js';
+import { createWidget } from '../components/widget.js'
+import { addStaticDOMListeners } from '../components/events.js';
 
 async function init() {
-
     const photographerId = getPhotographerId();
-    const photographerObject = await getPhotographerProfile(photographerId);
+    const galery = await getGalery(photographerId);
 
-    if (getCurrentPhotographerGalery() === null) {
-        const initialPhotographerGalery = await getInitialPhotographerGalery(photographerId);
-        await setPhotographerGalery(photographerId, initialPhotographerGalery);
-    }
-    const photographerGalery = await getCurrentPhotographerGalery(photographerId);
-    getCheckboxState()
-    displayProfile(photographerObject);
-    
+    displayProfile(photographerId);
     await updateGalery();
-    updateCheckboxState(photographerId);
-    createPhotographerWidget();
-    displayPrice(photographerObject);
-    updatePhotographerWidget(photographerGalery);
-
-    // ADD EVENT LISTENER TO SELECT INPUT
-    document.getElementById('select').addEventListener('change', function() {
-        updateGalery(this.value)
-    });
-
-    // ADD EVENT LISTENER TO CONTACT BUTTON
-    document.getElementById('contact-me_button').addEventListener('click', async function() {
-        openContactModal();
-    });
-
-    // ADD EVENT LISTENER TO CLOSE MODAL BUTTON
-    document.getElementById('contact-modal_close-button').addEventListener('click', function () {
-        closeContactModal();
-    });
-
-    async function openContactModal() {
-        const contactModal = document.getElementById('contact_modal');
-        contactModal.style.setProperty('display', 'flex');
-        const contactModalTitle  = document.getElementById('contact_modal_title');
-        const photographerProfile = await getPhotographerProfile(getPhotographerId());
-        const photographerName = photographerProfile.name;
-        contactModalTitle.textContent = `Contactez-moi ${photographerName}`;
-    };
-
-    function closeContactModal() {
-        const contactModal = document.getElementById('contact_modal');
-        contactModal.style.setProperty('display', 'none');
-    }
+    createWidget(photographerId, galery);
+    addStaticDOMListeners();
 }
-
 await init();
-
-

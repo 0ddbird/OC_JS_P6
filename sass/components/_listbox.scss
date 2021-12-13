@@ -1,0 +1,62 @@
+@use '../abstract/' as a;
+
+#listbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    min-height: 50px;
+    background-color: a.$clr-primary;
+    margin: 0 0 30px 0;
+    border-radius: 5px;
+}
+
+#listbox-label {
+    font-weight: 500;
+}
+
+#listbox {
+    display: none;
+    background-color: a.$clr-primary;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.listbox-option {
+    width: 100px;
+    padding: 10px 0;
+}
+
+#listbox-current-option {
+    color: white;
+    font-weight: 500;
+
+    &::after {
+        @include a.fontAwesome;
+        content: '\f107';
+        margin-left: 1ch;
+    }
+}
+
+.listbox-option + .listbox-option {
+    border-top: 1px solid white;
+
+    &::before {
+        @include a.fontAwesome;
+        content: '\f105';
+        color: white;
+        margin-right: 1ch;
+        transform: scale(0);
+    }
+    
+    &:hover::before {
+        @include a.fontAwesome;
+        content: '\f105';
+        margin-right: 1ch;
+        transition: transform .25s ease-in-out;
+        transform: scale(1);
+    }
+}

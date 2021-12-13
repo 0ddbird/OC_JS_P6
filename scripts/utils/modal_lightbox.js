@@ -1,29 +1,17 @@
 let animationDirection;
 
-export async function addMediaEventListeners(photographerId, articlesDOM, photographerGalery) {
-    articlesDOM.forEach((article) => {
-        article.addEventListener('click', function() {
-            const mediaId = parseInt(this.id.slice(8));
-            openLightboxModal(photographerId, mediaId, photographerGalery);
-        });
-    });
-}
+export function openLightboxModal(photographerId, mediaId, photographerGalery) {
+    const galery = photographerGalery;
+    const media = galery.find(media => media.id === mediaId);
+    const lightbox = document.getElementById('lightbox_modal');
+    lightbox.style.setProperty('display', 'flex');
+    displayLightboxMedia(photographerId, media, galery);
+};
 
 function closeLightboxModal() {
     const lightbox = document.getElementById('lightbox_modal');
     lightbox.style.setProperty('display', 'none');
 }
-
-function openLightboxModal(photographerId, mediaId, photographerGalery) {
-    const galery = photographerGalery;
-    const media = galery.find(media => media.id === mediaId);
-    const lightbox = document.getElementById('lightbox_modal');
-    lightbox.style.setProperty('display', 'flex');
-
-    displayLightboxMedia(photographerId, media, galery);
-};
-
-
 
 function displayLightboxMedia(photographerId, media, galery) {
 /* =============================== HTML element made by getThumbnailDOM() ===============================
@@ -49,6 +37,8 @@ function displayLightboxMedia(photographerId, media, galery) {
 
     if (animationDirection != undefined) {
         mediaMain.classList.add(animationDirection);
+    } else {
+        mediaMain.classList.add('first');
     }
 
     // LIGHTBOX MAIN: TITLE
@@ -111,19 +101,37 @@ function displayLightboxMedia(photographerId, media, galery) {
         }
     });
 
-    // GET ARROW HTML ELEMENTS
-    const lightboxLeftArrow = document.getElementById('left-arrow');
-    const lightboxRightArrow = document.getElementById('right-arrow');
-
     //ADD EVENT LISTENERS TO ARROWS
-    lightboxLeftArrow.addEventListener('click', () => getPreviousMedia(photographerId, media, galeryProxy));
-    lightboxRightArrow.addEventListener('click', () => getNextMedia(photographerId, media, galeryProxy));
-    lightboxCloseButton.addEventListener('click', () => closeLightboxModal());
+    addLightboxArrowsListeners(photographerId, media, galeryProxy, document.getElementById('left-arrow'), document.getElementById('right-arrow'));
+    addLightboxCloseButtonListener(lightboxCloseButton);
+};
+
+function addLightboxArrowsListeners(photographerId, media, proxy, leftArrow, rightArrow){
+    leftArrow.addEventListener('click', () => getPreviousMedia(photographerId, media, proxy));
+    rightArrow.addEventListener('click', () => getNextMedia(photographerId, media, proxy));
+    
+    window.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') {
+            getPreviousMedia(photographerId, media, proxy);
+        } else if (e.key === 'ArrowRight') {
+            getNextMedia(photographerId, media, proxy);
+        }
+        });
+};
+
+function addLightboxCloseButtonListener(button){
+    button.addEventListener('click', () => {
+        closeLightboxModal()
+        animationDirection = undefined;
+    });
+    window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightboxModal();
+    });
 };
 
 function getPreviousMedia(photographerId, media, galery) {
     const mediaId = media.id;
-    const thisMediaIndex = getMedia(mediaId, galery);
+    const thisMediaIndex = getCurrentMediaIndex(mediaId, galery);
     const previousMedia = galery[thisMediaIndex - 1];
     animationDirection = 'previous';
     displayLightboxMedia(photographerId, previousMedia, galery);
@@ -131,12 +139,13 @@ function getPreviousMedia(photographerId, media, galery) {
 
 function getNextMedia(photographerId, media, galery) {
     const mediaId = media.id;
-    const thisMediaIndex = getMedia(mediaId, galery);
+    const thisMediaIndex = getCurrentMediaIndex(mediaId, galery);
     const nextMedia = galery[thisMediaIndex + 1];
     animationDirection = 'next';
     displayLightboxMedia(photographerId, nextMedia, galery);
 };
 
-function getMedia(mediaId, galery) {
+function getCurrentMediaIndex(mediaId, galery) {
     return galery.findIndex(media => media.id === mediaId);
 };
+

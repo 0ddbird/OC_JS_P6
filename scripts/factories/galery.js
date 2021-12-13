@@ -1,15 +1,14 @@
-import { getCheckboxState } from "../components/query.js";
+import { getCheckboxState } from "../components/likes.js";
 
 export function galeryFactory(data) {
 
     const { photographerId, id, title, image, video, likes, date} = data;
-    
-    let link, pictureName, srcSetLink;
+    let link, linkNoExtension, pictureName;
 
     if (data.hasOwnProperty('image')) {
-        link = `./assets/photos/${photographerId}/${image}`;
         pictureName = image.slice(0, -4);
-        srcSetLink = `./assets/photos/${photographerId}/${pictureName}-light.jpg`;
+        link = `./assets/photos/${photographerId}/${image}`;
+        linkNoExtension = `./assets/photos/${photographerId}/${pictureName}`
     } else if (data.hasOwnProperty('video')) 
     {
         link = `./assets/photos/${photographerId}/${video}`;
@@ -33,21 +32,21 @@ export function galeryFactory(data) {
         const article = document.createElement('article');
         article.setAttribute('id', `article-${id}`);
         article.classList.add("media-article");
+        article.setAttribute('tabindex', '0');
 
         // MEDIA IMG | VIDEO
         let articleMedia;
-        
 
         if (data.hasOwnProperty('image')) {
             articleMedia = document.createElement('img');
-            
-            articleMedia.setAttribute('srcset', `${srcSetLink} 2000w, ${link} 2500w`);
+            articleMedia.setAttribute('srcset', `${linkNoExtension}-light.jpg 2000w, ${linkNoExtension}.jpg 2560w`);
         } else if (data.hasOwnProperty('video')) {
             articleMedia = document.createElement('video');
             articleMedia.setAttribute('preload','metadata');
-            articleMedia.setAttribute('poster',`./assets/posters/${title}.jpg`);
+            articleMedia.setAttribute('tabindex','-1');
+            articleMedia.setAttribute('poster',`./assets/photos/${photographerId}/${title}.jpg`);
         }
-        articleMedia.setAttribute("src", srcSetLink);
+        articleMedia.setAttribute("src", `${link}`);
         
         articleMedia.classList.add('media-article_media','buffer');
         articleMedia.setAttribute('alt', `${title}, closeup view`);
@@ -110,4 +109,3 @@ export function galeryFactory(data) {
     }
     return {id, likes, date, title, getThumbnailDOM};
 }
-

@@ -1,35 +1,44 @@
 const jsonData = await getJsonData();
-let allCheckboxStates = [];
-export const photographersArray = await getPhotographersArray();
 
 export function getPhotographerId() {
     return parseInt(new URLSearchParams(window.location.search).get('id'));
-} 
+}
 
-// Index.html and profile.html
 export async function getJsonData() {
     const response = await fetch('./data/photographers.json');
     return await response.json();
 }
 
-//Index.html
-export async function getPhotographersArray() {
-    const data = await getJsonData()
-    return data.photographers
+export async function getPhotographers() {
+    return jsonData.photographers
 }
 
-//Profile.html
-export async function getPhotographerProfile(photographerId) {
+export async function getProfile(photographerId) {
     return jsonData.photographers.find(photographer => photographer.id === photographerId);
 }
 
-export async function getInitialPhotographerGalery(photographerId) {
+export async function getGalery(photographerId) {
+    let sessionGalery = await getSessionGalery(photographerId);
+    if (!sessionGalery) {
+        sessionGalery = await getInitialGalery(photographerId);
+        setSessionGalery(photographerId, sessionGalery);
+    }
+    return sessionGalery;
+};
+
+export function getSessionGalery(photographerId) {
+    return JSON.parse(sessionStorage.getItem(photographerId));
+}
+
+export async function getInitialGalery(photographerId) {
     const result = jsonData.media.filter(element => element.photographerId === photographerId);
+    //console.log('getInitialGalery', result);
     return await fixMediaTitles(result);
 }
 
-export function getCurrentPhotographerGalery() {
-    return JSON.parse(sessionStorage.getItem(getPhotographerId()));
+export async function setSessionGalery(photographerId, galery) {
+    //console.log('setPhotographerGalery', photographerId, galery);
+    sessionStorage.setItem(photographerId, JSON.stringify(galery));
 }
 
 async function fixMediaTitles(data) {
@@ -38,27 +47,6 @@ async function fixMediaTitles(data) {
             element.title = element.video.replace(/_/g, " ").replace('.mp4', "");
         }
     });
+    //console.log('fixMediaTitles', data);
     return data;
 }
-
-export async function setPhotographerGalery(photographerId, galery) {
-    sessionStorage.setItem(photographerId, JSON.stringify(galery));
-}
-
-export function setCheckboxState(photographerId, checkboxId, checked) {
-    if(checked === true) {
-        allCheckboxStates.push(checkboxId);
-    } else {
-        let indexOfId = allCheckboxStates.indexOf(checkboxId);
-        allCheckboxStates.splice(indexOfId, 1);
-    }
-    sessionStorage.setItem(`${photographerId}-checkboxes`, allCheckboxStates);
-}
-
-export function getCheckboxState(photographerId) {
-    if (sessionStorage.getItem(`${photographerId}-checkboxes`)) {
-
-        return [...sessionStorage.getItem(`${photographerId}-checkboxes`).split(',')];
-    }
-}
-

@@ -36,25 +36,32 @@
 #right-arrow {
     right: 0;
 }
+
 #lightbox_modal_main {
     display: flex;
     flex-direction: column;
     margin: 0 1%;
     overflow: hidden;
     animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-    animation-duration: .55s;
+    animation-timing-function: ease;
 }
 
 .previous {
     animation-name: slideRight;
     transform: translateX(2000px);
+    animation-duration: .50s;
 }
 
 .next {
     animation-name: slideLeft;
     transform: translateX(-2000px);
-    
+    animation-duration: .50s;
+}
+
+.first {
+    animation-name: slideUp;
+    transform: translateY(500px);
+    animation-duration: .75s;
 }
 
 #lightbox_modal_close_button{
@@ -65,7 +72,7 @@
     cursor: pointer;
 }
 
-#lightbox_modal_media{
+#lightbox_modal_media {
     object-fit: contain;
     margin-bottom: 1em;
     border-radius: 5px;

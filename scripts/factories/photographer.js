@@ -4,7 +4,6 @@ export function photographerFactory(data) {
     // Remove .jpg extension for sourceset
     const portraitName = portrait.slice(0, -4);
     const srcSetLink = `./assets/photographers/${portraitName}-xxlight.jpg`
-
     const picture = `./assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
@@ -90,7 +89,7 @@ export function photographerFactory(data) {
         contactButton.classList.add('contact_button');
         contactButton.setAttribute('id','contact-me_button');
         contactButton.setAttribute('aria-labelledby', 'contact-me_button');
-        contactButton.setAttribute('onclick', "displayModal()");
+        //contactButton.setAttribute('onclick', "displayModal()");
 
         detailsDiv.appendChild(locationSpan);
         detailsDiv.appendChild(taglineSpan);

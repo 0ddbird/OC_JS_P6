@@ -1,11 +1,9 @@
-import { photographersArray } from "../components/query.js";
 import { displayPhotographers } from '../components/display.js';
+import {getPhotographers} from '../components/query.js';
 
-/**
- * Main function of index.html
- */
 async function indexInit() {
-    displayPhotographers(photographersArray); 
+    const photographers = await getPhotographers();
+    displayPhotographers(photographers); 
 };
 
 indexInit();

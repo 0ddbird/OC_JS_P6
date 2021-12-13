@@ -1,6 +1,6 @@
 import { galeryFactory } from '../factories/galery.js';
 import { photographerFactory } from '../factories/photographer.js';
-import { getCheckboxState } from './query.js';
+import { getProfile } from './query.js';
 
 export async function displayPhotographers(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
@@ -10,14 +10,14 @@ export async function displayPhotographers(photographers) {
         photographersSection.appendChild(userCardDOM);
     });
     bufferPhotographers();
-    
 };
 
-export async function displayProfile(photographer) {
+export async function displayProfile(photographerId) {
     const photographerSection = document.getElementById('photographer-section');
+    const photographer = await getProfile(photographerId)
     const photographerModel = photographerFactory(photographer);
     const userSectionDOM = photographerModel.getUserSectionDOM();
-    photographerSection.appendChild(userSectionDOM);
+    photographerSection.appendChild(userSectionDOM); 
 }
 
 export async function displayGalery(galery) {
@@ -29,46 +29,6 @@ export async function displayGalery(galery) {
         const mediaThumbnailDOM = mediaThumbnail.getThumbnailDOM();
         galerySection.appendChild(mediaThumbnailDOM);
     })
-}
-
-// Photographer widget
-export async function createPhotographerWidget() {
-    const body = document.getElementsByTagName('body')[0];
-    const widget = document.createElement('div');
-    widget.setAttribute('id', 'widget');
-    const likeCount = document.createElement('span');
-    likeCount.setAttribute('id', 'widget__like-count')
-    widget.appendChild(likeCount);
-    body.appendChild(widget);
-}
-
-export async function displayPrice(photographer) {
-    const price = photographer.price;
-    const widget = document.getElementById('widget');
-    const priceTag = document.createElement('span');
-    priceTag.textContent = `${price}€/jour`;
-    widget.appendChild(priceTag);
-}
-
-export async function computeLikes(galery) {
-    return galery.reduce((acc, curr) => acc + curr.likes, 0);
-}
-
-export async function updatePhotographerWidget(galery) {
-    
-    const widgetLikes = document.getElementById('widget__like-count');
-    widgetLikes.textContent = await computeLikes(galery);
-    
-}
-
-export async function updateCheckboxState(photographerId) {
-    const photographerCheckboxes = getCheckboxState(photographerId);
-    if (photographerCheckboxes != undefined) {
-        photographerCheckboxes.forEach(checkbox => {
-        const selectedCheckbox = document.getElementById(`${checkbox}`)
-        selectedCheckbox.setAttribute('checked', true)
-    });
-    }
 }
 
 function bufferPhotographers() {
