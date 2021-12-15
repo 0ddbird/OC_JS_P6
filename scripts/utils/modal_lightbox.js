@@ -6,6 +6,8 @@ export function openLightboxModal(photographerId, mediaId, photographerGalery) {
     const lightbox = document.getElementById('lightbox_modal');
     lightbox.style.setProperty('display', 'flex');
     displayLightboxMedia(photographerId, media, galery);
+
+
 };
 
 function closeLightboxModal() {
@@ -25,9 +27,9 @@ function displayLightboxMedia(photographerId, media, galery) {
     |-- IMG             #lightbox_modal_close_button
 ============================================================================================================*/
     const lightbox = document.getElementById('lightbox_modal');
-    
+
     const { title, image, video } = media;
-    
+
     // RESET LIGHTBOX CONTENT
     lightbox.innerHTML = '';
 

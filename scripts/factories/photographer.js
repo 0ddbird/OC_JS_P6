@@ -10,23 +10,25 @@ export function photographerFactory(data) {
         // Create new article
         const url = `./profile.html?id=${id}`;
         const link = document.createElement( 'a' );
-        link.setAttribute('href', url)
+        link.setAttribute('href', url);
+        link.setAttribute('tabindex', '-1');
 
         const article = document.createElement( 'article' );
         article.classList.add("photographer-article");
+        article.setAttribute('tabindex', '0');
 
         // Build profile picture element
         const img = document.createElement( 'img' );
         img.classList.add("photographer-article__picture", "buffer");
         img.setAttribute("src", srcSetLink)
         img.setAttribute("srcset", `${srcSetLink} w2000, ${picture} w2500`)
-        
+
         // Build title element with Name
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         h2.classList.add("photographer-article__name");
         h2.setAttribute('aria-label', name); 
-        
+
         // Build City, Country element
         const locationSpan = document.createElement( 'span' );
         locationSpan.textContent = city + ', ' + country;
@@ -78,7 +80,7 @@ export function photographerFactory(data) {
         const locationSpan = document.createElement( 'span' );
         locationSpan.textContent = city + ', ' + country;
         locationSpan.classList.add("photographer-section__profile-details-location")
- 
+
         // Build tagline
         const taglineSpan = document.createElement( 'span' );
         taglineSpan.textContent = tagline;
@@ -102,6 +104,6 @@ export function photographerFactory(data) {
 
         return profile
     }
-    // A quoi sert de retourner name et picture ?
+
     return {name, picture, getUserCardDOM, getUserSectionDOM }
 }

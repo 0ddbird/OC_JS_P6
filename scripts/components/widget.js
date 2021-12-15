@@ -12,7 +12,7 @@ export async function createWidget(photographerId, galery) {
     // CREATE LIKE COUNT SPAN
     const likeCount = document.createElement('span');
     likeCount.setAttribute('id', 'widget__like-count')
-    
+
     const priceTag = document.createElement('span');
     priceTag.textContent = `${price}€/jour`;
     //APPEND LIKE SPAN TO WIDGET
