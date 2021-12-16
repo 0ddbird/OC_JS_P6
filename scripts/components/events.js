@@ -1,5 +1,5 @@
 import { openContactModal, closeContactModal } from '../utils/modal_form.js';
-import { openListbox, closeListbox } from './listbox.js';
+import { openListbox, handleOption, closeListbox } from './listbox.js';
 import { openLightboxModal } from '../utils/modal_lightbox.js';
 import { toggleCheckbox } from './likes.js';
 
@@ -14,21 +14,35 @@ export function addStaticDOMListeners() {
 }
 
 function addListboxListeners() {
-    document.getElementById('listbox-container').addEventListener('click', function() {
+    const listboxContainer = document.getElementById('listbox-container');
+    const listboxOptions = new Array (
+        document.getElementById('listbox-popularity'), 
+        document.getElementById('listbox-date'), 
+        document.getElementById('listbox-title')
+    );
+
+    listboxContainer.addEventListener('click', function() {
         openListbox();
     });
-    document.getElementById('listbox-container').addEventListener('keydown', function(e) {
-        const key = e.key;
-        if (key === 'Enter') {
+    listboxContainer.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' && document.activeElement === listboxContainer) {
+            e.stopPropagation();
             openListbox();
         }
-    });
-    document.getElementById('listbox-container').addEventListener('focusout', function(e) {
-        const hasActiveChildren = document.getElementById('listbox-container').contains(document.activeElement);
-        if(!hasActiveChildren) {
+    }, true);
+
+    listboxContainer.addEventListener('focusout', function(e) {
+        if (!listboxContainer.contains(e.relatedTarget)) {
             closeListbox();
         }
     });
+
+    listboxOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.stopPropagation();
+            handleOption(option);
+        });
+    })
 }
 
 function addContactModalListeners() {

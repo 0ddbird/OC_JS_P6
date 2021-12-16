@@ -3,12 +3,14 @@ import {getProfile, getPhotographerId} from '../components/query.js'
 export async function openContactModal() {
     const contactModal = document.getElementById('contact_modal');
     contactModal.style.setProperty('display', 'flex');
+    contactModal.focus();
+
     const contactModalTitle  = document.getElementById('contact_modal_title');
     const photographerProfile = await getProfile(getPhotographerId());
     const photographerName = photographerProfile.name;
     const form = document.forms["contact-form"];
     contactModalTitle.textContent = `Contactez-moi ${photographerName}`;
-    
+
     form.addEventListener("submit", function(e) {
         e.preventDefault();
         submitContactForm();
@@ -18,6 +20,8 @@ export async function openContactModal() {
 export function closeContactModal() {
     const contactModal = document.getElementById('contact_modal');
     contactModal.style.setProperty('display', 'none');
+    //document.body.focus();
+    document.getElementById('logo').focus();
 };
 
 function submitContactForm() {

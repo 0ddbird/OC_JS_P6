@@ -11,17 +11,16 @@ export function photographerFactory(data) {
         const url = `./profile.html?id=${id}`;
         const link = document.createElement( 'a' );
         link.setAttribute('href', url);
-        link.setAttribute('tabindex', '-1');
 
         const article = document.createElement( 'article' );
         article.classList.add("photographer-article");
-        article.setAttribute('tabindex', '0');
 
         // Build profile picture element
         const img = document.createElement( 'img' );
-        img.classList.add("photographer-article__picture", "buffer");
+        img.classList.add("photographer-article__picture", "buffer")
         img.setAttribute("src", srcSetLink)
         img.setAttribute("srcset", `${srcSetLink} w2000, ${picture} w2500`)
+        img.setAttribute('alt', `photo de profil de ${name}`)
 
         // Build title element with Name
         const h2 = document.createElement( 'h2' );
@@ -33,6 +32,7 @@ export function photographerFactory(data) {
         const locationSpan = document.createElement( 'span' );
         locationSpan.textContent = city + ', ' + country;
         locationSpan.classList.add("photographer-article__location")
+        locationSpan.setAttribute('aria-label', 'Ville et pays du photographe');
 
         // Build tagline
         const taglineSpan = document.createElement( 'span' );
@@ -45,15 +45,15 @@ export function photographerFactory(data) {
         priceSpan.classList.add("photographer-article__price")
 
         //Append elements to article
-        article.appendChild(img);
-        article.appendChild(h2);
-        article.appendChild(locationSpan);
-        article.appendChild(taglineSpan);
-        article.appendChild(priceSpan);
+        link.appendChild(img);
+        link.appendChild(h2);
+        link.appendChild(locationSpan);
+        link.appendChild(taglineSpan);
+        link.appendChild(priceSpan);
 
         // append article to link
-        link.appendChild(article)
-        return link;
+        article.appendChild(link)
+        return article;
     }
 
     function getUserSectionDOM() {

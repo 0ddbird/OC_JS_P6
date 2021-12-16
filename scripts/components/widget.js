@@ -7,7 +7,7 @@ export async function createWidget(photographerId, galery) {
     const price = photographer.price;
 
     // CREATE WIDGET DIV
-    const widget = document.createElement('div');
+    const widget = document.createElement('aside');
     widget.setAttribute('id', 'widget');
     // CREATE LIKE COUNT SPAN
     const likeCount = document.createElement('span');

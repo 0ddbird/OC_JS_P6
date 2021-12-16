@@ -1,48 +1,65 @@
 import { updateGalery } from "./updategalery.js";
 
-const listBox = document.getElementById('listbox');
-const optionPopularity = document.getElementById('listbox-popularity');
-const optionDate = document.getElementById('listbox-date');
-const optionTitle = document.getElementById('listbox-title');
+const listboxContainer = document.getElementById('listbox-container');
+const listbox = document.getElementById('listbox');
 
-const options = [optionPopularity, optionDate, optionTitle];
 
 export function openListbox() {
-    listBox.style.setProperty('display', 'block');
+    listbox.style.setProperty('display', 'block');
+    listboxContainer.setAttribute('aria-expanded', 'true');
     hideCurrentListboxOption();
-
-    window.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowUp' || e.key ==='ArrowDown') {
-            e.preventDefault();
-        }
-        if (e.key === 'ArrowDown') {
-            optionDate.focus();
-        }
-    });
-     //CLICK ON LISTBOX OPTION TO UPDATE GALERY (SORTED)
-    
-    document.getElementById('listbox-popularity').addEventListener('click', function(e) {
-        e.stopPropagation();
-        handleOption('popularity');
-    });
-    document.getElementById('listbox-date').addEventListener('click', function(e) {
-        e.stopPropagation();
-        handleOption('date');
-    });
-    document.getElementById('listbox-title').addEventListener('click', function(e) {
-        e.stopPropagation();
-        handleOption('title');
-    });
+    let selectedOption = listbox.firstElementChild;
+    selectedOption.focus();
+    window.addEventListener('keydown', handleKeydown, false);
 }
 
 export function closeListbox(option) {
-    listBox.style.setProperty('display', 'none');
+    listbox.style.setProperty('display', 'none');
+    listboxContainer.setAttribute('aria-expanded', 'false');
     displayCurrentListboxOption(option);
+    window.removeEventListener('keydown', handleKeydown, false);
+}
+
+function handleKeydown(e) {
+    e.preventDefault();
+        let selectedOption = document.activeElement;
+        selectedOption.setAttribute('aria-selected', 'true');
+
+        if (e.key === 'ArrowUp' || e.key ==='ArrowDown') {
+            selectedOption.setAttribute('aria-selected', 'false');
+            if (e.key === 'ArrowUp') {
+                if (selectedOption.previousElementSibling != null) {
+                    selectedOption = selectedOption.previousElementSibling;
+                } else {
+                    selectedOption = selectedOption.parentNode.lastElementChild;
+                }
+            } else if (e.key === 'ArrowDown') {
+                if ( selectedOption.nextElementSibling != null ) {
+                    selectedOption = selectedOption.nextElementSibling
+                } else {
+                    selectedOption = selectedOption.parentNode.firstElementChild
+                }
+            }
+            selectedOption.setAttribute('aria-selected', 'true');
+            selectedOption.focus();
+        }
+        if (e.key === 'Escape') {
+            closeListbox();
+        }
+        if (e.key === 'Enter') {
+            e.stopPropagation();
+            handleOption(selectedOption);
+        }
 }
 
 export function handleOption(option) {
-    updateGalery(option);
-    closeListbox(option);
+    updateGalery(option.dataset.sort);
+    closeListbox(option.dataset.sort);
+    changeOptionsOrder(option);
+}
+
+function changeOptionsOrder(optionDOM) {
+    listbox.insertBefore(optionDOM, listbox.firstElementChild);
 }
 
 export function displayCurrentListboxOption(option) {
@@ -56,6 +73,8 @@ export function displayCurrentListboxOption(option) {
             result = 'Titre';
             break;
         case 'popularity':
+            result = 'Popularité';
+            break;
         default:
             result = currentOptionDOM.textContent;
     }

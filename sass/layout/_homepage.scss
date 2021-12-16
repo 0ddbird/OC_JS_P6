@@ -5,9 +5,17 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
+
+    @media screen and (max-width: 1200px) {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+    }
+    @media screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 }
 
-.photographer-article {
+.photographer-article a {
     justify-self: center;
     display: flex;
     justify-content: center;

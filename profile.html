@@ -7,36 +7,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
-    <title>Fisheye - photographe </title>
+    <title>Fisheye - photographe</title>
     <script src="https://kit.fontawesome.com/52b9d34509.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
-      <a href="index.html">
-      <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
+      <a href="index.html" tabindex="0" id="back-to-home">
+        <img src="assets/images/logo.png" id="logo"  alt="Fisheye Home page"/>
       </a>
     </header>
     <main id="main">
       <section id="photographer-section"></section>
-      <div id="listbox-label" role="label">Trier par</div> 
-      <div id="listbox-container" tabindex="0"> 
-        <span id="listbox-current-option">Popularité</span>
-        <div role="listbox" id="listbox" tabindex="-1" aria-labelledby="listbox-label" aria-activedescendant="listbox-popularity"> 
-          <div class="listbox-option" role="option" tabindex="-1" id="listbox-popularity" aria-selected="true">Popularité</div> 
-          <div class="listbox-option" role="option" tabindex="-1" id="listbox-date">Date</div>
-          <div class="listbox-option" role="option" tabindex="-1" id="listbox-title">Titre</div>
+      <label id="listbox-label" for="listbox-container">Trier par
+        <div id="listbox-container" tabindex="0" aria-expanded="false"> 
+          <span id="listbox-current-option">Popularité</span>
+          <div role="listbox" id="listbox" tabindex="-1" aria-labelledby="listbox-label" aria-activedescendant="listbox-popularity"> 
+            <div class="listbox-option" role="option" data-sort="popularity" tabindex="-1" id="listbox-popularity">Popularité</div> 
+            <div class="listbox-option" role="option" data-sort="date" tabindex="-1" id="listbox-date">Date</div>
+            <div class="listbox-option" role="option" data-sort="title" tabindex="-1" id="listbox-title">Titre</div>
+          </div>
         </div>
-      </div>
+      </label> 
       <section id="galery-section"></section>
     </main>
     <div id="lightbox_modal"></div>
-    <div id="contact_modal">
+    <div id="contact_modal" tabindex="-1">
     <div class="modal-body">
       <header>
         <h2 id="contact_modal_title">Contactez-moi</h2>
         <img src="assets/icons/close.svg" id="contact-modal_close-button" />
       </header>
-
       <form id="contact-form">
           <label for="contact-first-name">Prénom</label>
           <input type="text" id="contact-first-name"/>
