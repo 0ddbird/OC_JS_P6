@@ -1,8 +1,9 @@
 export function appendLightboxMedia(photographerId, mediaObject, animationDirection) {
     const { id, title, image, video } = mediaObject;
-    const lightboxFigure = document.getElementById('lightbox_modal_main');
+    const lightboxModalMain = document.getElementById('lightbox_modal_main');
+    lightboxModalMain.innerHTML = '';
 
-    lightboxFigure.innerHTML = '';
+    const lightboxFigure = document.createElement('figure')
     lightboxFigure.setAttribute('data-direction', animationDirection);
 
     let lightboxMedia, mediaLink;
@@ -26,4 +27,6 @@ export function appendLightboxMedia(photographerId, mediaObject, animationDirect
 
     lightboxFigure.appendChild(lightboxMedia);
     lightboxFigure.appendChild(mediaTitle);
+    lightboxModalMain.appendChild(lightboxFigure);
+
 };

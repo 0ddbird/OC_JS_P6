@@ -5,7 +5,7 @@ export function addObserver() {
         {
             root: null, 
             treshold: 0, 
-            rootMargin: "0px 0px 100px 0px"
+            rootMargin: "0px 0px 250px 0px"
         }
     
     const observer = new IntersectionObserver(function (entries, observer) {
@@ -13,7 +13,7 @@ export function addObserver() {
             if(!entry.isIntersecting){
                 return;
             }
-            console.log(entry.target);
+            //console.log(entry.target);
             entry.target.classList.add('lazy-load');
             observer.unobserve(entry.target);
         })

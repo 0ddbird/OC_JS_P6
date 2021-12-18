@@ -12,14 +12,12 @@ button {
     cursor: pointer;
 
     &:focus {
-        background-color: a.$clr-secondary;
-        color: black;
-        outline: white;
+        outline: 2px solid a.$clr-secondary;
     }
 
     &:hover {
         background-color: a.$clr-secondary;
         color: black;
         outline: white;     
-    }
+    }   
 }

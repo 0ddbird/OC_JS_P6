@@ -58,14 +58,14 @@ export async function getFollowingMedia(direction) {
 
 function createLightboxDOM() {
 /* =============================== HTML element made by createLightboxDOM() ===============================
-|-- MODAL               #lightbox_modal
-    |-- DIV             .lightbox_modal_arrow + #left-arrow
-    |-- DIV             #lightbox_modal_main
-    |   |--IMG/VIDEO    #lightbox_modal_media
-    |   |--SPAN         #lightbox_modal_title
+|-- MODAL                           #lightbox_modal
+    |-- DIV                         .lightbox_modal_arrow + #left-arrow
+    |-- DIV                         #lightbox_modal_main
+    |   |--FIGURE                   #lightbox_modal_media
+    |       |--FIGCAPTION           #lightbox_modal_title
     |
-    |-- DIV             .lightbox_modal_arrow + #right-arrow
-    |-- IMG             #lightbox_modal_close_button
+    |-- DIV                         .lightbox_modal_arrow + #right-arrow
+    |-- IMG                         #lightbox_modal_close_button
 ============================================================================================================*/
     const lightbox = document.createElement('dialog');
     lightbox.setAttribute('id', 'lightbox_modal');
@@ -77,8 +77,10 @@ function createLightboxDOM() {
     leftArrow.setAttribute('data-directioninput','previous');
     leftArrow.textContent= '<';
 
+    const modalMain = document.createElement('div');
+    modalMain.setAttribute('id', 'lightbox_modal_main');
     const figure = document.createElement('figure');
-    figure.setAttribute('id', 'lightbox_modal_main');
+    figure.setAttribute('id', 'lightbox_modal_main_media');
 
     const rightArrow = document.createElement('div');
     rightArrow.setAttribute('id','right-arrow');
@@ -89,6 +91,7 @@ function createLightboxDOM() {
     const lightboxCloseButton = document.createElement('img');
     lightboxCloseButton.setAttribute('src', 'assets/icons/close.svg');
     lightboxCloseButton.setAttribute('id', 'lightbox_modal_close_button');
+    lightboxCloseButton.setAttribute('alt', 'lightbox close button');
 
     lightbox.appendChild(leftArrow);
     lightbox.appendChild(figure);

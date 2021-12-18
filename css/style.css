@@ -416,9 +416,7 @@ button {
   cursor: pointer;
 }
 button:focus {
-  background-color: #D3573C;
-  color: black;
-  outline: white;
+  outline: 2px solid #D3573C;
 }
 button:hover {
   background-color: #D3573C;
@@ -677,7 +675,7 @@ header {
   right: 0;
 }
 
-#lightbox_modal_main {
+#lightbox_modal_main_media {
   display: flex;
   flex-direction: column;
   margin: 0 1%;
@@ -688,20 +686,17 @@ header {
 
 [data-direction=previous] {
   animation-name: slideRight;
-  transform: translateX(2000px);
-  animation-duration: 0.5s;
+  animation-duration: 0.25s;
 }
 
 [data-direction=next] {
   animation-name: slideLeft;
-  transform: translateX(-2000px);
-  animation-duration: 0.5s;
+  animation-duration: 0.25s;
 }
 
 [data-direction=first] {
   animation-name: slideUp;
-  transform: translateY(500px);
-  animation-duration: 0.75s;
+  animation-duration: 0.5s;
 }
 
 #lightbox_modal_close_button {
@@ -723,6 +718,7 @@ header {
 #lightbox_modal_title {
   font-size: 30px;
   color: #901C1C;
+  align-self: flex-end;
 }
 
 #contact_modal {
@@ -780,7 +776,7 @@ form {
 
 form label {
   color: #312E2E;
-  font-size: 36px;
+  font-size: 26px;
 }
 
 form div {
@@ -796,6 +792,7 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px;
+  margin: 1em 0;
 }
 
 #contact-message {

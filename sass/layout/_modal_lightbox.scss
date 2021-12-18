@@ -37,7 +37,7 @@
     right: 0;
 }
 
-#lightbox_modal_main {
+#lightbox_modal_main_media {
     display: flex;
     flex-direction: column;
     margin: 0 1%;
@@ -48,20 +48,17 @@
 
 [data-direction="previous"] {
     animation-name: slideRight;
-    transform: translateX(2000px);
-    animation-duration: .50s;
+    animation-duration: .25s;
 }
 
 [data-direction="next"] {
     animation-name: slideLeft;
-    transform: translateX(-2000px);
-    animation-duration: .50s;
+    animation-duration: .25s;
 }
 
 [data-direction="first"] {
     animation-name: slideUp;
-    transform: translateY(500px);
-    animation-duration: .75s;
+    animation-duration: .50s;
 }
 
 #lightbox_modal_close_button{
@@ -83,4 +80,5 @@
 #lightbox_modal_title {
     font-size: 30px;
     color: a.$clr-primary;
+    align-self: flex-end;
 }

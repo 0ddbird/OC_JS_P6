@@ -17,7 +17,10 @@ export function addContactModalListeners() {
     document.getElementById('contact-modal_close-button').addEventListener('click', function () {
         closeContactModal();
     });
+
     window.addEventListener('keydown', function (e) {
+        e.stopPropagation();
         if (e.key === 'Escape') closeContactModal();
     });
+
 }

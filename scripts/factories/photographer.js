@@ -32,7 +32,6 @@ export function photographerFactory(data) {
         const locationSpan = document.createElement( 'span' );
         locationSpan.textContent = city + ', ' + country;
         locationSpan.classList.add("photographer-article__location")
-        locationSpan.setAttribute('aria-label', 'Ville et pays du photographe');
 
         // Build tagline
         const taglineSpan = document.createElement( 'span' );
