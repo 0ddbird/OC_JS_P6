@@ -1,4 +1,4 @@
-import { openContactModal, closeContactModal } from '../utils/modal_form.js';
+import { addContactModalListeners } from '../modules/contact/contact_listeners.js';
 import { openListbox, handleOption, closeListbox } from './listbox.js';
 import { openLightboxModal } from '../modules/lightbox/lightbox.js';
 import { toggleCheckbox } from './likes.js';
@@ -45,30 +45,19 @@ function addListboxListeners() {
     })
 }
 
-function addContactModalListeners() {
-    document.getElementById('contact-me_button').addEventListener('click', async function() {
-        openContactModal();
-    });
-    document.getElementById('contact-modal_close-button').addEventListener('click', function () {
-        closeContactModal();
-    });
-    window.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeContactModal();
-    });
-}
-
 export async function addMediaListeners() {
-    const articlesDOM = document.querySelectorAll('.media-article');
-    articlesDOM.forEach((article) => {
+    const mediaDOM = document.querySelectorAll('.media-article_media');
+
+    mediaDOM.forEach((media) => {
         
-        article.addEventListener('click', function(e) {
+        media.addEventListener('click', function(e) {
             const mediaId = parseInt(this.dataset.id);
             openLightboxModal(mediaId);
         });
-        article.addEventListener('keypress', function(e) {
+        media.addEventListener('keypress', function(e) {
             const mediaId = parseInt(this.dataset.id);
             if (e.key ==='Enter') openLightboxModal(mediaId);
-        });
+        }, true);
     });
 }
 
@@ -89,5 +78,15 @@ export function addLikesListeners(photographerId, photographerGalery) {
         checkbox.addEventListener('change', async function() {
             toggleCheckbox(this, photographerId, photographerGalery);
         });
+        checkbox.addEventListener('keydown', async function (e) {
+            if (e.key === 'Enter') {
+                if(this.checked) {
+                    this.checked = false;
+                } else {
+                    this.checked = true;
+                }
+                toggleCheckbox(this, photographerId, photographerGalery);
+            }
+        })
     });
 }

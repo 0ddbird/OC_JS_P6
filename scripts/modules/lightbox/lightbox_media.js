@@ -13,6 +13,7 @@ export function appendLightboxMedia(photographerId, mediaObject, animationDirect
     } else if (mediaObject.hasOwnProperty('video')) {
         lightboxMedia = document.createElement('video');
         mediaLink = `./assets/photos/${photographerId}/${video}`;
+        lightboxMedia.setAttribute('controls', '')
     };
     lightboxMedia.setAttribute('src', mediaLink);
     lightboxMedia.setAttribute('id', 'lightbox_modal_media');

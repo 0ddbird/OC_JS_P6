@@ -24,6 +24,8 @@
     animation-duration: .5s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
+
+    
 }
 
 .media-article_media {
@@ -31,6 +33,12 @@
     object-fit: cover;
     border-radius: 5px;
     object-position: center top;
+    &:focus {
+        outline: 3px solid a.$clr-secondary;
+    }
+    &:hover {
+        outline: 3px solid a.$clr-secondary;
+    }
 }
 
 .buffer {

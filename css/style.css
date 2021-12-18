@@ -179,7 +179,21 @@ h2 {
 }
 
 .media-article_details_like-module_input {
-  display: none;
+  position: relative;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.media-article_details_like-module_input:focus:checked ~ label::before {
+  color: #D3573C;
+}
+.media-article_details_like-module_input:focus:not(:checked) ~ label::before {
+  color: #901C1C;
 }
 
 .media-article_details_like-module_input:checked ~ .media-article_details_like-module_label i {
@@ -204,6 +218,25 @@ h2 {
   color: #901C1C;
   margin-left: 1ch;
   cursor: pointer;
+  position: relative;
+}
+.media-article_details_like-module_label::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  z-index: -1;
+  content: "\f111";
+  font-weight: 400;
+  font-size: 2em;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #widget {
@@ -246,8 +279,17 @@ h2 {
   margin-left: 1ch;
 }
 
+#sort {
+  height: 80px;
+}
+
 #listbox-label {
   font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+  margin: 0 0 30px 0;
+  position: absolute;
 }
 
 #listbox-container {
@@ -258,12 +300,13 @@ h2 {
   width: 150px;
   min-height: 50px;
   background-color: #901C1C;
-  margin: 0 0 30px 0;
+  position: absolute;
+  left: 80px;
+  z-index: 1;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
   color: white;
-  position: relative;
 }
 #listbox-container::after {
   position: absolute;
@@ -290,7 +333,11 @@ h2 {
   color: black;
 }
 #listbox-container:focus {
-  background-color: #D3573C;
+  outline: 2px solid #D3573C;
+}
+
+#listbox-container[aria-expanded=true]::after {
+  content: "\f106";
 }
 
 #listbox {
@@ -561,6 +608,12 @@ header {
   object-fit: cover;
   border-radius: 5px;
   object-position: center top;
+}
+.media-article_media:focus {
+  outline: 3px solid #D3573C;
+}
+.media-article_media:hover {
+  outline: 3px solid #D3573C;
 }
 
 .buffer {

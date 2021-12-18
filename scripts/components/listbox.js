@@ -24,8 +24,8 @@ function handleKeydown(e) {
     e.preventDefault();
         let selectedOption = document.activeElement;
         selectedOption.setAttribute('aria-selected', 'true');
-
-        if (e.key === 'ArrowUp' || e.key ==='ArrowDown') {
+    
+        if (e.key === 'ArrowUp' || e.key ==='ArrowDown' || e.key === 'Home' || e.key === 'End') {
             selectedOption.setAttribute('aria-selected', 'false');
             if (e.key === 'ArrowUp') {
                 if (selectedOption.previousElementSibling != null) {
@@ -35,10 +35,14 @@ function handleKeydown(e) {
                 }
             } else if (e.key === 'ArrowDown') {
                 if ( selectedOption.nextElementSibling != null ) {
-                    selectedOption = selectedOption.nextElementSibling
+                    selectedOption = selectedOption.nextElementSibling;
                 } else {
-                    selectedOption = selectedOption.parentNode.firstElementChild
+                    selectedOption = selectedOption.parentNode.firstElementChild;
                 }
+            } else if (e.key === 'Home') {
+                selectedOption = selectedOption.parentNode.firstElementChild;
+            } else if (e.key === 'End') {
+                selectedOption = selectedOption.parentNode.lastElementChild;
             }
             selectedOption.setAttribute('aria-selected', 'true');
             selectedOption.focus();

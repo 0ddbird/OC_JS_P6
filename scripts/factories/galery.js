@@ -32,10 +32,9 @@ export function galeryFactory(data) {
         const article = document.createElement('article');
         article.setAttribute('id', `article-${id}`);
         article.classList.add("media-article");
-        article.setAttribute('tabindex', '0');
-        article.setAttribute('data-id', `${id}`)
+        
 
-        // MEDIA IMG | VIDEO
+        // MEDIA IMG | VIDEO    
         let articleMedia;
 
         if (data.hasOwnProperty('image')) {
@@ -48,7 +47,8 @@ export function galeryFactory(data) {
             articleMedia.setAttribute('poster',`./assets/photos/${photographerId}/${title}.jpg`);
         }
         articleMedia.setAttribute("src", `${link}`);
-        
+        articleMedia.setAttribute('data-id', `${id}`)
+        articleMedia.setAttribute('tabindex', '0');
         articleMedia.classList.add('media-article_media','buffer');
         articleMedia.setAttribute('alt', `${title}, closeup view`);
         // DETAILS DIV

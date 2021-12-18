@@ -1,7 +1,16 @@
 @use '../abstract/' as a;
 
+#sort {
+    height: 80px;
+}
+
 #listbox-label {
     font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    margin: 0 0 30px 0;
+    position: absolute;
 }
 
 #listbox-container {
@@ -12,12 +21,14 @@
     width: 150px;
     min-height: 50px;
     background-color: a.$clr-primary;
-    margin: 0 0 30px 0;
+    position: absolute;
+    left: 80px;
+    z-index: 1;
     border-radius: 5px;
     cursor: pointer;
     font-weight: 500;
     color: white;
-    position: relative;
+    
 
     &::after {
         position: absolute;
@@ -40,9 +51,14 @@
         background-color: a.$clr-secondary;
         color: black;
     }
+
     &:focus {
-        background-color: a.$clr-secondary;
+        outline: 2px solid a.$clr-secondary;
     }
+}
+
+#listbox-container[aria-expanded="true"]::after {
+    content: '\f106';
 }
 
 #listbox {

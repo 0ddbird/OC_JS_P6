@@ -1,30 +1,26 @@
-import {getProfile, getPhotographerId} from '../components/query.js'
+import { addFormListener, removeFormListener } from './contact_listeners.js';
+import { getProfile, getPhotographerId } from '../../components/query.js';
 
 export async function openContactModal() {
     const contactModal = document.getElementById('contact_modal');
     contactModal.style.setProperty('display', 'flex');
     contactModal.focus();
-
     const contactModalTitle  = document.getElementById('contact_modal_title');
     const photographerProfile = await getProfile(getPhotographerId());
     const photographerName = photographerProfile.name;
-    const form = document.forms["contact-form"];
     contactModalTitle.textContent = `Contactez-moi ${photographerName}`;
-
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        submitContactForm();
-    });
+    addFormListener();
 };
 
 export function closeContactModal() {
     const contactModal = document.getElementById('contact_modal');
     contactModal.style.setProperty('display', 'none');
-    //document.body.focus();
     document.getElementById('contact-me_button').focus();
+    removeFormListener();
 };
 
-function submitContactForm() {
+export function submitContactForm(e) {
+    e.preventDefault();
     const firstNameInputDOM = document.getElementById('contact-first-name');
     const lastNameInputDOM = document.getElementById('contact-last-name');
     const emailInputDOM = document.getElementById('contact-email');

@@ -73,7 +73,8 @@ function createLightboxDOM() {
     const leftArrow = document.createElement('div');
     leftArrow.setAttribute('id','left-arrow');
     leftArrow.classList.add('lightbox_modal_arrow');
-    rightArrow.setAttribute('data-directioninput','previous');
+
+    leftArrow.setAttribute('data-directioninput','previous');
     leftArrow.textContent= '<';
 
     const figure = document.createElement('figure');

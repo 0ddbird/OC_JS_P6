@@ -18,38 +18,30 @@
     </header>
     <main id="main">
       <section id="photographer-section"></section>
-      <label id="listbox-label" for="listbox-container">Trier par
-        <div id="listbox-container" role="button" aria-haspopup="listbox" tabindex="0" aria-expanded="false"> 
-          <span id="listbox-current-option">Popularité</span>
-          <div role="listbox" id="listbox" tabindex="-1" aria-labelledby="listbox-label" aria-activedescendant="listbox-popularity"> 
-            <div class="listbox-option" role="option" data-sort="popularity" tabindex="-1" id="listbox-popularity">Popularité</div> 
-            <div class="listbox-option" role="option" data-sort="date" tabindex="-1" id="listbox-date">Date</div>
-            <div class="listbox-option" role="option" data-sort="title" tabindex="-1" id="listbox-title">Titre</div>
+      <div id="sort">
+        <label id="listbox-label" for="listbox-container">Trier par
+          <div id="listbox-container" role="button" aria-haspopup="listbox" tabindex="0" aria-expanded="false"> 
+            <span id="listbox-current-option">Popularité</span>
+            <div role="listbox" id="listbox" tabindex="-1" aria-labelledby="listbox-label" aria-activedescendant="listbox-popularity"> 
+              <div class="listbox-option" role="option" data-sort="popularity" tabindex="-1" id="listbox-popularity">Popularité</div> 
+              <div class="listbox-option" role="option" data-sort="date" tabindex="-1" id="listbox-date">Date</div>
+              <div class="listbox-option" role="option" data-sort="title" tabindex="-1" id="listbox-title">Titre</div>
+            </div>
           </div>
-        </div>
-      </label> 
+        </label> 
+      </div>
       <section id="galery-section"></section>
     </main>
-    <!-- <dialog id="lightbox_modal"></dialog> -->
 
     <template id="template_lightbox">
-
       <dialog id="lightbox_modal">
-
           <div class="lightbox_modal_arrow" id="left-arrow" data-directioninput="previous">&lt;</div>
-
           <figure id="lightbox_modal_main">
-
             <figcaption id="lightbox_modal_title"></figcaption>
-
           </figure>
-
           <div class="lightbox_modal_arrow" id="right-arrow" data-directioninput="next">&gt;</div>
-
           <img id="lightbox_modal_close_button" src="assets/icons/close.svg"></img>
-
       </dialog>
-
   </template>
 
     <div id="contact_modal" tabindex="-1">

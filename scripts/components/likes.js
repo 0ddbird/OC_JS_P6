@@ -5,7 +5,7 @@ let allCheckboxStates = [];
 
 export function displayDOMCheckboxState(photographerId) {
     const photographerCheckboxes = getCheckboxState(photographerId);
-    if ( photographerCheckboxes != undefined ) {
+    if ( photographerCheckboxes ) {
         photographerCheckboxes.forEach(checkbox => {
         const selectedCheckbox = document.getElementById(`${checkbox}`);
         selectedCheckbox.setAttribute('checked', true);
@@ -14,9 +14,8 @@ export function displayDOMCheckboxState(photographerId) {
 }
 
 export function getCheckboxState(photographerId) {
-
-    let photographerCheckbox = sessionStorage.getItem(`${photographerId}-checkboxes`);
-    if (photographerCheckbox != undefined && photographerCheckbox != null) return [...sessionStorage.getItem(`${photographerId}-checkboxes`).split(',')];
+    const photographerCheckbox = sessionStorage.getItem(`${photographerId}-checkboxes`);
+    if (photographerCheckbox) return [...sessionStorage.getItem(`${photographerId}-checkboxes`).split(',')];
 }
 
 export function toggleCheckbox(checkbox, photographerId, photographerGalery) {
