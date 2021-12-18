@@ -13,19 +13,18 @@
 }
 
 .media-article {
-    transform: scale(0);
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    transform: translateY(2000px);
+}
+
+.lazy-load {
+    transform: scale(0);
     animation-name: slideUp;
-    /* animation-delay: .5s; */
     animation-duration: .5s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
-
-    
 }
 
 .media-article_media {
