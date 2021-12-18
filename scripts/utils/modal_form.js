@@ -21,7 +21,7 @@ export function closeContactModal() {
     const contactModal = document.getElementById('contact_modal');
     contactModal.style.setProperty('display', 'none');
     //document.body.focus();
-    document.getElementById('logo').focus();
+    document.getElementById('contact-me_button').focus();
 };
 
 function submitContactForm() {

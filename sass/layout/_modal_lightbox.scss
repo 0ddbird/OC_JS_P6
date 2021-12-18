@@ -46,19 +46,19 @@
     animation-timing-function: ease;
 }
 
-.previous {
+[data-direction="previous"] {
     animation-name: slideRight;
     transform: translateX(2000px);
     animation-duration: .50s;
 }
 
-.next {
+[data-direction="next"] {
     animation-name: slideLeft;
     transform: translateX(-2000px);
     animation-duration: .50s;
 }
 
-.first {
+[data-direction="first"] {
     animation-name: slideUp;
     transform: translateY(500px);
     animation-duration: .75s;

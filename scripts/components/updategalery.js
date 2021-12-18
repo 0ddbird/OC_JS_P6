@@ -1,4 +1,4 @@
-import { getPhotographerId, getGalery } from './query.js';
+import { getPhotographerId, getGalery, setSessionGalery } from './query.js';
 import { displayGalery } from './display.js';
 import { addDynamicDOMListeners } from './events.js';
 import { displayDOMCheckboxState } from './likes.js';
@@ -7,8 +7,8 @@ export async function updateGalery(sortOption) {
     const photographerId = getPhotographerId();
     const photographerGalery = await getGalery(photographerId);
     let sortedGalery = sortGalery(photographerGalery, sortOption);
- 
     await displayGalery(sortedGalery);
+    setSessionGalery(photographerId, sortedGalery);
     bufferMedias();
     displayDOMCheckboxState(photographerId);
     addDynamicDOMListeners(photographerId, photographerGalery);

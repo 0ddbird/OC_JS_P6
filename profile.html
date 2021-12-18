@@ -19,7 +19,7 @@
     <main id="main">
       <section id="photographer-section"></section>
       <label id="listbox-label" for="listbox-container">Trier par
-        <div id="listbox-container" tabindex="0" aria-expanded="false"> 
+        <div id="listbox-container" role="button" aria-haspopup="listbox" tabindex="0" aria-expanded="false"> 
           <span id="listbox-current-option">Popularité</span>
           <div role="listbox" id="listbox" tabindex="-1" aria-labelledby="listbox-label" aria-activedescendant="listbox-popularity"> 
             <div class="listbox-option" role="option" data-sort="popularity" tabindex="-1" id="listbox-popularity">Popularité</div> 
@@ -30,12 +30,36 @@
       </label> 
       <section id="galery-section"></section>
     </main>
-    <div id="lightbox_modal"></div>
+    <!-- <dialog id="lightbox_modal"></dialog> -->
+
+    <template id="template_lightbox">
+
+      <dialog id="lightbox_modal">
+
+          <div class="lightbox_modal_arrow" id="left-arrow" data-directioninput="previous">&lt;</div>
+
+          <figure id="lightbox_modal_main">
+
+            <figcaption id="lightbox_modal_title"></figcaption>
+
+          </figure>
+
+          <div class="lightbox_modal_arrow" id="right-arrow" data-directioninput="next">&gt;</div>
+
+          <img id="lightbox_modal_close_button" src="assets/icons/close.svg"></img>
+
+      </dialog>
+
+  </template>
+
     <div id="contact_modal" tabindex="-1">
     <div class="modal-body">
+      <svg id="contact-modal_close-button" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="#901C1C"/>
+      </svg>
       <header>
         <h2 id="contact_modal_title">Contactez-moi</h2>
-        <img src="assets/icons/close.svg" id="contact-modal_close-button" />
+        <!-- <img src="assets/icons/close.svg"  /> -->
       </header>
       <form id="contact-form">
           <label for="contact-first-name">Prénom</label>

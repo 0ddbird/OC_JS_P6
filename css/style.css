@@ -246,37 +246,65 @@ h2 {
   margin-left: 1ch;
 }
 
+#listbox-label {
+  font-weight: 500;
+}
+
 #listbox-container {
   display: flex;
   align-items: center;
   padding: 0 10px;
   width: max-content;
+  width: 150px;
   min-height: 50px;
   background-color: #901C1C;
   margin: 0 0 30px 0;
   border-radius: 5px;
-}
-
-#listbox-label {
+  cursor: pointer;
   font-weight: 500;
+  color: white;
+  position: relative;
+}
+#listbox-container::after {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f107";
+  margin-left: 1ch;
+}
+#listbox-container:hover {
+  background-color: #D3573C;
+}
+#listbox-container:hover > #listbox-current-option {
+  color: black;
+}
+#listbox-container:hover .listbox-option {
+  background-color: #D3573C;
+  color: black;
+}
+#listbox-container:focus {
+  background-color: #D3573C;
 }
 
 #listbox {
   display: none;
-  background-color: #901C1C;
-  color: white;
   padding: 5px 0;
-  border-radius: 5px;
-  font-weight: 500;
-  cursor: pointer;
 }
 
 .listbox-option {
-  margin-right: 1ch;
-  padding: 10px 0;
+  padding: 10px 1ch 10px 0;
 }
 .listbox-option:focus {
   outline: none;
+  background-color: #D3573C;
+  color: black;
 }
 .listbox-option::before {
   display: inline-block;
@@ -323,32 +351,32 @@ h2 {
   font-weight: 500;
   margin: 0 1ch;
 }
-#listbox-current-option::after {
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "\f107";
-  margin-left: 1ch;
-}
-
-.listbox-option:nth-child(1)::after {
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "\f106";
-  margin-left: 1ch;
-}
 
 .listbox-option + .listbox-option {
   border-top: 1px solid white;
+}
+
+button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901C1C;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:focus {
+  background-color: #D3573C;
+  color: black;
+  outline: white;
+}
+button:hover {
+  background-color: #D3573C;
+  color: black;
+  outline: white;
 }
 
 body {
@@ -425,19 +453,6 @@ header {
   background-color: #FAFAFA;
   height: 300px;
   margin: 0 100px;
-}
-
-.contact_button {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  padding: 11px;
-  width: 170px;
-  height: 70px;
-  border: none;
-  background-color: #901C1C;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 #photographer-section {
@@ -617,19 +632,19 @@ header {
   animation-timing-function: ease;
 }
 
-.previous {
+[data-direction=previous] {
   animation-name: slideRight;
   transform: translateX(2000px);
   animation-duration: 0.5s;
 }
 
-.next {
+[data-direction=next] {
   animation-name: slideLeft;
   transform: translateX(-2000px);
   animation-duration: 0.5s;
 }
 
-.first {
+[data-direction=first] {
   animation-name: slideUp;
   transform: translateY(500px);
   animation-duration: 0.75s;
@@ -673,14 +688,16 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 35px;
+  padding: 45px;
   margin: auto;
   position: relative;
 }
 
-.modal header {
+.modal-body header {
   width: 100%;
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
 #contact_modal_title {
@@ -695,6 +712,9 @@ header {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+#contact-modal_close-button path {
+  fill: white;
 }
 
 form {

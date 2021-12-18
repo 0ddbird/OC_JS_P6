@@ -1,10 +1,10 @@
 import { openContactModal, closeContactModal } from '../utils/modal_form.js';
 import { openListbox, handleOption, closeListbox } from './listbox.js';
-import { openLightboxModal } from '../utils/modal_lightbox.js';
+import { openLightboxModal } from '../modules/lightbox/lightbox.js';
 import { toggleCheckbox } from './likes.js';
 
 export function addDynamicDOMListeners(photographerId, photographerGalery) {
-    addMediaListeners(photographerId, photographerGalery);
+    addMediaListeners();
     addLikesListeners(photographerId, photographerGalery);
 }
 
@@ -57,17 +57,17 @@ function addContactModalListeners() {
     });
 }
 
-export async function addMediaListeners(photographerId, photographerGalery) {
+export async function addMediaListeners() {
     const articlesDOM = document.querySelectorAll('.media-article');
     articlesDOM.forEach((article) => {
         
-        article.addEventListener('click', function() {
-            const mediaId = parseInt(this.id.slice(8));
-            openLightboxModal(photographerId, mediaId, photographerGalery);
+        article.addEventListener('click', function(e) {
+            const mediaId = parseInt(this.dataset.id);
+            openLightboxModal(mediaId);
         });
         article.addEventListener('keypress', function(e) {
-            const mediaId = parseInt(this.id.slice(8)); 
-            if (e.key ==='Enter') openLightboxModal(photographerId, mediaId, photographerGalery);
+            const mediaId = parseInt(this.dataset.id);
+            if (e.key ==='Enter') openLightboxModal(mediaId);
         });
     });
 }

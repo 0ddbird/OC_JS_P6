@@ -33,6 +33,7 @@ export function galeryFactory(data) {
         article.setAttribute('id', `article-${id}`);
         article.classList.add("media-article");
         article.setAttribute('tabindex', '0');
+        article.setAttribute('data-id', `${id}`)
 
         // MEDIA IMG | VIDEO
         let articleMedia;

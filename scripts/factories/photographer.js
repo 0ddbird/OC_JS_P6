@@ -20,7 +20,7 @@ export function photographerFactory(data) {
         img.classList.add("photographer-article__picture", "buffer")
         img.setAttribute("src", srcSetLink)
         img.setAttribute("srcset", `${srcSetLink} w2000, ${picture} w2500`)
-        img.setAttribute('alt', `photo de profil de ${name}`)
+        img.setAttribute('alt', name)
 
         // Build title element with Name
         const h2 = document.createElement( 'h2' );

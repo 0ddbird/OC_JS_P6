@@ -20,6 +20,7 @@ export async function getProfile(photographerId) {
 export async function getGalery(photographerId) {
     let sessionGalery = await getSessionGalery(photographerId);
     if (!sessionGalery) {
+        console.error('No session galery yet')
         sessionGalery = await getInitialGalery(photographerId);
         setSessionGalery(photographerId, sessionGalery);
     }
@@ -49,4 +50,8 @@ async function fixMediaTitles(data) {
     });
     //console.log('fixMediaTitles', data);
     return data;
+}
+
+export function supportsTemplates() {
+    return 'content' in document.createElement('template');
 }
