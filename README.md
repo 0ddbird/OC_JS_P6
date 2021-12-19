@@ -11,6 +11,8 @@ ___
 Lien vers la [GitHub Page](https://okuspo.github.io/OC_P6_Fisheye/)  
 
 Lien vers le [diagramme des fonctions - v4](https://whimsical.com/p6-v4-PtWt93VBERWdH3PrCxM4Ey)
+
+Lien vers la [JSDoc](https://okuspo.github.io/OC_P6_Fisheye/scripts/out/)
 ___
 
 ## Fonctionnalités demandées
@@ -121,7 +123,12 @@ Trop peu de recul pour savoir si ça apporte une réelle valeur ajoutée (avec m
 
 ### To do
 
-Un minimum de responsive.  
+- Un minimum de responsivité
+- Validation du formulaire
+- Générer un lien de partage depuis la lightbox vers le média affiché (id photographe + id media + toggle lightbox ?)
+- Remplacer le "/" par "par" dans "300€/jour" pour une meilleure compréhension du lecteur d'écran. (pseudo élément "/" devant le mot "par" pour respecter la maquette ?)
+- 
+- 
 
 ___
 ## Versions antérieures :
