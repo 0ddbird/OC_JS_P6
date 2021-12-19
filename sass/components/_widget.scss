@@ -1,7 +1,7 @@
 @use '../abstract/' as a;
 #widget {
-    position: sticky;
-    bottom: 0;
+    position: fixed;
+    bottom: 0px;
     left: 85%;
     background-color: a.$clr-secondary;
     width: 225px;
@@ -17,6 +17,7 @@
     animation-duration: .75s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
+    z-index: 1;
 } 
 
 @keyframes slideIn {

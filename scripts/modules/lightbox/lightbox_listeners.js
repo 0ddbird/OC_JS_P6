@@ -30,20 +30,6 @@ export function removeLightboxListeners() {
 }
 
 /**
- * DOES NOT WORK. Is supposed to do the same thing as both functions above, but triggers event listeners on creation.
- */
-export function toggleLightboxListeners(option) {
-    const lightboxArrows = [document.getElementById('left-arrow'), document.getElementById('right-arrow')]
-    const lightboxCloseButton = document.getElementById('lightbox_modal_close_button');
-    let eventMethod = (element) => element[`${option}EventListener`]
-    lightboxArrows.forEach(arrow => {
-        eventMethod(arrow)('click', handleLightboxArrowsClick(arrow), false);
-    })
-    eventMethod(lightboxCloseButton)('click', handleLightboxCloseButtonClick, false);
-    eventMethod(window)('keydown', handleLightboxKeydown, false)
-}
-
-/**
  * Calls getFollowingMedia function and gives it the slide direction.
  * @param {event} e 
  */
@@ -63,7 +49,10 @@ function handleLightboxCloseButtonClick() {
  * @param {event} e 
  */
 function handleLightboxKeydown(e) {
-    e.preventDefault();
+    const lightboxArrows = [document.getElementById('left-arrow'), document.getElementById('right-arrow')]
+    const leftArrow = document.getElementById('left-arrow');
+    const rightArrow = document.getElementById('right-arrow')
+    const lightboxCloseButton = document.getElementById('lightbox_modal_close_button');
     let direction;
         if (e.key === 'ArrowLeft') {
             direction = 'previous'
@@ -73,6 +62,18 @@ function handleLightboxKeydown(e) {
             getFollowingMedia(direction)
         } else if (e.key === 'Escape') {
             closeLightboxModal();
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+        } else if (e.key === 'Enter') {
+            if (document.activeElement === leftArrow || document.activeElement === rightArrow) {
+                getFollowingMedia(e.target.dataset.directioninput)
+            } 
+            if (document.activeElement === lightboxCloseButton) {
+                closeLightboxModal();
+            }
+        } else if (e.key === 'Tab' && document.activeElement === lightboxCloseButton) {
+            const lightboxModal = document.getElementById('lightbox_modal');
+            lightboxModal.focus();
         }
 
 };

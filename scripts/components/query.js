@@ -82,7 +82,7 @@ export function setSessionGalery(photographerId, galery) {
  * @param {array} data 
  * @returns array of objects
  */
-async function fixMediaTitles(data) {
+export function fixMediaTitles(data) {
     data.forEach(element => {
         if (element.title === undefined) element.title = element.video.replace(/_/g, " ").replace('.mp4', "");
     });

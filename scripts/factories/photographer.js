@@ -20,6 +20,10 @@ export function photographerFactory(data) {
         const link = document.createElement( 'a' );
         link.setAttribute('href', url);
 
+        const mainContainer = document.createElement('div');
+        mainContainer.setAttribute('tabindex', '0');
+        
+
         // Build profile picture element
         const img = document.createElement( 'img' );
         img.classList.add("photographer-article__picture", "buffer")
@@ -33,10 +37,14 @@ export function photographerFactory(data) {
         h2.classList.add("photographer-article__name");
         h2.setAttribute('aria-label', name); 
 
+        // Build photographer details section
+        const detailsSection = document.createElement('section');
+        detailsSection.setAttribute('tabindex', '0');
+
         // Build City, Country element
-        const locationSpan = document.createElement( 'span' );
-        locationSpan.textContent = city + ', ' + country;
-        locationSpan.classList.add("photographer-article__location")
+        const locationHeading = document.createElement( 'h3' );
+        locationHeading.textContent = city + ', ' + country;
+        locationHeading.classList.add("photographer-article__location")
 
         // Build tagline
         const taglineSpan = document.createElement( 'span' );
@@ -49,12 +57,13 @@ export function photographerFactory(data) {
         priceSpan.classList.add("photographer-article__price")
 
         //Append elements to article
-        link.appendChild(img);
-        link.appendChild(h2);
-        link.appendChild(locationSpan);
-        link.appendChild(taglineSpan);
-        link.appendChild(priceSpan);
-
+        detailsSection.appendChild(locationHeading);
+        detailsSection.appendChild(taglineSpan)
+        detailsSection.appendChild(priceSpan);
+        mainContainer.appendChild(img);
+        mainContainer.appendChild(h2);
+        link.appendChild(mainContainer);
+        link.appendChild(detailsSection)
         // append article to link
         article.appendChild(link)
         return article;
@@ -76,9 +85,11 @@ export function photographerFactory(data) {
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         h2.classList.add("photographer-section__profile-name")
+        h2.setAttribute('tabindex', '0');
 
         const detailsDiv = document.createElement('div');
         detailsDiv.classList.add('photographer-section__profile-details');
+        detailsDiv.setAttribute('tabindex', '0');
 
         // Build City, Country element
         const locationSpan = document.createElement( 'span' );

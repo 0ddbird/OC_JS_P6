@@ -241,8 +241,8 @@ h2 {
 }
 
 #widget {
-  position: sticky;
-  bottom: 0;
+  position: fixed;
+  bottom: 0px;
   left: 85%;
   background-color: #D3573C;
   width: 225px;
@@ -258,6 +258,7 @@ h2 {
   animation-duration: 0.75s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
+  z-index: 1;
 }
 
 @keyframes slideIn {
@@ -466,6 +467,22 @@ header {
   animation-duration: 0.75s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
+}
+
+.photographer-article a div {
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.photographer-article a section {
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .photographer-article__name {

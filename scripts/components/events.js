@@ -6,8 +6,8 @@ import { toggleCheckbox } from './likes.js';
 
 /**
  * Adds Event Listeners to media articles and like checkboxes/labels on profile.html load and galery refresh.
- * @param {*} photographerId 
- * @param {*} photographerGalery 
+ * @param {number} photographerId 
+ * @param {array} photographerGalery 
  */
 export function addDynamicDOMListeners(photographerId, photographerGalery) {
     addMediaListeners();

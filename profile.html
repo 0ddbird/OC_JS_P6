@@ -34,15 +34,15 @@
     </main>
 
     <template id="template_lightbox">
-      <dialog id="lightbox_modal">
-          <div class="lightbox_modal_arrow" id="left-arrow" data-directioninput="previous">&lt;</div>
-          <div id="lightbox_modal_main">
-            <figure id="lightbox_modal_main_media">
-              <figcaption id="lightbox_modal_title"></figcaption>
+      <dialog id="lightbox_modal" tabindex="0" aria-hidden="false">
+          <div class="lightbox_modal_arrow" id="left-arrow" data-directioninput="previous" tabindex="0">&lt;</div>
+          <div id="lightbox_modal_main" >
+            <figure tabindex="0" id="lightbox_modal_main_media">
+              <figcaption tabindex="0" id="lightbox_modal_title"></figcaption>
             </figure>
           </div>
-          <div class="lightbox_modal_arrow" id="right-arrow" data-directioninput="next">&gt;</div>
-          <img id="lightbox_modal_close_button" src="assets/icons/close.svg" alt="lightbox close button"></img>
+          <div class="lightbox_modal_arrow" id="right-arrow" data-directioninput="next" tabindex="0">&gt;</div>
+          <img id="lightbox_modal_close_button" src="assets/icons/close.svg" alt="lightbox close button" tabindex="0"></img>
       </dialog>
   </template>
 
@@ -50,7 +50,6 @@
       <div class="modal-body">
         <header>
           <h2 id="contact_modal_title">Contactez-moi</h2>
-            <!-- <img src="assets/icons/close.svg"  /> -->
         </header>
         <form id="contact-form">
             <label for="contact-first-name">Prénom</label>

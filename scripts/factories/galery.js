@@ -62,6 +62,7 @@ export function galeryFactory(data) {
         const detailsTitle = document.createElement('span');
         detailsTitle.textContent = title;
         detailsTitle.classList.add(`media-article_details_title`);
+        detailsTitle.setAttribute('tabindex', '0');
 
         // LIKE MODULE
         const likeModule = document.createElement('div');
@@ -71,6 +72,7 @@ export function galeryFactory(data) {
         const likeInput = document.createElement('input');
         likeInput.classList.add('media-article_details_like-module_input');
         likeInput.setAttribute('type', 'checkbox')
+        likeInput.setAttribute('aria-label', 'like checkbox')
         likeInput.setAttribute('id', id)
         if (getCheckboxState() != null ){
             const checkBoxState = getCheckboxState().split(',');

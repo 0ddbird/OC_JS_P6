@@ -1,5 +1,6 @@
 import { displayPhotographers } from '../components/display.js';
-import { getPhotographers } from '../components/query.js';
+import { getJsonData, getPhotographers } from '../components/query.js';
+import { fixJsonAlts } from '../utils/fixjsonalts.js';
 
 /**
  * Init sequence on profile.html load.
@@ -10,3 +11,6 @@ async function init() {
 };
 
 init();
+
+const jsonData = await getJsonData();
+fixJsonAlts(jsonData);

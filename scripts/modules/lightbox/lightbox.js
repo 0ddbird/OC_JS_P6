@@ -1,5 +1,5 @@
 import { getGalery, getPhotographerId, supportsTemplates } from "../../components/query.js";
-import { addLightboxListeners, removeLightboxListeners, toggleLightboxListeners } from "./lightbox_listeners.js";
+import { addLightboxListeners, removeLightboxListeners } from "./lightbox_listeners.js";
 import { appendLightboxMedia } from "./lightbox_media.js";
 
 /**
@@ -10,7 +10,6 @@ export async function openLightboxModal(mediaId) {
     const photographerId = getPhotographerId();
     const galery = await getGalery(photographerId);
     const mediaObject = galery.find(media => media.id === mediaId);
-
     if (supportsTemplates()) {
         document.body.appendChild(document.getElementById('template_lightbox').content);
     } else {
@@ -20,7 +19,6 @@ export async function openLightboxModal(mediaId) {
 
     appendLightboxMedia(photographerId, mediaObject, 'first');
     addLightboxListeners();
-    //toggleLightboxListeners('add');
 };
 
 /**
@@ -30,7 +28,6 @@ export function closeLightboxModal() {
     const lightbox = document.getElementById('lightbox_modal');
     lightbox.style.setProperty('display', 'none');
     removeLightboxListeners();
-    //toggleLightboxListeners('remove');
 }
 
 /**

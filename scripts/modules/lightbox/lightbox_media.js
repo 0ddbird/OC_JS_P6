@@ -4,6 +4,7 @@
 export function appendLightboxMedia(photographerId, mediaObject, animationDirection) {
     const { id, title, image, video } = mediaObject;
     const lightboxModalMain = document.getElementById('lightbox_modal_main');
+    
     lightboxModalMain.innerHTML = '';
 
     const lightboxFigure = document.createElement('figure')
@@ -23,13 +24,16 @@ export function appendLightboxMedia(photographerId, mediaObject, animationDirect
     lightboxMedia.setAttribute('id', 'lightbox_modal_media');
     lightboxMedia.setAttribute('data-mediaid', `${id}`)
     lightboxMedia.setAttribute('aria-label', 'image closeup view');
+    lightboxMedia.setAttribute('tabindex', '0');
 
     const mediaTitle = document.createElement('figcaption');
     mediaTitle.setAttribute('id', 'lightbox_modal_title');
+    mediaTitle.setAttribute('tabindex', '0');
     mediaTitle.textContent = title;
 
     lightboxFigure.appendChild(lightboxMedia);
     lightboxFigure.appendChild(mediaTitle);
     lightboxModalMain.appendChild(lightboxFigure);
-
+    const lightboxModal = document.getElementById('lightbox_modal');
+    lightboxModal.focus();
 };

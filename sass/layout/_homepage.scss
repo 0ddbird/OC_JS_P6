@@ -27,6 +27,22 @@
     animation-fill-mode: forwards;
 }
 
+.photographer-article a div {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.photographer-article a section {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .photographer-article__name {
     font-size: 36px;
 }

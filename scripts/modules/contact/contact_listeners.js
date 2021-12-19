@@ -32,5 +32,4 @@ export function addContactModalListeners() {
         e.stopPropagation();
         if (e.key === 'Escape') closeContactModal();
     });
-
 }
