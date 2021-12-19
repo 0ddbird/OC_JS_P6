@@ -1,3 +1,8 @@
+/**
+ * Factory function to create a photographer article or section depending on if it's index.html or profile.html
+ * @param {object} data 
+ * @returns {object}
+ */
 export function photographerFactory(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
 
@@ -8,12 +13,12 @@ export function photographerFactory(data) {
 
     function getUserCardDOM() {
         // Create new article
+        const article = document.createElement( 'article' );
+        article.classList.add("photographer-article");
+
         const url = `./profile.html?id=${id}`;
         const link = document.createElement( 'a' );
         link.setAttribute('href', url);
-
-        const article = document.createElement( 'article' );
-        article.classList.add("photographer-article");
 
         // Build profile picture element
         const img = document.createElement( 'img' );

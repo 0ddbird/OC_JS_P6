@@ -1,3 +1,6 @@
+/**
+ * Instanciate intersection observer on galery articles to display medias when they enter viewport. 
+ */
 export function addObserver() {
     const articles = document.querySelectorAll('.media-article');
 

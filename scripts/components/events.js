@@ -3,16 +3,28 @@ import { openListbox, handleOption, closeListbox } from './listbox.js';
 import { openLightboxModal } from '../modules/lightbox/lightbox.js';
 import { toggleCheckbox } from './likes.js';
 
+
+/**
+ * Adds Event Listeners to media articles and like checkboxes/labels on profile.html load and galery refresh.
+ * @param {*} photographerId 
+ * @param {*} photographerGalery 
+ */
 export function addDynamicDOMListeners(photographerId, photographerGalery) {
     addMediaListeners();
     addLikesListeners(photographerId, photographerGalery);
 }
 
+/**
+ * Adds Event Listeners to the Listbox (custom select) and to the Contact Modal button.
+ */
 export function addStaticDOMListeners() {
     addListboxListeners();
     addContactModalListeners();
 }
 
+/**
+ * Adds Event Listeners to the listbox container and options.
+ */
 function addListboxListeners() {
     const listboxContainer = document.getElementById('listbox-container');
     const listboxOptions = new Array (
@@ -45,6 +57,9 @@ function addListboxListeners() {
     })
 }
 
+/**
+ * Adds Event Listeners to media articles (images or video);
+ */
 export async function addMediaListeners() {
     const mediaDOM = document.querySelectorAll('.media-article_media');
 
@@ -61,6 +76,11 @@ export async function addMediaListeners() {
     });
 }
 
+/**
+ * Adds Event Listeners to like checkboxes and labels
+ * @param {number} photographerId 
+ * @param {array} photographerGalery 
+ */
 export function addLikesListeners(photographerId, photographerGalery) {
     const likeCheckboxes = [...document.querySelectorAll('.media-article_details_like-module_input')];
     const likeLabels = [...document.querySelectorAll('.media-article_details_like-module_label')];

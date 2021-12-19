@@ -1,6 +1,6 @@
 # OpenClassrooms - Parcours Développeur Front-end
 
-## Projet 6 - Fisheye
+## <a id="start">Projet 6 - Fisheye</a>
 
 Fisheye est une plateforme de photographes freelance.
 La plateforme permet aux photographes d'afficher leur portfolio et aux utilisateurs de les consulter/liker.
@@ -9,12 +9,13 @@ ___
 ## Liens
 
 Lien vers la [GitHub Page](https://okuspo.github.io/OC_P6_Fisheye/)  
-Lien vers le [diagramme des fonctions](https://whimsical.com/p6-v3-9AFQhqD5Um8mHJavxmGz6L)
+
+Lien vers le [diagramme des fonctions - v4](https://whimsical.com/p6-v4-PtWt93VBERWdH3PrCxM4Ey)
 ___
 
 ## Fonctionnalités demandées
 
-Sur base d'un fichier json content des photographes et des photos :
+Développer un site sur base d'un fichier json content des photographes et des photos.
 
 ```json
 {
@@ -66,51 +67,68 @@ Sur base d'un fichier json content des photographes et des photos :
 - Le utilisateurs doivent pouvoir afficher la photo en plein écran dans une modale (lightbox) au clic sur l'article.
 - Dans la lightbox on peut naviguer entre les médias.
 
-## Fonctionnalités supplémentaires
+### Objectifs du projet
+
+- Apprendre le design pattern Factory
+- Exploiter un fichier json avec JavaScript
+- Accéder au DOM et le modifier avec JavaScript
+- Rendre un site accessible (balises sémantiques, attributs aria, navigation au clavier, tabindex)
+- Manipuler les event listeners (clics, navigation au clavier, focus)
+- Trier des objets en utilisant la fonction sort()
+- Pas d'attentes particulières sur la responsivité
+
+## :sparkles: En bonus !
 
 ### Likes
-Les likes sont persistants (sessionStorage) ce qui permet de :
+
+Le tri de la galerie et le nombre de likes sont persistants (stockés dans le sessionStorage) ce qui permet de :
 
 - Conserver le compte des likes de chaque photographe même après refresh/changement de page.
 - Permettre à fonction de tri par Popularité de s'appuyer sur les nouvelles valeurs
 
 ### Vidéos
-Les médias de type vidéo possèdent un attribut `poster` avec un lien vers une vignette jpg, et sont paramétrés en `preload="metadata"` ce qui permet d'accélérer l'injection dans le DOM.
+
+Les médias de type vidéo possèdent un attribut `poster` avec un lien vers une vignette jpg, et sont paramétrés en `preload="metadata"` ce qui permet d'accélérer l'injection dans le DOM.  
+Par ailleurs, l'attribut "controls" a été ajouté dans la lighbox pour distinguer les vidéos des photos.
 
 ### Images
-Ajout d'attributs `srcset` vers une version plus petite prévue pour chaque image.
-Les images étant très grandes (~ 3000px * 5000px) et lourdes (~5Mo pour certaines), c'est leur version "light" qui s'affiche dans la galerie, et leur source originale dans la lightbox.
 
-Même principe pour les photos de profil des photographes (profile.html et index.html) qui disposent de 2 sourcesets (light et x-light).
+Ajout d'attributs `srcset` vers une version plus petite prévue pour chaque image.  
+Les images étant très grandes (~ 3000px * 5000px) et lourdes (~5Mo pour certaines), c'est leur version "light" qui s'affiche dans la galerie, et leur source originale dans la lightbox.  
 
-### Prévu mais non implémenté
-Ajout de 2 fichiers HTML : media.html et photographer.html qui contiendront des templates.
+Même principe pour les photos de profil des photographes (profile.html et index.html) qui disposent de 2 sourcesets (light et x-light).  
 
-L'objectif est d'éviter trop de :
+### Lightbox
 
-- `document.createElement('element')`
-- `document.classlist.add('className')`
+Dans la v3, lorsqu'on faisait défiler les photos de la galerie, les event listeners pour les clics sur les flèches (ou les flèches du clavier) étaient rajoutés à chaque nouvelle photo.  
+Cela posait de très gros problèmes de performance (freeze du navigateur).  
+Ce problème est réglé dans la v4 (voir diagramme). Les event listeners sont ajoutés à l'ouverture de la lightbox, et retirés à la fermeture.  
 
-et de raccourcir le code.
+Ajout d'un `<template>` pour la lightbox, avec une option de repli si les templates HTML ne sont pas supportés par le navigateur.  
 
-```html
-<template id="photographer-template">
-    <a>
-        <article class="photographer-article">
-            <img class="photographer-article__picture">
-            <h2 class="photographer-article__name"></h2>
-            <span class="photographer-article__location"></span>
-            <span class="photographer-article__tagline"></span>
-            <span class="photographer-article__price"></span>
-        </article>
-    </a>
-</template>
-```
+### Galerie
+
+Instanciation de l'intersection observer sur les médias de la galerie pour un affichage progressif.
+
+### Listbox
+
+Support des touches Home et End pour naviguer dans la listbox.
+
+### Global
+
+Découverte et ajout de la JSDoc.  
+Trop peu de recul pour savoir si ça apporte une réelle valeur ajoutée (avec mes commentaires actuels, les tooltips ne sont pas très explicites, et ça rajoute beaucoup de lignes).
+
+### To do
+
+Un minimum de responsive.  
 
 ___
-Versions antérieures :
+## Versions antérieures :
 
 - [Diagramme des fonctions - Codebase initiale](https://whimsical.com/p6-default-codebase-NmtiyYW4fcZdGe7scF4N9h)
 - [Diagramme des fonctions - v1](https://whimsical.com/p6-v1-2UpNeXviK4t4p4QTr451iv)
 - [Diagramme des fonctions - v2](https://whimsical.com/p6-v2-A87joBVZsNk5HMAfs7Wg3E)
+- [Diagramme des fonctions - v3](https://whimsical.com/p6-v3-9AFQhqD5Um8mHJavxmGz6L)
 ___
+[:top: Retour en haut de page](#start)

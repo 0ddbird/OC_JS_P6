@@ -1,6 +1,9 @@
 import { addFormListener, removeFormListener } from './contact_listeners.js';
 import { getProfile, getPhotographerId } from '../../components/query.js';
 
+/**
+ * Displays contact modal and sets focus on it. Sets photographer name to contact modal. Adds form Event Listener
+ */
 export async function openContactModal() {
     const contactModal = document.getElementById('contact_modal');
     contactModal.style.setProperty('display', 'flex');
@@ -12,6 +15,9 @@ export async function openContactModal() {
     addFormListener();
 };
 
+/**
+ * Hides contact modal and sets focus to contact button. Removes form Event Listener.
+ */
 export function closeContactModal() {
     const contactModal = document.getElementById('contact_modal');
     contactModal.style.setProperty('display', 'none');
@@ -19,6 +25,9 @@ export function closeContactModal() {
     removeFormListener();
 };
 
+/** 
+ * Submits contact form and console.log the input content.
+ */
 export function submitContactForm(e) {
     e.preventDefault();
     e.stopPropagation();

@@ -1,3 +1,6 @@
+/**
+ * Creates a figure and a figcaption to append in the lightbox. Sets a data attribute 'data-direction' used for CSS animation.
+ */
 export function appendLightboxMedia(photographerId, mediaObject, animationDirection) {
     const { id, title, image, video } = mediaObject;
     const lightboxModalMain = document.getElementById('lightbox_modal_main');

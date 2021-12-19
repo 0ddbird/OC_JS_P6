@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/listbox.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/listbox.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { updateGalery } from "./updategalery.js";
+
+const listboxContainer = document.getElementById('listbox-container');
+const listbox = document.getElementById('listbox');
+
+/**
+ * Expand Listbox container to show sorting options. Adds keyboard Event Listeners.
+ */
+export function openListbox() {
+    listbox.style.setProperty('display', 'block');
+    listboxContainer.setAttribute('aria-expanded', 'true');
+    hideCurrentListboxOption();
+    let selectedOption = listbox.firstElementChild;
+    selectedOption.focus();
+    window.addEventListener('keydown', handleKeydown, false);
+}
+
+/**
+ * Hides listbox options, sorts the galery according to the chosen option, remove the keyboard Event Listeners.
+ * @param {*} option 
+ */
+export function closeListbox(option) {
+    listbox.style.setProperty('display', 'none');
+    listboxContainer.setAttribute('aria-expanded', 'false');
+    displayCurrentListboxOption(option);
+    window.removeEventListener('keydown', handleKeydown, false);
+}
+
+/**
+ * Listbox keyboard navigation ArrowUp, ArrowDown, Home, End, Escape and Enter.
+ * @param {event} e event handling to prevent up and down arrows to scroll in the window.
+ */
+function handleKeydown(e) {
+    e.preventDefault();
+        let selectedOption = document.activeElement;
+        selectedOption.setAttribute('aria-selected', 'true');
+    
+        if (e.key === 'ArrowUp' || e.key ==='ArrowDown' || e.key === 'Home' || e.key === 'End') {
+            selectedOption.setAttribute('aria-selected', 'false');
+            if (e.key === 'ArrowUp') {
+                if (selectedOption.previousElementSibling != null) {
+                    selectedOption = selectedOption.previousElementSibling;
+                } else {
+                    selectedOption = selectedOption.parentNode.lastElementChild;
+                }
+            } else if (e.key === 'ArrowDown') {
+                if ( selectedOption.nextElementSibling != null ) {
+                    selectedOption = selectedOption.nextElementSibling;
+                } else {
+                    selectedOption = selectedOption.parentNode.firstElementChild;
+                }
+            } else if (e.key === 'Home') {
+                selectedOption = selectedOption.parentNode.firstElementChild;
+            } else if (e.key === 'End') {
+                selectedOption = selectedOption.parentNode.lastElementChild;
+            }
+            selectedOption.setAttribute('aria-selected', 'true');
+            selectedOption.focus();
+        }
+        if (e.key === 'Escape') {
+            closeListbox();
+        }
+        if (e.key === 'Enter') {
+            e.stopPropagation();
+            handleOption(selectedOption);
+        }
+}
+
+/**
+ * Updates the photographer's galery according to chosen option, closes listbox and updates the last option in folded listbox.
+ * @param {element} option 
+ */
+export function handleOption(option) {
+    updateGalery(option.dataset.sort);
+    closeListbox(option.dataset.sort);
+    changeOptionsOrder(option);
+}
+
+/**
+ * Swap listbox options order to display the last one selected first.
+ * @param {element} optionDOM 
+ */
+function changeOptionsOrder(optionDOM) {
+    listbox.insertBefore(optionDOM, listbox.firstElementChild);
+}
+
+/**
+ * Displays the current listbox option in folded listbox.
+ * @param {element} option 
+ */
+export function displayCurrentListboxOption(option) {
+    const currentOptionDOM = document.getElementById('listbox-current-option');
+    let result;
+    switch(option) {
+        case 'date':
+            result = 'Date';
+            break;
+        case 'title':
+            result = 'Titre';
+            break;
+        case 'popularity':
+            result = 'Popularité';
+            break;
+        default:
+            result = currentOptionDOM.textContent;
+    }
+    currentOptionDOM.textContent = result;
+    currentOptionDOM.style.setProperty('display', 'block');
+}
+
+/**
+ * Hides current sorting option span when listbox is expanded. 
+ */
+function hideCurrentListboxOption() {
+    const currentOptionDOM = document.getElementById('listbox-current-option');
+    if (currentOptionDOM != undefined) {
+        currentOptionDOM.style.setProperty('display', 'none');
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactModalListeners">addContactModalListeners</a></li><li><a href="global.html#addDynamicDOMListeners">addDynamicDOMListeners</a></li><li><a href="global.html#addFormListener">addFormListener</a></li><li><a href="global.html#addLightboxListeners">addLightboxListeners</a></li><li><a href="global.html#addLikesListeners">addLikesListeners</a></li><li><a href="global.html#addListboxListeners">addListboxListeners</a></li><li><a href="global.html#addMediaListeners">addMediaListeners</a></li><li><a href="global.html#addObserver">addObserver</a></li><li><a href="global.html#addStaticDOMListeners">addStaticDOMListeners</a></li><li><a href="global.html#appendLightboxMedia">appendLightboxMedia</a></li><li><a href="global.html#bufferMedias">bufferMedias</a></li><li><a href="global.html#bufferPhotographers">bufferPhotographers</a></li><li><a href="global.html#changeOptionsOrder">changeOptionsOrder</a></li><li><a href="global.html#closeContactModal">closeContactModal</a></li><li><a href="global.html#closeLightboxModal">closeLightboxModal</a></li><li><a href="global.html#closeListbox">closeListbox</a></li><li><a href="global.html#createLightboxDOM">createLightboxDOM</a></li><li><a href="global.html#createWidget">createWidget</a></li><li><a href="global.html#displayCurrentListboxOption">displayCurrentListboxOption</a></li><li><a href="global.html#displayDOMCheckboxState">displayDOMCheckboxState</a></li><li><a href="global.html#displayGalery">displayGalery</a></li><li><a href="global.html#displayPhotographers">displayPhotographers</a></li><li><a href="global.html#displayProfile">displayProfile</a></li><li><a href="global.html#fixMediaTitles">fixMediaTitles</a></li><li><a href="global.html#galeryFactory">galeryFactory</a></li><li><a href="global.html#getCheckboxState">getCheckboxState</a></li><li><a href="global.html#getFollowingMedia">getFollowingMedia</a></li><li><a href="global.html#getGalery">getGalery</a></li><li><a href="global.html#getInitialGalery">getInitialGalery</a></li><li><a href="global.html#getJsonData">getJsonData</a></li><li><a href="global.html#getPhotographerId">getPhotographerId</a></li><li><a href="global.html#getPhotographers">getPhotographers</a></li><li><a href="global.html#getProfile">getProfile</a></li><li><a href="global.html#getSessionGalery">getSessionGalery</a></li><li><a href="global.html#handleKeydown">handleKeydown</a></li><li><a href="global.html#handleLightboxArrowsClick">handleLightboxArrowsClick</a></li><li><a href="global.html#handleLightboxCloseButtonClick">handleLightboxCloseButtonClick</a></li><li><a href="global.html#handleLightboxKeydown">handleLightboxKeydown</a></li><li><a href="global.html#handleOption">handleOption</a></li><li><a href="global.html#hideCurrentListboxOption">hideCurrentListboxOption</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openContactModal">openContactModal</a></li><li><a href="global.html#openLightboxModal">openLightboxModal</a></li><li><a href="global.html#openListbox">openListbox</a></li><li><a href="global.html#photographerFactory">photographerFactory</a></li><li><a href="global.html#removeFormListener">removeFormListener</a></li><li><a href="global.html#removeLightboxListeners">removeLightboxListeners</a></li><li><a href="global.html#setCheckboxState">setCheckboxState</a></li><li><a href="global.html#setSessionGalery">setSessionGalery</a></li><li><a href="global.html#sortGalery">sortGalery</a></li><li><a href="global.html#submitContactForm">submitContactForm</a></li><li><a href="global.html#supportsTemplates">supportsTemplates</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#toggleLightboxListeners">toggleLightboxListeners</a></li><li><a href="global.html#updateGalery">updateGalery</a></li><li><a href="global.html#updateWidget">updateWidget</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 19 2021 06:29:57 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

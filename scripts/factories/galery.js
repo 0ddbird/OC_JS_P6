@@ -1,5 +1,8 @@
 import { getCheckboxState } from "../components/likes.js";
 
+/**:
+ * Factory function to create and append media articles in profile.html
+ */
 export function galeryFactory(data) {
 
     const { photographerId, id, title, image, video, likes, date} = data;

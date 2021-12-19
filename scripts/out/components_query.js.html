@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/query.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/query.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const jsonData = await getJsonData();
+
+/**
+ * Returns the current photographer ID in profile.html
+ * @returns {number} photographerId
+ */
+export function getPhotographerId() {
+    return parseInt(new URLSearchParams(window.location.search).get('id'));
+}
+
+/**
+ * Fetches the json Data and returns it
+ * @returns {promise} resolve is an object with 2 keys, photographers and data.
+ */
+export async function getJsonData() {
+    const response = await fetch('./data/photographers.json');
+    return await response.json();
+}
+
+/**
+ * Gets all photographers objects from the json Data
+ * @returns {promise} resolve is an array of photographers objects.
+ */
+export async function getPhotographers() {
+    return jsonData.photographers
+}
+
+/**
+ * Gets a specific photographer object from json Data
+ * @param {number} photographerId 
+ * @returns {promise} resolve is an object with the photographer's profile data.
+ */
+export async function getProfile(photographerId) {
+    return jsonData.photographers.find(photographer => photographer.id === photographerId);
+}
+
+/**
+ * Gets the latest version of the galery in session storage. If none, gets it from the json and saves it in sessionStorage.
+ * @param {number} photographerId 
+ * @returns {promise} an array of objects (photographer's medias)
+ */
+export async function getGalery(photographerId) {
+    let sessionGalery = await getSessionGalery(photographerId);
+    if (!sessionGalery) {
+        console.info('No galery in sessionStorage yet. Creating one.')
+        sessionGalery = await getInitialGalery(photographerId);
+        setSessionGalery(photographerId, sessionGalery);
+    }
+    return sessionGalery;
+};
+
+/**
+ * Gets a specific photographer galery in sessionStorage.
+ * @param {number} photographerId 
+ * @returns {array} of objects (photographer's medias)
+ */
+export function getSessionGalery(photographerId) {
+    return JSON.parse(sessionStorage.getItem(photographerId));
+}
+
+/**
+ * Gets a specific photographer galery in json Data (on first profile page load for this photographer)
+ * @param {number} photographerId 
+ * @returns {promise} resolve: an array of objects (photographer's medias)
+ */
+export async function getInitialGalery(photographerId) {
+    const result = jsonData.media.filter(element => element.photographerId === photographerId);
+    return await fixMediaTitles(result);
+}
+
+/**
+ * Sets a specific photographer galery in sessionStorage
+ * @param {number} photographerId 
+ * @param {array} galery 
+ */
+export function setSessionGalery(photographerId, galery) {
+    sessionStorage.setItem(photographerId, JSON.stringify(galery));
+}
+
+/**
+ * Creates a title for medias of type "video". Title is made of the file name without any blanks nor extension.
+ * @param {array} data 
+ * @returns array of objects
+ */
+async function fixMediaTitles(data) {
+    data.forEach(element => {
+        if (element.title === undefined) element.title = element.video.replace(/_/g, " ").replace('.mp4', "");
+    });
+    return data;
+}
+
+/**
+ * Asserts if the browser supports HTML Templates
+ * @returns {boolean}
+ */
+export function supportsTemplates() {
+    return 'content' in document.createElement('template');
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactModalListeners">addContactModalListeners</a></li><li><a href="global.html#addDynamicDOMListeners">addDynamicDOMListeners</a></li><li><a href="global.html#addFormListener">addFormListener</a></li><li><a href="global.html#addLightboxListeners">addLightboxListeners</a></li><li><a href="global.html#addLikesListeners">addLikesListeners</a></li><li><a href="global.html#addListboxListeners">addListboxListeners</a></li><li><a href="global.html#addMediaListeners">addMediaListeners</a></li><li><a href="global.html#addObserver">addObserver</a></li><li><a href="global.html#addStaticDOMListeners">addStaticDOMListeners</a></li><li><a href="global.html#appendLightboxMedia">appendLightboxMedia</a></li><li><a href="global.html#bufferMedias">bufferMedias</a></li><li><a href="global.html#bufferPhotographers">bufferPhotographers</a></li><li><a href="global.html#changeOptionsOrder">changeOptionsOrder</a></li><li><a href="global.html#closeContactModal">closeContactModal</a></li><li><a href="global.html#closeLightboxModal">closeLightboxModal</a></li><li><a href="global.html#closeListbox">closeListbox</a></li><li><a href="global.html#createLightboxDOM">createLightboxDOM</a></li><li><a href="global.html#createWidget">createWidget</a></li><li><a href="global.html#displayCurrentListboxOption">displayCurrentListboxOption</a></li><li><a href="global.html#displayDOMCheckboxState">displayDOMCheckboxState</a></li><li><a href="global.html#displayGalery">displayGalery</a></li><li><a href="global.html#displayPhotographers">displayPhotographers</a></li><li><a href="global.html#displayProfile">displayProfile</a></li><li><a href="global.html#fixMediaTitles">fixMediaTitles</a></li><li><a href="global.html#galeryFactory">galeryFactory</a></li><li><a href="global.html#getCheckboxState">getCheckboxState</a></li><li><a href="global.html#getFollowingMedia">getFollowingMedia</a></li><li><a href="global.html#getGalery">getGalery</a></li><li><a href="global.html#getInitialGalery">getInitialGalery</a></li><li><a href="global.html#getJsonData">getJsonData</a></li><li><a href="global.html#getPhotographerId">getPhotographerId</a></li><li><a href="global.html#getPhotographers">getPhotographers</a></li><li><a href="global.html#getProfile">getProfile</a></li><li><a href="global.html#getSessionGalery">getSessionGalery</a></li><li><a href="global.html#handleKeydown">handleKeydown</a></li><li><a href="global.html#handleLightboxArrowsClick">handleLightboxArrowsClick</a></li><li><a href="global.html#handleLightboxCloseButtonClick">handleLightboxCloseButtonClick</a></li><li><a href="global.html#handleLightboxKeydown">handleLightboxKeydown</a></li><li><a href="global.html#handleOption">handleOption</a></li><li><a href="global.html#hideCurrentListboxOption">hideCurrentListboxOption</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openContactModal">openContactModal</a></li><li><a href="global.html#openLightboxModal">openLightboxModal</a></li><li><a href="global.html#openListbox">openListbox</a></li><li><a href="global.html#photographerFactory">photographerFactory</a></li><li><a href="global.html#removeFormListener">removeFormListener</a></li><li><a href="global.html#removeLightboxListeners">removeLightboxListeners</a></li><li><a href="global.html#setCheckboxState">setCheckboxState</a></li><li><a href="global.html#setSessionGalery">setSessionGalery</a></li><li><a href="global.html#sortGalery">sortGalery</a></li><li><a href="global.html#submitContactForm">submitContactForm</a></li><li><a href="global.html#supportsTemplates">supportsTemplates</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#toggleLightboxListeners">toggleLightboxListeners</a></li><li><a href="global.html#updateGalery">updateGalery</a></li><li><a href="global.html#updateWidget">updateWidget</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 19 2021 06:29:57 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

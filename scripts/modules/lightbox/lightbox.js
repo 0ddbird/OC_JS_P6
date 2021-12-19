@@ -2,6 +2,10 @@ import { getGalery, getPhotographerId, supportsTemplates } from "../../component
 import { addLightboxListeners, removeLightboxListeners, toggleLightboxListeners } from "./lightbox_listeners.js";
 import { appendLightboxMedia } from "./lightbox_media.js";
 
+/**
+ * Appends the lightbox to the HTML document, then appends the Media to the lightbox, then adds lightbox event listeners.
+ * @param {number} mediaId id of the media to display
+ */
 export async function openLightboxModal(mediaId) {
     const photographerId = getPhotographerId();
     const galery = await getGalery(photographerId);
@@ -19,6 +23,9 @@ export async function openLightboxModal(mediaId) {
     //toggleLightboxListeners('add');
 };
 
+/**
+ * Hides the lightbox and removes its events listeners.
+ */
 export function closeLightboxModal() {
     const lightbox = document.getElementById('lightbox_modal');
     lightbox.style.setProperty('display', 'none');
@@ -26,6 +33,10 @@ export function closeLightboxModal() {
     //toggleLightboxListeners('remove');
 }
 
+/**
+ * Appends the following media to the Lightbox.
+ * @param {string} direction 
+ */
 export async function getFollowingMedia(direction) {
     const photographerId = getPhotographerId();
     const galery = await getGalery(photographerId);
@@ -56,6 +67,9 @@ export async function getFollowingMedia(direction) {
     appendLightboxMedia(photographerId, followingMedia , direction);
 }
 
+/**
+ * Creates Lightbox DOM Elements if templates are not supported by the browser.
+ */
 function createLightboxDOM() {
 /* =============================== HTML element made by createLightboxDOM() ===============================
 |-- MODAL                           #lightbox_modal

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/events.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/events.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { addContactModalListeners } from '../modules/contact/contact_listeners.js';
+import { openListbox, handleOption, closeListbox } from './listbox.js';
+import { openLightboxModal } from '../modules/lightbox/lightbox.js';
+import { toggleCheckbox } from './likes.js';
+
+
+/**
+ * Adds Event Listeners to media articles and like checkboxes/labels on profile.html load and galery refresh.
+ * @param {*} photographerId 
+ * @param {*} photographerGalery 
+ */
+export function addDynamicDOMListeners(photographerId, photographerGalery) {
+    addMediaListeners();
+    addLikesListeners(photographerId, photographerGalery);
+}
+
+/**
+ * Adds Event Listeners to the Listbox (custom select) and to the Contact Modal button.
+ */
+export function addStaticDOMListeners() {
+    addListboxListeners();
+    addContactModalListeners();
+}
+
+/**
+ * Adds Event Listeners to the listbox container and options.
+ */
+function addListboxListeners() {
+    const listboxContainer = document.getElementById('listbox-container');
+    const listboxOptions = new Array (
+        document.getElementById('listbox-popularity'), 
+        document.getElementById('listbox-date'), 
+        document.getElementById('listbox-title')
+    );
+
+    listboxContainer.addEventListener('click', function() {
+        openListbox();
+    });
+    listboxContainer.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' &amp;&amp; document.activeElement === listboxContainer) {
+            e.stopPropagation();
+            openListbox();
+        }
+    }, true);
+
+    listboxContainer.addEventListener('focusout', function(e) {
+        if (!listboxContainer.contains(e.relatedTarget)) {
+            closeListbox();
+        }
+    });
+
+    listboxOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.stopPropagation();
+            handleOption(option);
+        });
+    })
+}
+
+/**
+ * Adds Event Listeners to media articles (images or video);
+ */
+export async function addMediaListeners() {
+    const mediaDOM = document.querySelectorAll('.media-article_media');
+
+    mediaDOM.forEach((media) => {
+        
+        media.addEventListener('click', function(e) {
+            const mediaId = parseInt(this.dataset.id);
+            openLightboxModal(mediaId);
+        });
+        media.addEventListener('keypress', function(e) {
+            const mediaId = parseInt(this.dataset.id);
+            if (e.key ==='Enter') openLightboxModal(mediaId);
+        }, true);
+    });
+}
+
+/**
+ * Adds Event Listeners to like checkboxes and labels
+ * @param {number} photographerId 
+ * @param {array} photographerGalery 
+ */
+export function addLikesListeners(photographerId, photographerGalery) {
+    const likeCheckboxes = [...document.querySelectorAll('.media-article_details_like-module_input')];
+    const likeLabels = [...document.querySelectorAll('.media-article_details_like-module_label')];
+
+    likeLabels.forEach(label => {
+        label.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+    });
+
+    likeCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+        checkbox.addEventListener('change', async function() {
+            toggleCheckbox(this, photographerId, photographerGalery);
+        });
+        checkbox.addEventListener('keydown', async function (e) {
+            if (e.key === 'Enter') {
+                if(this.checked) {
+                    this.checked = false;
+                } else {
+                    this.checked = true;
+                }
+                toggleCheckbox(this, photographerId, photographerGalery);
+            }
+        })
+    });
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactModalListeners">addContactModalListeners</a></li><li><a href="global.html#addDynamicDOMListeners">addDynamicDOMListeners</a></li><li><a href="global.html#addFormListener">addFormListener</a></li><li><a href="global.html#addLightboxListeners">addLightboxListeners</a></li><li><a href="global.html#addLikesListeners">addLikesListeners</a></li><li><a href="global.html#addListboxListeners">addListboxListeners</a></li><li><a href="global.html#addMediaListeners">addMediaListeners</a></li><li><a href="global.html#addObserver">addObserver</a></li><li><a href="global.html#addStaticDOMListeners">addStaticDOMListeners</a></li><li><a href="global.html#appendLightboxMedia">appendLightboxMedia</a></li><li><a href="global.html#bufferMedias">bufferMedias</a></li><li><a href="global.html#bufferPhotographers">bufferPhotographers</a></li><li><a href="global.html#changeOptionsOrder">changeOptionsOrder</a></li><li><a href="global.html#closeContactModal">closeContactModal</a></li><li><a href="global.html#closeLightboxModal">closeLightboxModal</a></li><li><a href="global.html#closeListbox">closeListbox</a></li><li><a href="global.html#createLightboxDOM">createLightboxDOM</a></li><li><a href="global.html#createWidget">createWidget</a></li><li><a href="global.html#displayCurrentListboxOption">displayCurrentListboxOption</a></li><li><a href="global.html#displayDOMCheckboxState">displayDOMCheckboxState</a></li><li><a href="global.html#displayGalery">displayGalery</a></li><li><a href="global.html#displayPhotographers">displayPhotographers</a></li><li><a href="global.html#displayProfile">displayProfile</a></li><li><a href="global.html#fixMediaTitles">fixMediaTitles</a></li><li><a href="global.html#galeryFactory">galeryFactory</a></li><li><a href="global.html#getCheckboxState">getCheckboxState</a></li><li><a href="global.html#getFollowingMedia">getFollowingMedia</a></li><li><a href="global.html#getGalery">getGalery</a></li><li><a href="global.html#getInitialGalery">getInitialGalery</a></li><li><a href="global.html#getJsonData">getJsonData</a></li><li><a href="global.html#getPhotographerId">getPhotographerId</a></li><li><a href="global.html#getPhotographers">getPhotographers</a></li><li><a href="global.html#getProfile">getProfile</a></li><li><a href="global.html#getSessionGalery">getSessionGalery</a></li><li><a href="global.html#handleKeydown">handleKeydown</a></li><li><a href="global.html#handleLightboxArrowsClick">handleLightboxArrowsClick</a></li><li><a href="global.html#handleLightboxCloseButtonClick">handleLightboxCloseButtonClick</a></li><li><a href="global.html#handleLightboxKeydown">handleLightboxKeydown</a></li><li><a href="global.html#handleOption">handleOption</a></li><li><a href="global.html#hideCurrentListboxOption">hideCurrentListboxOption</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openContactModal">openContactModal</a></li><li><a href="global.html#openLightboxModal">openLightboxModal</a></li><li><a href="global.html#openListbox">openListbox</a></li><li><a href="global.html#photographerFactory">photographerFactory</a></li><li><a href="global.html#removeFormListener">removeFormListener</a></li><li><a href="global.html#removeLightboxListeners">removeLightboxListeners</a></li><li><a href="global.html#setCheckboxState">setCheckboxState</a></li><li><a href="global.html#setSessionGalery">setSessionGalery</a></li><li><a href="global.html#sortGalery">sortGalery</a></li><li><a href="global.html#submitContactForm">submitContactForm</a></li><li><a href="global.html#supportsTemplates">supportsTemplates</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#toggleLightboxListeners">toggleLightboxListeners</a></li><li><a href="global.html#updateGalery">updateGalery</a></li><li><a href="global.html#updateWidget">updateWidget</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 19 2021 06:29:57 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

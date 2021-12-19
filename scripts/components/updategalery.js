@@ -3,6 +3,11 @@ import { displayGalery } from './display.js';
 import { addDynamicDOMListeners } from './events.js';
 import { displayDOMCheckboxState } from './likes.js';
 
+
+/**
+ * Updates the photographer's galery (on page load, then on sort)
+ * @param {string} sortOption 
+ */
 export async function updateGalery(sortOption) {
     const photographerId = getPhotographerId();
     const photographerGalery = await getGalery(photographerId);
@@ -14,6 +19,12 @@ export async function updateGalery(sortOption) {
     addDynamicDOMListeners(photographerId, photographerGalery);
 };
 
+/**
+ * Sorts the array by date (most recent to oldest), title (alphabetical), popularity (likes decending)
+ * @param {array} galery 
+ * @param {string} sortOption 
+ * @returns {array}
+ */
 function sortGalery(galery, sortOption) {
     let sortedGalery = galery;
 
@@ -34,6 +45,9 @@ function sortGalery(galery, sortOption) {
     }
 }
 
+/**
+ * Adds a class used in CSS to hide media until its DOM content is loaded.
+ */
 function bufferMedias() {
     let galeryDOM = document.querySelectorAll('.media-article_media');
 

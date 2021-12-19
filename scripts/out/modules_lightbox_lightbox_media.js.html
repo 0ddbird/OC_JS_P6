@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: modules/lightbox/lightbox_media.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: modules/lightbox/lightbox_media.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Creates a figure and a figcaption to append in the lightbox. Sets a data attribute 'data-direction' used for CSS animation.
+ */
+export function appendLightboxMedia(photographerId, mediaObject, animationDirection) {
+    const { id, title, image, video } = mediaObject;
+    const lightboxModalMain = document.getElementById('lightbox_modal_main');
+    lightboxModalMain.innerHTML = '';
+
+    const lightboxFigure = document.createElement('figure')
+    lightboxFigure.setAttribute('data-direction', animationDirection);
+
+    let lightboxMedia, mediaLink;
+
+    if (mediaObject.hasOwnProperty('image')) {
+        lightboxMedia = document.createElement('img');
+        mediaLink = `./assets/photos/${photographerId}/${image}`;
+    } else if (mediaObject.hasOwnProperty('video')) {
+        lightboxMedia = document.createElement('video');
+        mediaLink = `./assets/photos/${photographerId}/${video}`;
+        lightboxMedia.setAttribute('controls', '')
+    };
+    lightboxMedia.setAttribute('src', mediaLink);
+    lightboxMedia.setAttribute('id', 'lightbox_modal_media');
+    lightboxMedia.setAttribute('data-mediaid', `${id}`)
+    lightboxMedia.setAttribute('aria-label', 'image closeup view');
+
+    const mediaTitle = document.createElement('figcaption');
+    mediaTitle.setAttribute('id', 'lightbox_modal_title');
+    mediaTitle.textContent = title;
+
+    lightboxFigure.appendChild(lightboxMedia);
+    lightboxFigure.appendChild(mediaTitle);
+    lightboxModalMain.appendChild(lightboxFigure);
+
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactModalListeners">addContactModalListeners</a></li><li><a href="global.html#addDynamicDOMListeners">addDynamicDOMListeners</a></li><li><a href="global.html#addFormListener">addFormListener</a></li><li><a href="global.html#addLightboxListeners">addLightboxListeners</a></li><li><a href="global.html#addLikesListeners">addLikesListeners</a></li><li><a href="global.html#addListboxListeners">addListboxListeners</a></li><li><a href="global.html#addMediaListeners">addMediaListeners</a></li><li><a href="global.html#addObserver">addObserver</a></li><li><a href="global.html#addStaticDOMListeners">addStaticDOMListeners</a></li><li><a href="global.html#appendLightboxMedia">appendLightboxMedia</a></li><li><a href="global.html#bufferMedias">bufferMedias</a></li><li><a href="global.html#bufferPhotographers">bufferPhotographers</a></li><li><a href="global.html#changeOptionsOrder">changeOptionsOrder</a></li><li><a href="global.html#closeContactModal">closeContactModal</a></li><li><a href="global.html#closeLightboxModal">closeLightboxModal</a></li><li><a href="global.html#closeListbox">closeListbox</a></li><li><a href="global.html#createLightboxDOM">createLightboxDOM</a></li><li><a href="global.html#createWidget">createWidget</a></li><li><a href="global.html#displayCurrentListboxOption">displayCurrentListboxOption</a></li><li><a href="global.html#displayDOMCheckboxState">displayDOMCheckboxState</a></li><li><a href="global.html#displayGalery">displayGalery</a></li><li><a href="global.html#displayPhotographers">displayPhotographers</a></li><li><a href="global.html#displayProfile">displayProfile</a></li><li><a href="global.html#fixMediaTitles">fixMediaTitles</a></li><li><a href="global.html#galeryFactory">galeryFactory</a></li><li><a href="global.html#getCheckboxState">getCheckboxState</a></li><li><a href="global.html#getFollowingMedia">getFollowingMedia</a></li><li><a href="global.html#getGalery">getGalery</a></li><li><a href="global.html#getInitialGalery">getInitialGalery</a></li><li><a href="global.html#getJsonData">getJsonData</a></li><li><a href="global.html#getPhotographerId">getPhotographerId</a></li><li><a href="global.html#getPhotographers">getPhotographers</a></li><li><a href="global.html#getProfile">getProfile</a></li><li><a href="global.html#getSessionGalery">getSessionGalery</a></li><li><a href="global.html#handleKeydown">handleKeydown</a></li><li><a href="global.html#handleLightboxArrowsClick">handleLightboxArrowsClick</a></li><li><a href="global.html#handleLightboxCloseButtonClick">handleLightboxCloseButtonClick</a></li><li><a href="global.html#handleLightboxKeydown">handleLightboxKeydown</a></li><li><a href="global.html#handleOption">handleOption</a></li><li><a href="global.html#hideCurrentListboxOption">hideCurrentListboxOption</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openContactModal">openContactModal</a></li><li><a href="global.html#openLightboxModal">openLightboxModal</a></li><li><a href="global.html#openListbox">openListbox</a></li><li><a href="global.html#photographerFactory">photographerFactory</a></li><li><a href="global.html#removeFormListener">removeFormListener</a></li><li><a href="global.html#removeLightboxListeners">removeLightboxListeners</a></li><li><a href="global.html#setCheckboxState">setCheckboxState</a></li><li><a href="global.html#setSessionGalery">setSessionGalery</a></li><li><a href="global.html#sortGalery">sortGalery</a></li><li><a href="global.html#submitContactForm">submitContactForm</a></li><li><a href="global.html#supportsTemplates">supportsTemplates</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#toggleLightboxListeners">toggleLightboxListeners</a></li><li><a href="global.html#updateGalery">updateGalery</a></li><li><a href="global.html#updateWidget">updateWidget</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 19 2021 06:29:57 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

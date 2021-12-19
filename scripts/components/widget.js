@@ -1,5 +1,10 @@
 import { getProfile } from "./query.js";
 
+/**
+ * Creates and appends a widget displaying total likes and fees for a photographer
+ * @param {number} photographerId 
+ * @param {array} galery 
+ */
 export async function createWidget(photographerId, galery) {
     // FIND BODY DOM
     const photographer = await getProfile(photographerId);
@@ -22,6 +27,11 @@ export async function createWidget(photographerId, galery) {
     updateWidget(galery)
 }
 
+
+/**
+ * Sums up all likes in galery medias and updates the widget DOM Element
+ * @param {array} galery 
+ */
 export async function updateWidget(galery) {
     const widgetLikes = document.getElementById('widget__like-count');
     widgetLikes.textContent = galery.reduce((acc, curr) => acc + curr.likes, 0);

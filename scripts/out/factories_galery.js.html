@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: factories/galery.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: factories/galery.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { getCheckboxState } from "../components/likes.js";
+
+/**:
+ * Factory function to create and append media articles in profile.html
+ */
+export function galeryFactory(data) {
+
+    const { photographerId, id, title, image, video, likes, date} = data;
+    let link, linkNoExtension, pictureName;
+
+    if (data.hasOwnProperty('image')) {
+        pictureName = image.slice(0, -4);
+        link = `./assets/photos/${photographerId}/${image}`;
+        linkNoExtension = `./assets/photos/${photographerId}/${pictureName}`
+    } else if (data.hasOwnProperty('video')) 
+    {
+        link = `./assets/photos/${photographerId}/${video}`;
+    };
+
+    function getThumbnailDOM() {
+
+    /* ============================= HTML element made by getThumbnailDOM() =============================
+    |-- ARTICLE                      .media-article
+            |-- IMG || VIDEO         .media-article_media
+            |-- DIV                  .media-article_details
+                |-- SPAN             .media-article_details_title
+                |-- DIV              .media-article_details_like-module
+                    |-- INPUT        .media-article_details_like-module_input
+                    |-- SPAN         .media-article_details_like-module_count
+                        |-- LABEL    .media-article_details_like-module_label
+                            |-- I    .media-article_details_like-module_label_like-icon + .fas + .fa-heart 
+    =====================================================================================================*/
+
+        // ARTICLE
+        const article = document.createElement('article');
+        article.setAttribute('id', `article-${id}`);
+        article.classList.add("media-article");
+        
+
+        // MEDIA IMG | VIDEO    
+        let articleMedia;
+
+        if (data.hasOwnProperty('image')) {
+            articleMedia = document.createElement('img');
+            articleMedia.setAttribute('srcset', `${linkNoExtension}-light.jpg 2000w, ${linkNoExtension}.jpg 2560w`);
+        } else if (data.hasOwnProperty('video')) {
+            articleMedia = document.createElement('video');
+            articleMedia.setAttribute('preload','metadata');
+            articleMedia.setAttribute('tabindex','-1');
+            articleMedia.setAttribute('poster',`./assets/photos/${photographerId}/${title}.jpg`);
+        }
+        articleMedia.setAttribute("src", `${link}`);
+        articleMedia.setAttribute('data-id', `${id}`)
+        articleMedia.setAttribute('tabindex', '0');
+        articleMedia.classList.add('media-article_media','buffer');
+        articleMedia.setAttribute('alt', `${title}, closeup view`);
+        // DETAILS DIV
+        const detailsDiv = document.createElement('div');
+        detailsDiv.classList.add('media-article_details');
+        
+        // DETAILS DIV: TITLE
+        const detailsTitle = document.createElement('span');
+        detailsTitle.textContent = title;
+        detailsTitle.classList.add(`media-article_details_title`);
+
+        // LIKE MODULE
+        const likeModule = document.createElement('div');
+        likeModule.classList.add(`media-article_details_like-module`);
+        
+        //LIKE MODULE: INPUT
+        const likeInput = document.createElement('input');
+        likeInput.classList.add('media-article_details_like-module_input');
+        likeInput.setAttribute('type', 'checkbox')
+        likeInput.setAttribute('id', id)
+        if (getCheckboxState() != null ){
+            const checkBoxState = getCheckboxState().split(',');
+            likeInput.checked = checkBoxState.includes(likeInput.id);
+        }
+
+        //LIKE MODULE: SPAN 'COUNT'
+        const likeCountSpan = document.createElement('span');
+        likeCountSpan.setAttribute('id', `${id}-likes`)
+        likeCountSpan.classList.add('media-article_details_like-module_count')
+        likeCountSpan.textContent = likes;
+
+        // LIKE MODULE: LABEL
+        const likeLabel = document.createElement('label');
+        likeLabel.setAttribute('for', id);
+        likeLabel.classList.add('media-article_details_like-module_label')
+
+        // LIKE MODULE LABEL: ICON
+        const likeLabelIcon = document.createElement('i');
+        likeLabelIcon.classList.add('fas', 'fa-heart', '.media-article_details_like-module_label_like-icon')
+        likeLabelIcon.setAttribute('aria-label', 'likes');
+
+        // APPEND ICON TO LABEL
+        likeLabel.appendChild(likeLabelIcon);
+
+        // APPEND INPUT, SPAN AND LABEL TO DIV 'LIKE MODULE'
+        likeModule.appendChild(likeInput);
+        likeModule.appendChild(likeCountSpan);
+        likeModule.appendChild(likeLabel);
+        
+        // APPEND TITLE AND LIKE MODULE TO DIV 'DETAILS'
+        detailsDiv.appendChild(detailsTitle);
+        detailsDiv.appendChild(likeModule);
+        
+        // APPEND MEDIA AND DIV 'DETAILS' TO ARTICLE
+        article.appendChild(articleMedia);
+        article.appendChild(detailsDiv);
+
+        return article;
+    }
+    return {id, likes, date, title, getThumbnailDOM};
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addContactModalListeners">addContactModalListeners</a></li><li><a href="global.html#addDynamicDOMListeners">addDynamicDOMListeners</a></li><li><a href="global.html#addFormListener">addFormListener</a></li><li><a href="global.html#addLightboxListeners">addLightboxListeners</a></li><li><a href="global.html#addLikesListeners">addLikesListeners</a></li><li><a href="global.html#addListboxListeners">addListboxListeners</a></li><li><a href="global.html#addMediaListeners">addMediaListeners</a></li><li><a href="global.html#addObserver">addObserver</a></li><li><a href="global.html#addStaticDOMListeners">addStaticDOMListeners</a></li><li><a href="global.html#appendLightboxMedia">appendLightboxMedia</a></li><li><a href="global.html#bufferMedias">bufferMedias</a></li><li><a href="global.html#bufferPhotographers">bufferPhotographers</a></li><li><a href="global.html#changeOptionsOrder">changeOptionsOrder</a></li><li><a href="global.html#closeContactModal">closeContactModal</a></li><li><a href="global.html#closeLightboxModal">closeLightboxModal</a></li><li><a href="global.html#closeListbox">closeListbox</a></li><li><a href="global.html#createLightboxDOM">createLightboxDOM</a></li><li><a href="global.html#createWidget">createWidget</a></li><li><a href="global.html#displayCurrentListboxOption">displayCurrentListboxOption</a></li><li><a href="global.html#displayDOMCheckboxState">displayDOMCheckboxState</a></li><li><a href="global.html#displayGalery">displayGalery</a></li><li><a href="global.html#displayPhotographers">displayPhotographers</a></li><li><a href="global.html#displayProfile">displayProfile</a></li><li><a href="global.html#fixMediaTitles">fixMediaTitles</a></li><li><a href="global.html#galeryFactory">galeryFactory</a></li><li><a href="global.html#getCheckboxState">getCheckboxState</a></li><li><a href="global.html#getFollowingMedia">getFollowingMedia</a></li><li><a href="global.html#getGalery">getGalery</a></li><li><a href="global.html#getInitialGalery">getInitialGalery</a></li><li><a href="global.html#getJsonData">getJsonData</a></li><li><a href="global.html#getPhotographerId">getPhotographerId</a></li><li><a href="global.html#getPhotographers">getPhotographers</a></li><li><a href="global.html#getProfile">getProfile</a></li><li><a href="global.html#getSessionGalery">getSessionGalery</a></li><li><a href="global.html#handleKeydown">handleKeydown</a></li><li><a href="global.html#handleLightboxArrowsClick">handleLightboxArrowsClick</a></li><li><a href="global.html#handleLightboxCloseButtonClick">handleLightboxCloseButtonClick</a></li><li><a href="global.html#handleLightboxKeydown">handleLightboxKeydown</a></li><li><a href="global.html#handleOption">handleOption</a></li><li><a href="global.html#hideCurrentListboxOption">hideCurrentListboxOption</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#openContactModal">openContactModal</a></li><li><a href="global.html#openLightboxModal">openLightboxModal</a></li><li><a href="global.html#openListbox">openListbox</a></li><li><a href="global.html#photographerFactory">photographerFactory</a></li><li><a href="global.html#removeFormListener">removeFormListener</a></li><li><a href="global.html#removeLightboxListeners">removeLightboxListeners</a></li><li><a href="global.html#setCheckboxState">setCheckboxState</a></li><li><a href="global.html#setSessionGalery">setSessionGalery</a></li><li><a href="global.html#sortGalery">sortGalery</a></li><li><a href="global.html#submitContactForm">submitContactForm</a></li><li><a href="global.html#supportsTemplates">supportsTemplates</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#toggleLightboxListeners">toggleLightboxListeners</a></li><li><a href="global.html#updateGalery">updateGalery</a></li><li><a href="global.html#updateWidget">updateWidget</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 19 2021 06:29:57 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

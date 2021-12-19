@@ -1,5 +1,8 @@
 import { getFollowingMedia, closeLightboxModal } from './lightbox.js';
 
+/**
+ * Adds Lightbox Event Listeners to arrows DOM elements, and Event Listener for keyboard navigation
+ */
 export function addLightboxListeners() {
     const lightboxArrows = [document.getElementById('left-arrow'), document.getElementById('right-arrow')]
     const lightboxCloseButton = document.getElementById('lightbox_modal_close_button');
@@ -12,6 +15,9 @@ export function addLightboxListeners() {
     window.addEventListener('keydown', handleLightboxKeydown, false);
 }
 
+/**
+ * Removes Event Listeners from arrows DOM elements, and Event Listener for keyboard navigation.
+ */
 export function removeLightboxListeners() {
     const lightboxArrows = [document.getElementById('left-arrow'), document.getElementById('right-arrow')]
     const lightboxCloseButton = document.getElementById('lightbox_modal_close_button');
@@ -23,6 +29,9 @@ export function removeLightboxListeners() {
     window.removeEventListener('keydown', handleLightboxKeydown, false)
 }
 
+/**
+ * DOES NOT WORK. Is supposed to do the same thing as both functions above, but triggers event listeners on creation.
+ */
 export function toggleLightboxListeners(option) {
     const lightboxArrows = [document.getElementById('left-arrow'), document.getElementById('right-arrow')]
     const lightboxCloseButton = document.getElementById('lightbox_modal_close_button');
@@ -34,14 +43,25 @@ export function toggleLightboxListeners(option) {
     eventMethod(window)('keydown', handleLightboxKeydown, false)
 }
 
+/**
+ * Calls getFollowingMedia function and gives it the slide direction.
+ * @param {event} e 
+ */
 function handleLightboxArrowsClick (e) {
     getFollowingMedia(e.target.dataset.directioninput)
 }
 
+/**
+ * Event Listener named function that calls closeLightboxModal.
+ */
 function handleLightboxCloseButtonClick() {
     closeLightboxModal()
 } 
 
+/**
+ * Event Listener named function that allows keyboard navigation in lightbox
+ * @param {event} e 
+ */
 function handleLightboxKeydown(e) {
     e.preventDefault();
     let direction;
