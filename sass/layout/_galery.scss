@@ -32,11 +32,21 @@
     object-fit: cover;
     border-radius: 5px;
     object-position: center top;
+    transform: translateY(0px) scale(1);
+    transition: all .25s ease;
+    box-shadow: a.$bxsh-base;
+
     &:focus {
-        outline: 3px solid a.$clr-secondary;
+        outline: none;
+        transform: translateY(-2px) scale(1.02);
+        transition: all .25s ease;
+        box-shadow: a.$bxsh-focus;
+
     }
     &:hover {
-        outline: 3px solid a.$clr-secondary;
+        transform: translateY(-2px) scale(1.02);
+        transition: all .25s ease;
+        box-shadow: a.$bxsh-focus;
     }
 }
 
@@ -53,13 +63,4 @@
     white-space: nowrap;
     text-overflow:ellipsis;
     font-size: 18px;
-}
-
-@keyframes grow {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
 }

@@ -89,14 +89,25 @@ export function galeryFactory(data) {
         const likeLabel = document.createElement('label');
         likeLabel.setAttribute('for', id);
         likeLabel.classList.add('media-article_details_like-module_label')
+        likeLabel.setAttribute('aria-hidden', 'false');
+
+        const iconContainer = document.createElement('div')
+        iconContainer.setAttribute('title',"Like")
+        iconContainer.setAttribute('role',"img")
+        iconContainer.setAttribute('aria-label', 'likes');
+        iconContainer.setAttribute('aria-hidden', 'false');
 
         // LIKE MODULE LABEL: ICON
         const likeLabelIcon = document.createElement('i');
         likeLabelIcon.classList.add('fas', 'fa-heart', '.media-article_details_like-module_label_like-icon')
+        /* likeLabelIcon.setAttribute('title',"Like")
+        likeLabelIcon.setAttribute('role',"img")
         likeLabelIcon.setAttribute('aria-label', 'likes');
+        likeLabelIcon.setAttribute('aria-hidden', 'false'); */
 
         // APPEND ICON TO LABEL
-        likeLabel.appendChild(likeLabelIcon);
+        iconContainer.appendChild(likeLabelIcon)
+        likeLabel.appendChild(iconContainer);
 
         // APPEND INPUT, SPAN AND LABEL TO DIV 'LIKE MODULE'
         likeModule.appendChild(likeInput);

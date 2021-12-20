@@ -82,6 +82,7 @@ a {
 }
 
 /* Colors */
+/* Box shadows */
 @keyframes grow {
   0% {
     transform: scale(0);
@@ -273,6 +274,7 @@ h2 {
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
   z-index: 1;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12);
 }
 
 @keyframes slideIn {
@@ -337,20 +339,20 @@ h2 {
   content: "\f107";
   margin-left: 1ch;
 }
-#listbox-container:hover {
-  background-color: #D3573C;
-}
 #listbox-container:hover > #listbox-current-option {
-  color: black;
-}
-#listbox-container:hover .listbox-option {
-  background-color: #D3573C;
   color: black;
 }
 #listbox-container:focus {
   outline: 2px solid #D3573C;
 }
 
+#listbox-container[aria-expanded=false]:hover {
+  background-color: #D3573C;
+}
+
+#listbox-container[aria-expanded=true] {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12);
+}
 #listbox-container[aria-expanded=true]::after {
   content: "\f106";
 }
@@ -377,7 +379,7 @@ h2 {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f105";
-  color: black;
+  color: white;
   margin-right: 1ch;
   margin-left: 2px;
   transform: scale(0);
@@ -394,6 +396,10 @@ h2 {
   margin-right: 1ch;
   transition: transform 0.25s ease-in-out;
   transform: scale(1);
+}
+.listbox-option:hover {
+  background-color: #D3573C;
+  color: black;
 }
 .listbox-option:hover::before {
   display: inline-block;
@@ -647,12 +653,20 @@ header {
   object-fit: cover;
   border-radius: 5px;
   object-position: center top;
+  transform: translateY(0px) scale(1);
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 }
 .media-article_media:focus {
-  outline: 3px solid #D3573C;
+  outline: none;
+  transform: translateY(-2px) scale(1.02);
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12);
 }
 .media-article_media:hover {
-  outline: 3px solid #D3573C;
+  transform: translateY(-2px) scale(1.02);
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12);
 }
 
 .buffer {
@@ -670,14 +684,6 @@ header {
   font-size: 18px;
 }
 
-@keyframes grow {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 #lightbox_modal {
   display: none;
   align-items: center;
@@ -693,6 +699,7 @@ header {
   right: 0;
   z-index: 1;
   overflow: hidden;
+  border: none;
 }
 
 .lightbox_modal_arrow {

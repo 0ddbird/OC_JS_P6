@@ -37,16 +37,7 @@
         margin-left: 1ch;
     }
 
-    &:hover {
-        background-color: a.$clr-secondary;
-    }
-
     &:hover > #listbox-current-option {
-        color: black;
-    }
-
-    &:hover .listbox-option {
-        background-color: a.$clr-secondary;
         color: black;
     }
 
@@ -55,8 +46,15 @@
     }
 }
 
-#listbox-container[aria-expanded="true"]::after {
-    content: '\f106';
+#listbox-container[aria-expanded="false"]:hover {
+    background-color: a.$clr-secondary;
+}
+
+#listbox-container[aria-expanded="true"] {
+    box-shadow: a.$bxsh-focus;
+    &::after {
+        content: '\f106';
+    }
 }
 
 #listbox {
@@ -75,7 +73,7 @@
     &::before {
         @include a.fontAwesome;
         content: '\f105';
-        color: black;
+        color: white;
         margin-right: 1ch;
         margin-left: 2px;
         transform: scale(0);
@@ -89,6 +87,10 @@
         transform: scale(1);
     }
 
+    &:hover {
+        background-color: a.$clr-secondary;
+        color: black;
+    }
     &:hover::before {
         @include a.fontAwesome;
         content: '\f105';

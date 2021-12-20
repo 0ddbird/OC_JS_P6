@@ -8,7 +8,7 @@ ___
 
 ## Liens
 
-Lien vers la [GitHub Page](https://okuspo.github.io/OC_P6_Fisheye/).  
+Lien vers la [GitHub Page](https://okuspo.github.io/Giacomo_LLINARES_6_12112021/).  
 
 Lien vers le [diagramme des fonctions](https://whimsical.com/p6-v4-PtWt93VBERWdH3PrCxM4Ey).  
 
@@ -19,33 +19,33 @@ ___
 
 Développer un site sur base d'un fichier json contenant des photographes et des photos.
 
-```json
+```yaml
 {
-"photographers": [
-					{
-						"name": "Mimi Keel",
-						"id": 243,
-						"city": "London",
-						"country": "UK",
-						"tagline": "Voir le beau dans le quotidien",
-						"price": 400,
-						"portrait": "MimiKeel.jpg"
-					},
-					{}
-				],
+	"photographers": [
+	{
+		"name": "Mimi Keel",
+		"id": 243,
+		"city": "London",
+		"country": "UK",
+		"tagline": "Voir le beau dans le quotidien",
+		"price": 400,
+		"portrait": "MimiKeel.jpg"
+	},
+	{}
+],
 
 "media": [
-			{
-				"id": 342550,
-				"photographerId": 82,
-				"title": "Fashion Yellow Beach",
-				"image": "Fashion_Yellow_Beach.jpg",
-				"likes": 62,
-				"date": "2011-12-08",
-				"price": 55
-			},
-			{}
-		]
+	{
+		"id": 342550,
+		"photographerId": 82,
+		"title": "Fashion Yellow Beach",
+		"image": "Fashion_Yellow_Beach.jpg",
+		"likes": 62,
+		"date": "2011-12-08",
+		"price": 55
+	},
+	{}
+]
 }
 ```
 
