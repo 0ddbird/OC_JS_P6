@@ -60,3 +60,25 @@
         opacity: 1;
     }
 }
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.75);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

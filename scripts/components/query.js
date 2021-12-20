@@ -40,9 +40,9 @@ export async function getProfile(photographerId) {
  * @returns {promise} an array of objects (photographer's medias)
  */
 export async function getGalery(photographerId) {
-    let sessionGalery = await getSessionGalery(photographerId);
+    let sessionGalery = getSessionGalery(photographerId);
     if (!sessionGalery) {
-        console.info('No galery in sessionStorage yet. Creating one.')
+        console.info('No galery in sessionStorage yet for this photographer. %cCreating one%c.', 'color: #1abc9c', 'color: inherit')
         sessionGalery = await getInitialGalery(photographerId);
         setSessionGalery(photographerId, sessionGalery);
     }
@@ -65,7 +65,7 @@ export function getSessionGalery(photographerId) {
  */
 export async function getInitialGalery(photographerId) {
     const result = jsonData.media.filter(element => element.photographerId === photographerId);
-    return await fixMediaTitles(result);
+    return fixMediaTitles(result);
 }
 
 /**

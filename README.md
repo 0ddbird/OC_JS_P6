@@ -8,66 +8,46 @@ ___
 
 ## Liens
 
-Lien vers la [GitHub Page](https://okuspo.github.io/OC_P6_Fisheye/)  
+Lien vers la [GitHub Page](https://okuspo.github.io/OC_P6_Fisheye/).  
 
-Lien vers le [diagramme des fonctions - v4](https://whimsical.com/p6-v4-PtWt93VBERWdH3PrCxM4Ey)
+Lien vers le [diagramme des fonctions](https://whimsical.com/p6-v4-PtWt93VBERWdH3PrCxM4Ey).  
 
 Lien vers la [JSDoc](https://okuspo.github.io/OC_P6_Fisheye/scripts/out/)
 ___
 
 ## Fonctionnalités demandées
 
-Développer un site sur base d'un fichier json content des photographes et des photos.
+Développer un site sur base d'un fichier json contenant des photographes et des photos.
 
 ```json
 {
-	"photographers": [
-		{
-			"name": "Mimi Keel",
-			"id": 243,
-			"city": "London",
-			"country": "UK",
-			"tagline": "Voir le beau dans le quotidien",
-			"price": 400,
-			"portrait": "MimiKeel.jpg"
-		},
-        ...
-        ],
+"photographers": [
+					{
+						"name": "Mimi Keel",
+						"id": 243,
+						"city": "London",
+						"country": "UK",
+						"tagline": "Voir le beau dans le quotidien",
+						"price": 400,
+						"portrait": "MimiKeel.jpg"
+					},
+					{}
+				],
 
-	"media": [
-		{
-			"id": 342550,
-			"photographerId": 82,
-			"title": "Fashion Yellow Beach",
-			"image": "Fashion_Yellow_Beach.jpg",
-			"likes": 62,
-			"date": "2011-12-08",
-			"price": 55
-		},
-        ...
-        ]
+"media": [
+			{
+				"id": 342550,
+				"photographerId": 82,
+				"title": "Fashion Yellow Beach",
+				"image": "Fashion_Yellow_Beach.jpg",
+				"likes": 62,
+				"date": "2011-12-08",
+				"price": 55
+			},
+			{}
+		]
 }
 ```
-
-### Site
-
-- Accessibilité : permettre la navigation au clavier (tab et keyboard events pour éléments HTML personnalisés)
-- Utilisations d'attributs Aria
-
-### Page d'accueil
-
-- Injecter 1 article par photographe avec un lien vers la page profil
-- Navigation au clavier avec tabindex
-
-### Page profil photographe
-
-- Injecter les données du photographe
-- Injecter la galerie relative au photographe
-
-- Les médias (articles) de la galerie peuvent être triés par popularité, date, titre.
-- Les utilisateurs doivent pouvoir cliquer sur les likes.
-- Le utilisateurs doivent pouvoir afficher la photo en plein écran dans une modale (lightbox) au clic sur l'article.
-- Dans la lightbox on peut naviguer entre les médias.
 
 ### Objectifs du projet
 
@@ -79,28 +59,53 @@ Développer un site sur base d'un fichier json content des photographes et des p
 - Trier des objets en utilisant la fonction sort()
 - Pas d'attentes particulières sur la responsivité
 
-## :sparkles: En bonus !
+### :one: Site
 
-### Likes
+- Accessibilité : permettre la navigation au clavier (tab et keyboard events pour éléments HTML personnalisés)
+- Utilisations d'attributs Aria
 
-Le tri de la galerie et le nombre de likes sont persistants (stockés dans le sessionStorage) ce qui permet de :
+### :two: Page d'accueil
+
+- Injecter 1 article par photographe avec un lien vers la page profil
+- Navigation au clavier avec tabindex
+
+### :three: Page profil photographe
+
+- Injecter les données du photographe
+- Injecter la galerie relative au photographe
+
+- Les médias (articles) de la galerie peuvent être triés par popularité, date, titre.
+- Les utilisateurs doivent pouvoir cliquer sur les likes.
+- Le utilisateurs doivent pouvoir afficher la photo en plein écran dans une modale (lightbox) au clic sur l'article.
+- Dans la lightbox on peut naviguer entre les médias.
+
+### :sparkles: En bonus !
+
+#### Likes
+
+L'état de la galerie est persistant (stocké dans le sessionStorage) ce qui permet de :
 
 - Conserver le compte des likes de chaque photographe même après refresh/changement de page.
 - Permettre à fonction de tri par Popularité de s'appuyer sur les nouvelles valeurs
 
-### Vidéos
+#### Vidéos
 
-Les médias de type vidéo possèdent un attribut `poster` avec un lien vers une vignette jpg, et sont paramétrés en `preload="metadata"` ce qui permet d'accélérer l'injection dans le DOM.  
-Par ailleurs, l'attribut "controls" a été ajouté dans la lighbox pour distinguer les vidéos des photos.
+Les vidéos ont un attribut `poster` avec un lien vers une vignette jpg.  
+Les vidéo ont un attribut `preload="metadata"` ce qui permet d'accélérer leur chargement dans le DOM.  
+Les vidéos ont un attribut `"controls"` mais uniquement dans la lighbox.  
 
-### Images
+#### Images
 
-Ajout d'attributs `srcset` vers une version plus petite prévue pour chaque image.  
+Les images ont un attribut `srcset` vers une version plus petite prévue pour chaque image.  
 Les images étant très grandes (~ 3000px * 5000px) et lourdes (~5Mo pour certaines), c'est leur version "light" qui s'affiche dans la galerie, et leur source originale dans la lightbox.  
 
 Même principe pour les photos de profil des photographes (profile.html et index.html) qui disposent de 2 sourcesets (light et x-light).  
 
-### Lightbox
+#### Galerie
+
+Instanciation de l'intersection observer sur les médias de la galerie pour un affichage progressif.
+
+#### MODALE Lightbox
 
 Dans la v3, lorsqu'on faisait défiler les photos de la galerie, les event listeners pour les clics sur les flèches (ou les flèches du clavier) étaient rajoutés à chaque nouvelle photo.  
 Cela posait de très gros problèmes de performance (freeze du navigateur).  
@@ -108,30 +113,17 @@ Ce problème est réglé dans la v4 (voir diagramme). Les event listeners sont a
 
 Ajout d'un `<template>` pour la lightbox, avec une option de repli si les templates HTML ne sont pas supportés par le navigateur.  
 
-### Galerie
+#### Listbox
 
-Instanciation de l'intersection observer sur les médias de la galerie pour un affichage progressif.
+Support des touches Arrow Up, Arrow Down, Home et End pour naviguer dans la listbox.
 
-### Listbox
-
-Support des touches Home et End pour naviguer dans la listbox.
-
-### Global
+#### Global
 
 Découverte et ajout de la JSDoc.  
-Trop peu de recul pour savoir si ça apporte une réelle valeur ajoutée (avec mes commentaires actuels, les tooltips ne sont pas très explicites, et ça rajoute beaucoup de lignes).
-
-### To do
-
-- Un minimum de responsivité
-- Validation du formulaire
-- Générer un lien de partage depuis la lightbox vers le média affiché (id photographe + id media + toggle lightbox ?)
-- Remplacer le "/" par "par" dans "300€/jour" pour une meilleure compréhension du lecteur d'écran. (pseudo élément "/" devant le mot "par" pour respecter la maquette ?)
-- 
-- 
 
 ___
-## Versions antérieures :
+
+### Versions antérieures
 
 - [Diagramme des fonctions - Codebase initiale](https://whimsical.com/p6-default-codebase-NmtiyYW4fcZdGe7scF4N9h)
 - [Diagramme des fonctions - v1](https://whimsical.com/p6-v1-2UpNeXviK4t4p4QTr451iv)

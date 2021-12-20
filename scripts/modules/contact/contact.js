@@ -40,12 +40,8 @@ export function submitContactForm(e) {
     && lastNameInputDOM.value != ''
     && emailInputDOM.value != ''
     && messageInputDOM.value != '') {
-        console.log(`Bonjour ${firstNameInputDOM.value} ${lastNameInputDOM.value}\n
-        Votre message a bien été envoyé au photographe.\n
-        Veuillez retrouver votre message ci-dessous :\n
-        \"${messageInputDOM.value}\"\n
-        Une copie de ce message vous sera envoyée à\n
-        ${emailInputDOM.value}`);
+        console.log(`%cBonjour %c${firstNameInputDOM.value} ${lastNameInputDOM.value},\n%cVotre message a bien été envoyé au photographe.\nVeuillez retrouver votre message ci-dessous :\n%c\"${messageInputDOM.value}\"\n%cUne copie de ce message vous sera envoyée à\n%c${emailInputDOM.value}`,
+         'line-height: 3em; font-size: 14px;','color: #D3573C; font-style: italic; font-weight: bold; line-height: 3em; font-size: 14px;', 'color: #FFF', 'color: #D3573C; font-size: 14px; font-style: italic; line-height: 3em;', 'color: #FFF', 'color: black; font-style: italic; font-weight: bold; background: white; font-size: 14px; line-height: 3em; border: 1px solid white;');
         document.forms['contact-form'].reset()
         closeContactModal();
     }

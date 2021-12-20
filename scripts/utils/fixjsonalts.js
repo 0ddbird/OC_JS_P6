@@ -1,15 +1,39 @@
-import { fixMediaTitles } from "../components/query.js";
+import { getJsonData, fixMediaTitles } from "../components/query.js";
 
+/**
+ * Adds titles to video medias, adds alt and altFullscreen key/values for all medias.
+ * @param {object} jsonFile 
+ * @returns {promise} an object with all photographers and all medias (fixed).
+ */
 export async function fixJsonAlts(jsonFile) {
+    let fullJson = jsonFile;
     const jsonMediaArray = jsonFile.media;
 
-    const fixedMedias = fixMediaTitles(jsonMediaArray)
+    let fixedMedias = fixMediaTitles(jsonMediaArray)
 
     fixedMedias.forEach(media => {
         media.alt = media.title;
         media.altFullscreen = `${media.title} close-up view`;
     })
+    fullJson.media = fixedMedias;
 
-    console.log(fixedMedias);
-
+    return JSON.stringify(fullJson);
 }
+
+/**
+ * Creates a txt file and downloads it from the browser.
+ * @param {object} content 
+ * @param {string} fileName 
+ * @param {string} contentType 
+ */
+export function download(content, fileName, contentType) {
+    var a = document.createElement("a");
+    var file = new Blob([content], {type: contentType});
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
+}
+
+const jsonData = await getJsonData();
+const fixedJson = await fixJsonAlts(jsonData);
+download(fixedJson, 'photographers-fixed.json', 'text/plain');

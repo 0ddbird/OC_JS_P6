@@ -8,7 +8,6 @@ import { getProfile } from "./query.js";
 export async function createWidget(photographerId, galery) {
     // FIND BODY DOM
     const photographer = await getProfile(photographerId);
-    //const body = document.getElementsByTagName('body')[0];
     const main = document.getElementsByTagName('main')[0];
     const sort = document.getElementById('sort');
     const price = photographer.price;
@@ -29,7 +28,6 @@ export async function createWidget(photographerId, galery) {
     main.insertBefore(widget, sort);
     updateWidget(galery)
 }
-
 
 /**
  * Sums up all likes in galery medias and updates the widget DOM Element

@@ -32,7 +32,6 @@
       </div>
       <section id="galery-section"></section>
     </main>
-
     <template id="template_lightbox">
       <dialog id="lightbox_modal" tabindex="0" aria-hidden="false">
           <div class="lightbox_modal_arrow" id="left-arrow" data-directioninput="previous" tabindex="0">&lt;</div>
@@ -45,20 +44,19 @@
           <img id="lightbox_modal_close_button" src="assets/icons/close.svg" alt="lightbox close button" tabindex="0"></img>
       </dialog>
   </template>
-
     <div id="contact_modal" tabindex="-1">
       <div class="modal-body">
         <header>
-          <h2 id="contact_modal_title">Contactez-moi</h2>
+          <h2 id="contact_modal_title" tabindex="0">Contactez-moi</h2>
         </header>
         <form id="contact-form">
             <label for="contact-first-name">Prénom</label>
-            <input type="text" id="contact-first-name"/>
+            <input type="text" minlength='2' maxlength="20" id="contact-first-name"/>
             <label for="contact-last-name">Nom</label>
-            <input type="text" id="contact-last-name"/>
+            <input type="text" id="contact-last-name" minlength='2' maxlength="20"/>
             <label for="contact-email">Email</label>
-            <input type="text" id="contact-email"/>
-            <label for="contact-message">Votre message</label>
+            <input type="email" id="contact-email"/>
+            <label for="contact-message"minlength='2' maxlength="250">Votre message</label>
             <input type="text" id="contact-message"/>
           <button id="submit-form_button">Envoyer</button>
         </form>
@@ -66,7 +64,6 @@
           <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="#901C1C"/>
         </svg>
     </div>
-    
   </div>
     <script defer src="./scripts/pages/profile.js" type="module"></script>
   </body>

@@ -16,7 +16,6 @@ export function removeFormListener() {
     form.removeEventListener("submit", submitContactForm);
 }
 
-
 /**
  * Adds contact modal Event Listeners : contact button in profile.html, close button in modal, Escape keydown to close the modal.
  */
@@ -29,7 +28,14 @@ export function addContactModalListeners() {
     });
 
     window.addEventListener('keydown', function (e) {
+        const contactModal = document.getElementById('contact_modal');
+        const contactModalCloseButton  = document.getElementById('contact-modal_close-button');
         e.stopPropagation();
-        if (e.key === 'Escape') closeContactModal();
+        if (e.key === 'Escape') {
+            closeContactModal();
+        }
+        if (e.key === 'Tab') {
+            if (document.activeElement === contactModalCloseButton) contactModal.focus();
+        }
     });
 }

@@ -140,6 +140,25 @@ a {
     opacity: 1;
   }
 }
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.75);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 h1 {
   color: #901C1C;
   margin-right: 100px;
@@ -188,12 +207,13 @@ h2 {
   padding: 0;
   position: absolute;
   width: 1px;
-}
-.media-article_details_like-module_input:focus:checked ~ label::before {
-  color: #D3573C;
-}
-.media-article_details_like-module_input:focus:not(:checked) ~ label::before {
-  color: #901C1C;
+  /* &:focus:checked ~ label::before {
+      color: a.$clr-secondary;
+  }
+
+  &:focus:not(:checked) ~ label::before {
+      color: a.$clr-primary;
+  } */
 }
 
 .media-article_details_like-module_input:checked ~ .media-article_details_like-module_label i {
@@ -219,25 +239,19 @@ h2 {
   margin-left: 1ch;
   cursor: pointer;
   position: relative;
-}
-.media-article_details_like-module_label::before {
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  position: absolute;
-  z-index: -1;
-  content: "\f111";
-  font-weight: 400;
-  font-size: 2em;
-  color: white;
-  top: 50%;
-  left: 50%;
-  opacity: 0.25;
-  transform: translate(-50%, -50%);
+  /* &::before {
+      @include a.fontAwesome;
+      position: absolute;
+      z-index: -1;
+      content: '\f111';
+      font-weight: 400;
+      font-size: 2em;
+      color: white;
+      top: 50%;
+      left: 50%;
+      transform:translate(-50%, -50%);
+      opacity: .1;
+  } */
 }
 
 #widget {
@@ -254,8 +268,8 @@ h2 {
   font-weight: 500;
   transform: translateY(50px);
   animation-name: slideIn;
-  animation-delay: 1s;
-  animation-duration: 0.75s;
+  animation-delay: 1.75s;
+  animation-duration: 0.85s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
   z-index: 1;
@@ -283,32 +297,31 @@ h2 {
 
 #sort {
   height: 80px;
+  padding: 0 0 0 20px;
 }
 
 #listbox-label {
   font-weight: 500;
   display: flex;
   justify-content: space-between;
-  width: 220px;
   margin: 0 0 30px 0;
   position: absolute;
 }
 
 #listbox-container {
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  width: max-content;
-  width: 150px;
-  min-height: 50px;
   background-color: #901C1C;
   position: absolute;
+  display: flex;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  padding: 0 10px 0 0;
+  border-radius: 5px;
+  min-height: 50px;
+  font-weight: 500;
+  width: 150px;
   left: 80px;
   z-index: 1;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 500;
-  color: white;
 }
 #listbox-container::after {
   position: absolute;
@@ -344,11 +357,11 @@ h2 {
 
 #listbox {
   display: none;
-  padding: 5px 0;
 }
 
 .listbox-option {
   padding: 10px 1ch 10px 0;
+  border-right: 1px solid white;
 }
 .listbox-option:focus {
   outline: none;
@@ -364,8 +377,9 @@ h2 {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f105";
-  color: white;
+  color: black;
   margin-right: 1ch;
+  margin-left: 2px;
   transform: scale(0);
 }
 .listbox-option:focus::before {
@@ -403,6 +417,14 @@ h2 {
 
 .listbox-option + .listbox-option {
   border-top: 1px solid white;
+}
+
+.listbox-option:nth-child(1) {
+  border-radius: 5px 0 0 0;
+}
+
+.listbox-option:nth-child(3) {
+  border-radius: 0 0 0 5px;
 }
 
 button {
@@ -704,12 +726,12 @@ header {
 
 [data-direction=previous] {
   animation-name: slideRight;
-  animation-duration: 0.25s;
+  animation-duration: 0.45s;
 }
 
 [data-direction=next] {
   animation-name: slideLeft;
-  animation-duration: 0.25s;
+  animation-duration: 0.45s;
 }
 
 [data-direction=first] {
